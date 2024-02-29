@@ -1,0 +1,65 @@
+{
+    "name": "Input",
+    "maps": [
+        {
+            "name": "CarController",
+            "id": "b75f0675-fef0-4dad-95e7-5fa3bdeae083",
+            "actions": [
+                {
+                    "name": "Gasinput",
+                    "type": "Button",
+                    "id": "1211012a-45cf-4be3-b006-f933318dbdf1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SteerInput",
+                    "type": "Value",
+                    "id": "17e2cad9-279d-4874-8417-32632737898f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f17f2fe9-7f72-4248-b585-4393cfee6ea9",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gasinput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0ebb584-1af0-41e8-b297-f3a4f41eff69",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SteerInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86e78b8c-0f6d-4056-9238-51094aa74c29",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SteerInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
