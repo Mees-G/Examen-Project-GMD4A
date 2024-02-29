@@ -6,18 +6,9 @@
             "id": "b75f0675-fef0-4dad-95e7-5fa3bdeae083",
             "actions": [
                 {
-                    "name": "Gasinput",
-                    "type": "Button",
-                    "id": "1211012a-45cf-4be3-b006-f933318dbdf1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SteerInput",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "17e2cad9-279d-4874-8417-32632737898f",
+                    "id": "1211012a-45cf-4be3-b006-f933318dbdf1",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -26,37 +17,59 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "f17f2fe9-7f72-4248-b585-4393cfee6ea9",
+                    "name": "WASD",
+                    "id": "6f7312b8-c44a-45b0-9be9-43ee52be8c9f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0f60781f-e808-4873-a2c1-6f4f0e7b8d07",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Gasinput",
+                    "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "d0ebb584-1af0-41e8-b297-f3a4f41eff69",
-                    "path": "",
+                    "name": "down",
+                    "id": "042becd0-401b-4b96-a81a-bcef67a2b653",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SteerInput",
+                    "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "86e78b8c-0f6d-4056-9238-51094aa74c29",
-                    "path": "",
+                    "name": "left",
+                    "id": "3800ff3d-beb3-4c06-a899-87aaae58e599",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SteerInput",
+                    "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "8791c3a5-0af1-4ad4-827a-f9ffe3fb4bff",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

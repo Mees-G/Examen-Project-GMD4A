@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
     public Car car;
 
-    public void OnGasinput()
+    public void OnMove(InputValue value)
     {
+        Vector2 inputVector = value.Get<Vector2>();
 
-    }
-    public void OnSteerInput()
-    {
-
+        car.throttle = inputVector.y;
+        car.steeringDirection = inputVector.x;
     }
 }
