@@ -7,11 +7,20 @@ public class CarController : MonoBehaviour
 {
     public Car car;
 
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     public void OnMove(InputValue value)
     {
         Vector2 inputVector = value.Get<Vector2>();
 
         car.throttle = inputVector.y;
         car.steeringDirection = inputVector.x;
+    }
+    public void OnHandBrake(InputValue value)
+    {
+
     }
 }

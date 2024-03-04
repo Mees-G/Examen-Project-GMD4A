@@ -21,4 +21,10 @@ public class CarController_NPC : MonoBehaviour
     {
         
     }
+
+    void Driving()
+    {
+        car.throttle = 1;
+    }
+    
 }

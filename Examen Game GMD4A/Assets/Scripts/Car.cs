@@ -23,8 +23,14 @@ public class Car : MonoBehaviour
     public float steeringRange = 30;
     public float steeringRangeAtMaxSpeed = 10;
 
+    [Header("Car Audio")]
+    public AudioSource engineAudio;
+    public AudioClip engineIdle;
+    private float minEnginePitch;
+
     private void Start()
     {
+        minEnginePitch = engineAudio.pitch;
         rb = GetComponent<Rigidbody>();
     }
     private void Update()
@@ -66,6 +72,6 @@ public class Car : MonoBehaviour
         }
 
         //sound and pitch of the engine
-        //engineAudioSource.pitch = minPitch + engineRPM / 3000f;
+        engineAudio.pitch = Mathf.Min(Mathf.Lerp(engineAudio.pitch, minEnginePitch + forwardSpeed, Time.deltaTime / 3), 2);
     }
 }
