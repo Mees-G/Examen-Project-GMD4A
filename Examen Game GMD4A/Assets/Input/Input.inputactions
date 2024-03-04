@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "HandBrake",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "62a282c4-8042-4fef-a6c3-46eb9311762f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

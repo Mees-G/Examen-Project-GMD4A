@@ -13,8 +13,9 @@ public class Car : MonoBehaviour
     public WheelCollider[] frontWheels;
     public WheelCollider[] backWheels;
 
-    public float throttle;
-    public float steeringDirection;
+    [HideInInspector] public float throttle;
+    [HideInInspector] public float steeringDirection;
+    public bool handBrake;
 
     [Header("Engine")]
     public float motorTorque = 2000;
@@ -26,17 +27,18 @@ public class Car : MonoBehaviour
     [Header("Car Audio")]
     public AudioSource engineAudio;
     public AudioClip engineIdle;
-    private float minEnginePitch;
 
+    private float minEnginePitch;
+    private float forwardSpeed;
     private void Start()
     {
         minEnginePitch = engineAudio.pitch;
         rb = GetComponent<Rigidbody>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         //calculate current speed in relation to the forward direction of the car
-        float forwardSpeed = Vector3.Dot(transform.forward, rb.velocity);
+        forwardSpeed = Vector3.Dot(transform.forward, rb.velocity);
 
         //calculate how close the car is to top speed
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, forwardSpeed);
@@ -57,6 +59,12 @@ public class Car : MonoBehaviour
         }
         foreach (WheelCollider wheel in backWheels)
         {
+            if (handBrake)
+            {
+                wheel.brakeTorque = brakeTorque;
+                return;
+            }
+
             if (isAccelerating)
             {
                 // Apply torque to Wheel colliders
@@ -70,7 +78,10 @@ public class Car : MonoBehaviour
                 wheel.motorTorque = 0;
             }
         }
+    }
 
+    private void Update()
+    {
         //sound and pitch of the engine
         engineAudio.pitch = Mathf.Min(Mathf.Lerp(engineAudio.pitch, minEnginePitch + forwardSpeed, Time.deltaTime / 3), 2);
     }

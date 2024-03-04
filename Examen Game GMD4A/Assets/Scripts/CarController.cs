@@ -7,7 +7,6 @@ public class CarController : MonoBehaviour
 {
     public Car car;
 
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -21,6 +20,7 @@ public class CarController : MonoBehaviour
     }
     public void OnHandBrake(InputValue value)
     {
-        
+        if(!car.handBrake) car.handBrake = value.isPressed;
+        else car.handBrake = false;
     }
 }
