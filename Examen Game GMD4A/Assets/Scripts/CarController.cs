@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarController : MonoBehaviour
+public class CarController : Controller
 {
     public Car car;
 
@@ -15,12 +15,17 @@ public class CarController : MonoBehaviour
     {
         Vector2 inputVector = value.Get<Vector2>();
 
-        car.throttle = inputVector.y;
-        car.steeringDirection = inputVector.x;
+        car.throttleInput = inputVector.y;
+        car.steeringDirectionInput = inputVector.x;
     }
     public void OnHandBrake(InputValue value)
     {
         if(!car.handBrake) car.handBrake = value.isPressed;
         else car.handBrake = false;
+    }
+
+    public override void NextCheckpoint(Transform checkpoint)
+    {
+
     }
 }

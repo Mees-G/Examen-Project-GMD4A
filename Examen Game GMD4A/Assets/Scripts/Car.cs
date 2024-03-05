@@ -7,14 +7,15 @@ using UnityEngine.Windows;
 
 public class Car : MonoBehaviour
 {
+    public Controller currentCarController;
     private Rigidbody rb;
 
     [Header("Wheels and Input")]
     public WheelCollider[] frontWheels;
     public WheelCollider[] backWheels;
 
-    [HideInInspector] public float throttle;
-    [HideInInspector] public float steeringDirection;
+    public float throttleInput;
+    public float steeringDirectionInput;
     public bool handBrake;
 
     [Header("Engine")]
@@ -50,12 +51,12 @@ public class Car : MonoBehaviour
         float currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
         // Check if the users input is in the same direction as the cars velocity
-        bool isAccelerating = Mathf.Sign(throttle) == Mathf.Sign(forwardSpeed);
+        bool isAccelerating = Mathf.Sign(throttleInput) == Mathf.Sign(forwardSpeed);
 
         foreach (WheelCollider wheel in frontWheels)
         {
             // Apply steering to Wheel colliders
-            wheel.steerAngle = steeringDirection * currentSteerRange;
+            wheel.steerAngle = steeringDirectionInput * currentSteerRange;
         }
         foreach (WheelCollider wheel in backWheels)
         {
@@ -68,13 +69,13 @@ public class Car : MonoBehaviour
             if (isAccelerating)
             {
                 // Apply torque to Wheel colliders
-                wheel.motorTorque = throttle * currentMotorTorque;
+                wheel.motorTorque = throttleInput * currentMotorTorque;
                 wheel.brakeTorque = 0;
             }
             else
             {
                 // apply brakes to all wheels when throttle is negative
-                wheel.brakeTorque = Mathf.Abs(throttle) * brakeTorque;
+                wheel.brakeTorque = Mathf.Abs(throttleInput) * brakeTorque;
                 wheel.motorTorque = 0;
             }
         }
@@ -84,5 +85,16 @@ public class Car : MonoBehaviour
     {
         //sound and pitch of the engine
         engineAudio.pitch = Mathf.Min(Mathf.Lerp(engineAudio.pitch, minEnginePitch + forwardSpeed, Time.deltaTime / 3), 2);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Checkpoint")
+        {
+            if (currentCarController.NPC)
+            {
+                currentCarController.NextCheckpoint(other.transform);
+            }
+        }
     }
 }
