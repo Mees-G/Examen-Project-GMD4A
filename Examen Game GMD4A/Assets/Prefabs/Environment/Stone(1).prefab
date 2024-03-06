@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.828327
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1079318e-10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.330055
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
@@ -36,12 +36,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab89a3ea78ac02144a4fa819dcf076bc,
         type: 3}
       propertyPath: m_Name
-      value: Stone 1
+      value: Stone(1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
