@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8fda743b539a043b220ae6e99779c2, type: 3}
+  m_Name: TreeGroup
+  m_EditorClassIdentifier: 
+  prototypes:
+  - prefab: {fileID: 536507721039140095, guid: 792456bd3dc7a3e40b3e2f382ddcba11, type: 3}
+    sharedMesh: {fileID: 1948005249019717993, guid: b5225621dd8202e43bf76f6b18fb351f,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: b5225621dd8202e43bf76f6b18fb351f, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 0
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 0}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/ForestTree(1).prefab
+  - prefab: {fileID: 5642129510480453497, guid: 5699dbf3e34e65d44a51f8d021c80c44,
+      type: 3}
+    sharedMesh: {fileID: 4627317528326677377, guid: 4eda385886e6df242845843f1e83188d,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: 4eda385886e6df242845843f1e83188d, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 0
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 0}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/ForestTree(2).prefab
+  - prefab: {fileID: 170268993454516883, guid: 016a4759c0d01e5488c1e6bf61228ab5, type: 3}
+    sharedMesh: {fileID: -4573318861974324045, guid: 779235d809ad82e4083d5ca7b0aea18b,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: 779235d809ad82e4083d5ca7b0aea18b, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 0
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 0}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/PlainsTree(1).prefab
+  - prefab: {fileID: 2502554517912554660, guid: 8a8ee3f13c0c47d41bf53b633034d353,
+      type: 3}
+    sharedMesh: {fileID: 1276857153159266714, guid: 7ff31583f80e40e40b3ecebaa8c26481,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: 7ff31583f80e40e40b3ecebaa8c26481, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 0
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 0}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/PlainsTree(2).prefab
