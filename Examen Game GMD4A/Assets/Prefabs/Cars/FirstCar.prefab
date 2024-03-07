@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6939419002254074635}
   - component: {fileID: 3198203771276263908}
   - component: {fileID: 1466411201596178380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7960775252415092248}
   - component: {fileID: 3979368749566249024}
   - component: {fileID: 8088014292319924972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FrontRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151991570935508863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: casual_car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 4362070233765047698}
   - component: {fileID: 6140363807577185461}
   - component: {fileID: 3494562968961275335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wheel_back_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 6360131297288684007}
   - component: {fileID: 1825651965800449008}
   - component: {fileID: 5027299131739702812}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wheel_front_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 7101430914888044998}
   - component: {fileID: 2640600548258460868}
   - component: {fileID: 6051733909375119800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wheel_front_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 8767515654463647190}
   - component: {fileID: 6959431114129535053}
   - component: {fileID: 6810495945501834785}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FrontLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,7 +1243,7 @@ GameObject:
   - component: {fileID: 4189484044711414038}
   - component: {fileID: 6937578634314740225}
   - component: {fileID: 3938988999120900816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car_Casual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1349,7 @@ GameObject:
   - component: {fileID: 9060428505966145229}
   - component: {fileID: 3342492643846958845}
   - component: {fileID: 1531484898236181773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wheel_back_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1445,7 +1445,7 @@ GameObject:
   - component: {fileID: 6951552054556995486}
   - component: {fileID: 791262419045965611}
   - component: {fileID: 8500988792378243130}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7006350707710069138}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
   m_Name: 
@@ -1851,7 +1851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8099218461279678474}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17133877, y: -0.41273284, z: 0.07936251, w: 0.89106464}
+  m_LocalRotation: {x: 0.17133878, y: -0.41273284, z: 0.07936252, w: 0.89106464}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1933,7 +1933,7 @@ Transform:
   m_GameObject: {fileID: 8844403209554162534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.35, y: 0, z: 3.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1959,6 +1959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCarController: {fileID: 0}
+  cameraControl: {fileID: 0}
   frontWheels:
   - {fileID: 6810495945501834785}
   - {fileID: 8088014292319924972}
@@ -1967,7 +1968,7 @@ MonoBehaviour:
   - {fileID: 8500988792378243130}
   throttleInput: 0
   steeringDirectionInput: 0
-  handBrake: 0
+  handBrake: 1
   motorTorque: 500
   brakeTorque: 2000
   maxSpeed: 20
