@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +9,11 @@ public class UIShopManager : MonoBehaviour
 
     public RectTransform buyableCarsParent;
     public UIBuyableCar uiBuyableCarPrefab;
+    public UIUpgrade uiUpgradePrefab;
+
+    public UIBuyableCar[] uiBuyableCars;
     public Buyable[] buyableCars;
-    public UIBuyableCar[] uiBuyableCar;
-    public CarCameraData[] cameraCarData; 
+    public CarCameraData[] cameraCarData;
 
     public GameObject confirmPanel;
     public ScrollRect scrollRect;
@@ -20,25 +21,27 @@ public class UIShopManager : MonoBehaviour
 
     public Button buyButton;
 
-
     public GameObject confirmMapPanel;
     public Transform mapCameraTransform;
+
+    public GameObject upgradePanel;
 
 
     public TMP_Text coinAmount;
     public TMP_Text buyPriceText;
 
-    private Action onFinishMapAnimation = delegate { };
+    private Coroutine lastRoutine;
 
 
     private int _currentEquiped = -1;
     public int currentEquiped
     {
-        set {
-            if(_currentEquiped >= 0)
-            uiBuyableCar[_currentEquiped].border.SetActive(false);
+        set
+        {
+            if (_currentEquiped >= 0)
+                uiBuyableCars[_currentEquiped].border.SetActive(false);
             _currentEquiped = value;
-            uiBuyableCar[_currentEquiped].border.SetActive(true);
+            uiBuyableCars[_currentEquiped].border.SetActive(true);
         }
         get { return _currentEquiped; }
     }
@@ -54,18 +57,45 @@ public class UIShopManager : MonoBehaviour
         }
         set
         {
-            if (_index != value) {
+            if (_index != value)
+            {
                 confirmMapPanel.SetActive(false);
                 confirmPanel.SetActive(false);
-                if (!doingAnimation) {
+                //if (!doingAnimation)
+                {
                     _index = value % buyableCarsParent.transform.childCount;
                     if (_index < 0) _index = buyableCarsParent.transform.childCount - 1;
+                    StopAllCoroutines();
                     StartCoroutine(SmoothScrollToObject(_index));
-                    Camera.main.SmoothToTransform(this, cameraCarData[_index].cameraTransform, scrollAnimation);
+                    lastRoutine = Camera.main.SmoothToTransform(this, cameraCarData[_index].cameraTransform, scrollAnimation);
                 }
-            } else
+
+                if (upgradePanel.transform.childCount != 0)
+                {
+                    for (int i = 0; i < upgradePanel.transform.childCount; i++)
+                    {
+                        Transform child = upgradePanel.transform.GetChild(i);
+                        Destroy(child.gameObject);
+                    }
+                }
+
+                //populate upgrades panel
+                upgradePanel.SetActive(buyableCars[_index].unlocked);
+                if (buyableCars[_index].unlocked)
+                {
+                    foreach (Upgrade upgrade in buyableCars[_index].upgrades)
+                    {
+                        UIUpgrade upgradeUI = Instantiate(uiUpgradePrefab, upgradePanel.transform);
+                        upgradeUI.upgrade = upgrade;
+                    }
+                }
+
+
+            }
+            else
             {
-                if (!buyableCars[_index].unlocked) {
+                if (!buyableCars[_index].unlocked)
+                {
                     Debug.Log("Buy/Select/ETC");
                     buyButton.interactable = buyableCars[_index].price <= CurrencyManager.INSTANCE.amount;
                     buyPriceText.text = buyableCars[_index].price.ToString();
@@ -85,30 +115,6 @@ public class UIShopManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SmoothScrollToObject(int index)
-    {
-        doingAnimation = true;
-        float factor = 0;
-        float animationSpeed = 2.0F;
-        Canvas.ForceUpdateCanvases();
-        Vector2 viewportLocalPosition = scrollRect.viewport.localPosition;
-        Vector2 childLocalPosition = buyableCarsParent.GetChild(index).localPosition;
-        Vector2 result = new Vector2(
-            0 - (viewportLocalPosition.x + childLocalPosition.x),
-            0 - (viewportLocalPosition.y + childLocalPosition.y)
-        );
-        Vector2 startPosition = scrollRect.content.localPosition;
-        Vector2 endPosition = result;
-        while (factor < 1)
-        {
-            scrollRect.content.localPosition = Vector2.LerpUnclamped(startPosition, endPosition, scrollAnimation.Evaluate(factor));
-            float add = Time.deltaTime * animationSpeed;
-            yield return new WaitForSeconds(Time.deltaTime);
-            factor += add;
-        }
-        doingAnimation = false;
-    }
-
     private void Awake()
     {
         this.InitializeUI();
@@ -116,13 +122,15 @@ public class UIShopManager : MonoBehaviour
 
     public void InitializeUI()
     {
+        CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;
         coinAmount.SetValue(this, CurrencyManager.INSTANCE.amount, 1);
-        uiBuyableCar = new UIBuyableCar[buyableCars.Length];
+
+        uiBuyableCars = new UIBuyableCar[buyableCars.Length];
         for (int i = 0; i < buyableCars.Length; i++)
         {
             Buyable buyable = buyableCars[i];
             UIBuyableCar carBuyUI = Instantiate(uiBuyableCarPrefab, buyableCarsParent);
-            uiBuyableCar[i] = carBuyUI;
+            uiBuyableCars[i] = carBuyUI;
             carBuyUI.buyable = buyable;
             carBuyUI.UpdateUI();
 
@@ -135,6 +143,57 @@ public class UIShopManager : MonoBehaviour
         //uiBuyableCar[_currentEquiped].border.SetActive(true);
     }
 
+    private IEnumerator SmoothScrollToObject(int index)
+    {
+        doingAnimation = true;
+        float factor = 0;
+        float animationSpeed = 2.0F;
+        Canvas.ForceUpdateCanvases();
+        Vector2 viewportLocalPosition = scrollRect.viewport.localPosition;
+
+        Vector2 childLocalPosition = buyableCarsParent.GetChild(index).localPosition;
+        Vector2 result = new Vector2(
+            0 - (viewportLocalPosition.x + childLocalPosition.x),
+            0 - (viewportLocalPosition.y + childLocalPosition.y)
+        );
+        Vector2 startPosition = scrollRect.content.localPosition;
+        Vector2 endPosition = result;
+        while (factor < 1)
+        {
+            scrollRect.content.localPosition = Vector2.LerpUnclamped(startPosition, endPosition, scrollAnimation.Evaluate(factor));
+
+            //200 = spacing
+            float contentPosition = scrollRect.content.localPosition.x;
+            float spaceBetweenItems = 200;
+            float itemSize = 300;
+            float half = itemSize / 2;
+
+
+            float f = -(contentPosition + half) / (spaceBetweenItems + itemSize);
+            int affectedIndex1 = (int)f;
+            int affectedIndex2 = (int)Math.Ceiling(f);
+
+            float extraScale = 0.2F;
+            float scale1 = (1 - f) * extraScale;
+            float scale2 = f * extraScale;
+
+            uiBuyableCars[affectedIndex2].transform.localScale = new Vector3(1 + scale2, 1 + scale2, 1 + scale2);
+            uiBuyableCars[affectedIndex1].transform.localScale = new Vector3(1 + scale1, 1 + scale1, 1 + scale1);
+
+            float add = Time.deltaTime * animationSpeed;
+            yield return new WaitForSeconds(Time.deltaTime);
+            factor += add;
+        }
+        doingAnimation = false;
+    }
+
+    private void OnChangeMoneyAmount(int amount)
+    {
+        coinAmount.SetValue(this, amount, 1);
+        Debug.Log("jaja " + amount);
+    }
+
+
     public void OnClickButton(UIBuyableCar uiCar)
     {
         index = uiCar.transform.GetSiblingIndex();
@@ -143,18 +202,18 @@ public class UIShopManager : MonoBehaviour
     public void BuyCurrentSelected()
     {
         CurrencyManager.INSTANCE.amount -= buyableCars[_index].price;
-        coinAmount.SetValue(this, CurrencyManager.INSTANCE.amount, 1);
         buyableCars[_index].unlocked = true;
-        uiBuyableCar[_index].UpdateUI();
+        uiBuyableCars[_index].UpdateUI();
         confirmPanel.SetActive(false);
     }
 
-    public void OnClickButtonMap()
+    public void OnClickButtonMap(MonoBehaviour monoBehaviour)
     {
-        Camera.main.SmoothToTransform(this, mapCameraTransform, scrollAnimation, 1, onFinishMapAnimation);
+        // onFinishMapAnimation += OnLoadedMap;
+        Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1);
         confirmMapPanel.SetActive(false);
-        onFinishMapAnimation += OnLoadedMap;
-       
+        gameObject.SetActive(false);
+
     }
 
     public void OnLoadedMap()

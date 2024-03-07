@@ -20,8 +20,18 @@ public class Buyable : ScriptableObject
 
     public bool unlocked;
 
+    public Upgrade[] upgrades;
+
     //public Dictionary<string, UpgradeData> upgrades;
 
+    public Upgrade GetUpgradeByName(string name)
+    {
+        foreach (Upgrade upgrade in upgrades)
+        {
+            if (upgrade.upgradeName.Equals(name)) return upgrade;
+        }
+        return null;
+    }
         
    
 }

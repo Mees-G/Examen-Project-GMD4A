@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,19 @@ public class CurrencyManager
         }
     }
 
-    public int amount = 500;
+    private int _amount = 500;
+    public int amount
+    {
+        get { return _amount; } 
+        set
+        {
+            _amount = value;
+            OnChangeAmount.Invoke(amount);
+        }
+    }
+
     public const double multiplier = 1.5;
+    public Action<int> OnChangeAmount;
 
     public int ConvertAlcoholToMoney(double liters)
     {

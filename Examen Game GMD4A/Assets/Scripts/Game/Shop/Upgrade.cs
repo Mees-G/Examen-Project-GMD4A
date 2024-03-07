@@ -77,8 +77,6 @@ public class UpgradeEditor : Editor
             }
         }
 
-        Debug.Log(upgrade.CalculateCurrentPrice());
-
         // Display min and max values
 
         EditorGUILayout.EndHorizontal();

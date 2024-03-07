@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public static class Camera_Extension
 {
 
-    public static void SmoothToTransform(this Camera camera, MonoBehaviour monoBehaviour, Transform to, AnimationCurve curve, float animationSpeed = 2.0F, Action action = null)
+    public static Coroutine SmoothToTransform(this Camera camera, MonoBehaviour monoBehaviour, Transform to, AnimationCurve curve, float animationSpeed = 2.0F, Action action = null)
     {
-        monoBehaviour.StartCoroutine(SmoothToTransform(camera, to, curve, animationSpeed, action));
+        return monoBehaviour.StartCoroutine(SmoothToTransform(camera, to, curve, animationSpeed, action));
     }
 
     private static IEnumerator SmoothToTransform(this Camera camera, Transform to, AnimationCurve curve, float animationSpeed, Action action = null)
@@ -31,10 +31,8 @@ public static class Camera_Extension
             yield return new WaitForSeconds(Time.deltaTime);
             factor += add;
         }
-        Debug.Log("DONE W");
         if (action != null)
         {
-            Debug.Log("DONE!");
             action.Invoke();
         }
     }
