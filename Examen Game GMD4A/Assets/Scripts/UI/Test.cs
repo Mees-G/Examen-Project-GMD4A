@@ -14,7 +14,7 @@ public class Test : MonoBehaviour
      if (Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("AAAAAA");
-            text.SetValue(this, 100);
+            //text.SetValue(this, 100);
         }   
     }
 }

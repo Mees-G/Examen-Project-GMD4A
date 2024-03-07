@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -73,28 +74,30 @@ public class UILevelPathHandler : MaskableGraphic
             LevelManager.INSTANCE.UpdateCurrentLevelIndex();
         }
         Vector2 previousPosition = car.transform.position;
-        Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).position;
-        Vector2 endPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex).position;
-        Vector2[] controlPoints = CalculateControlPoints(startPoint, endPoint);
+        Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
+        Vector2 endPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex).localPosition;
 
         //car pathing
         timer = Mathf.Min(timer + Time.deltaTime * 0.15f, 1);
 
 
-        Vector2 point = CalculateCubicSplinePoint(controlPoints[0], controlPoints[1], controlPoints[2], controlPoints[3], pathingAnimation.Evaluate(timer));
-        car.transform.position = point;
+      
 
         if (LevelManager.INSTANCE.currentLevelIndex != 0)
         {
             if (timer != 1)
             {
-            car.transform.rotation = Quaternion.Lerp(car.transform.rotation, Quaternion.Euler(0, 0, RotatePointTowards(previousPosition, point) - 90), Time.deltaTime * 5);
+                Vector2[] controlPoints = CalculateControlPoints(startPoint, endPoint);
+                Vector2 point = CalculateCubicSplinePoint(controlPoints[0], controlPoints[1], controlPoints[2], controlPoints[3], pathingAnimation.Evaluate(timer));
+                
+                car.transform.localPosition = point;
+                car.transform.rotation = Quaternion.Lerp(car.transform.rotation, Quaternion.Euler(0, 0, RotatePointTowards(previousPosition, car.transform.position) - 90), Time.deltaTime * 5);
                 float scale = carHummingAnimation.Evaluate(Time.time % 1);
                 car.localScale = new Vector3(scale, scale, scale);
                 Canvas.ForceUpdateCanvases();
 
-                contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, (Vector2)scrollRect.transform.InverseTransformPoint(contentPanel.position)
-                        - (Vector2)scrollRect.transform.InverseTransformPoint(car.transform.position), Time.deltaTime*5);
+                /*contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, (Vector2)scrollRect.transform.InverseTransformPoint(contentPanel.position)
+                        - (Vector2)scrollRect.transform.InverseTransformPoint(car.transform.position), Time.deltaTime * 5);*/
             }
         }
     }

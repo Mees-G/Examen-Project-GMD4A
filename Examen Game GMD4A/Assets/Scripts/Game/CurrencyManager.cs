@@ -21,7 +21,7 @@ public class CurrencyManager
         }
     }
 
-    public int amount;
+    public int amount = 500;
     public const double multiplier = 1.5;
 
     public int ConvertAlcoholToMoney(double liters)
