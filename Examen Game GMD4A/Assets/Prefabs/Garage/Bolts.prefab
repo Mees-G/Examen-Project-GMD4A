@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5095597649737163096}
   - component: {fileID: 5788089361337280352}
   - component: {fileID: 8784670283394087312}
+  - component: {fileID: 2627464303357302830}
   m_Layer: 0
   m_Name: Bolts
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2627464303357302830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599118485149371868}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13193351, y: 0.023927921, z: 0.13419247}
+  m_Center: {x: -0.0023166612, y: 0.011963961, z: -0.002789162}
