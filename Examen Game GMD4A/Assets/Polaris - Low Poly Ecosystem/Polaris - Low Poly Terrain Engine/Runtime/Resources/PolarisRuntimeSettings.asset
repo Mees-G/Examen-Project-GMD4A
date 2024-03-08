@@ -158,7 +158,7 @@ MonoBehaviour:
     grassDistance: 100
     grassCellToProcessPerFrame: 1
     grassFadeStart: 0.75
-    grassCullBias: 10
+    grassCullBias: 21.8
   foliageDefault:
     trees: {fileID: 11400000, guid: 0af7475bfa20a88428c4fdadbd83fa37, type: 2}
     treeSnapMode: 0

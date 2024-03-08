@@ -18,6 +18,7 @@ public class CarController_Player : Controller_Base
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        ActivateControl();
     }
 
     private void Update()
