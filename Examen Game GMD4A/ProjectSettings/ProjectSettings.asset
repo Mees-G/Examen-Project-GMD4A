@@ -806,7 +806,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: GRIFFIN;GRIFFIN_2020;GRIFFIN_URP
+    Standalone: GRIFFIN;GRIFFIN_2020;GRIFFIN_URP;ENABLE_UNITYMESHSIMPLIFIER
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
