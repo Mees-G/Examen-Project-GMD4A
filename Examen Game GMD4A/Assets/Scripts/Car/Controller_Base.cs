@@ -9,10 +9,6 @@ public abstract class Controller_Base : MonoBehaviour
 
     public Track track;
 
-    private void Start()
-    {
-        car.currentCarController = this;
-    }
     public virtual void NextCheckpoint(Transform checkpoint)
     {
 

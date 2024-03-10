@@ -8,8 +8,8 @@ using UnityEngine.Windows;
 
 public class Car : MonoBehaviour
 {
-    [HideInInspector] public Controller_Base currentCarController;
-    private Rigidbody rb;
+    public Controller_Base currentCarController;
+    [HideInInspector] public Rigidbody rb;
     [HideInInspector] public CinemachineFreeLook cameraControl;
 
     [Header("Wheels and Input")]
@@ -32,12 +32,18 @@ public class Car : MonoBehaviour
     public AudioClip engineIdle;
 
     private float minEnginePitch;
-    private float forwardSpeed;
+
+    [HideInInspector] public float forwardSpeed;
+    [HideInInspector] public float currentSteerRange;
+    [HideInInspector] public float wheelBase;
+
     private void Start()
     {
         cameraControl = GetComponentInChildren<CinemachineFreeLook>();
         minEnginePitch = engineAudio.pitch;
         rb = GetComponent<Rigidbody>();
+
+        wheelBase = Vector3.Distance(frontWheels[0].transform.position, backWheels[0].transform.position);
     }
     private void FixedUpdate()
     {
@@ -57,7 +63,7 @@ public class Car : MonoBehaviour
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
         
         //calculate how much to steer 
-        float currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
+        currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
         // Check if the users input is in the same direction as the cars velocity
         bool isAccelerating = Mathf.Sign(throttleInput) == Mathf.Sign(forwardSpeed);

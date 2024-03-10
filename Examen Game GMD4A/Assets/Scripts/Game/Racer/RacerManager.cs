@@ -19,9 +19,15 @@ public class RacerManager : GameModeManager
     public void SpawnParticipants()
     {
         //Spawn Player
+
+        //Select one of the track's start positions at random
         int spawnPosIndex = Random.Range(0, raceTrack.startPositions.Length);
         Transform spawnPoint = raceTrack.startPositions[spawnPosIndex].startTransform;
+
+        //Mark it as occupied
         raceTrack.startPositions[spawnPosIndex].occupied = true;
+
+        //Instantiate the player's car at the selected start position
         Car plyrCar = CarSpawner.instance.InstantiateCar(playerCarPrefab, spawnPoint);
 
         CarController_Player.instance.car = plyrCar;
@@ -33,6 +39,7 @@ public class RacerManager : GameModeManager
         {
             if (!raceTrack.startPositions[i].occupied)
             {
+                //Spawn a opponent at every free start position
                 Transform spawnPos = raceTrack.startPositions[i].startTransform;
                 Car NPCcar = CarSpawner.instance.InstantiateCar(NPCcars[Random.Range(0, NPCcars.Length)], spawnPos);
                 Controller_Base Npc = Instantiate(NpcObject, transform.GetChild(0)).GetComponent<Controller_Base>();

@@ -15,9 +15,10 @@ public class CarController_Player : Controller_Base
         playerInput.DeactivateInput();
     }
 
-    private void Start()
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        car.currentCarController = this;
         ActivateControl();
     }
 
