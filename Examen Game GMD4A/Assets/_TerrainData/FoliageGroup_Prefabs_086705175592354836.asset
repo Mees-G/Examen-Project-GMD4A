@@ -25,4 +25,16 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 6ca9f3c72e6cb7841a5db7cc17c47f8b, type: 3}
   - {fileID: 919132149155446097, guid: f982c2002cfd88d45850b7b0835365a3, type: 3}
   - {fileID: 919132149155446097, guid: e30817ad39740244a950bcf31dfb57f9, type: 3}
-  editor_PrefabAssetPaths: []
+  editor_PrefabAssetPaths:
+  - Assets/Art/Models/Environment/Forest/ForestGrass(1).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(2).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(3).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(4).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(5).fbx
+  - Assets/Art/Models/Environment/Forest/ForestStone(1).fbx
+  - Assets/Art/Models/Environment/Forest/ForestStone(2).fbx
+  - Assets/Art/Models/Environment/Forest/ForestStone(3).fbx
+  - Assets/Art/Models/Environment/Forest/ForestStone(4).fbx
+  - Assets/Art/Models/Environment/Forest/TreeLog(1).fbx
+  - Assets/Art/Models/Environment/Forest/TreeStump(1).fbx
+  - Assets/Art/Models/Environment/Forest/TreeStump(2).fbx
