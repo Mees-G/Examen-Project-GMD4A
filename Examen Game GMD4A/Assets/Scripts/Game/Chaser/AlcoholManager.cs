@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AlcoholManager : MonoBehaviour
 {
@@ -20,7 +24,7 @@ public class AlcoholManager : MonoBehaviour
     public Transform coinEndPoint;
     public AnimationCurve animationSpawn;
     public AnimationCurve animationCollect;
-    private float spawnDuration = 0.02f;
+    private float spawnDuration = 0.5F;
     private float collectionDuration = 1.0F;
     private float coinAnimationDuration = 0.5f;
 
@@ -37,14 +41,6 @@ public class AlcoholManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             AttemptToLoseAlcohol();
-        }
-
-
-        //Coin Spawning
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            StartCoroutine(CollectCoins());
         }
 
         foreach (Coin coin in coinList)
@@ -80,24 +76,52 @@ public class AlcoholManager : MonoBehaviour
         }
     }
 
-    private IEnumerator CollectCoins()
+
+    public void CollectCoins(UnityEngine.UI.Button button)
+    {
+        StartCoroutine(CollectCoins(button.transform.position));
+        liters = 0;
+    }
+
+    private IEnumerator CollectCoins(Vector2 position)
     {
         int convertedToMoney = CurrencyManager.INSTANCE.ConvertAlcoholToMoney(liters);
-        Debug.Log(convertedToMoney);
         CurrencyManager.INSTANCE.amount += convertedToMoney;
+        float endTime = Time.time + spawnDuration;
+        int givenAmount = 0;
+        float previousFactor = 0;
 
-        float xMiddle = Screen.width / 2;
-        float yMiddle = Screen.height / 2;
-
-        for (int i = 0; i < convertedToMoney; i++)
+        while (Time.time < endTime)
         {
-            float randomX = Random.Range(-Screen.height / 8, Screen.height / 8);
-            float randomY = Random.Range(-Screen.height / 8, Screen.height / 8);
-            GameObject coinInstansiated = Instantiate(coinPrefab, new Vector2(xMiddle + randomX, yMiddle + randomY), Quaternion.Euler(0, 0, Random.Range(-180, 180)), coinParent);
-            coinInstansiated.transform.localScale = Vector3.zero;
-            coinList.Add(new Coin(coinInstansiated));
+            float difference = endTime - Time.time;
+            float factor = 1 - (difference / spawnDuration);
+            int currentAmount = (int)(convertedToMoney * (factor - previousFactor));
+            //
+            for (int i = 0; i < currentAmount; i++)
+            {
+                SpawnCoin(position);
+                givenAmount++;
+            }
+            previousFactor = factor;
             yield return new WaitForSeconds(spawnDuration / convertedToMoney);
         }
+
+        while (givenAmount < convertedToMoney)
+        {
+            Debug.Log(givenAmount + " - AAAAAAA");
+            SpawnCoin(position);
+            givenAmount++;
+        }
+
+    }
+
+    public void SpawnCoin(Vector2 position)
+    {
+        Vector2 spawnAround = position + (Random.insideUnitCircle * 150);
+        GameObject coinInstansiated = Instantiate(coinPrefab, spawnAround, Quaternion.Euler(0, 0, Random.Range(-180, 180)), coinParent);
+        coinInstansiated.transform.SetSiblingIndex(0);
+        coinInstansiated.transform.localScale = Vector3.zero;
+        coinList.Add(new Coin(coinInstansiated));
     }
 
 
@@ -105,7 +129,7 @@ public class AlcoholManager : MonoBehaviour
     {
         if (liters > 0)
         {
-            GameObject alcoholInstaniate = Instantiate(alcoholPrefab, alcoholSpawnPoint.transform.position, Random.rotation);
+           /* GameObject alcoholInstaniate = Instantiate(alcoholPrefab, alcoholSpawnPoint.transform.position, Random.rotation);
             GameObject currentCar = GameManager.INSTANCE.currentCar;
 
             Rigidbody rigidbody = alcoholInstaniate.GetComponent<Rigidbody>();
@@ -113,7 +137,7 @@ public class AlcoholManager : MonoBehaviour
 
             rigidbody.velocity = -transform.forward * 2;
             rigidbody.angularVelocity = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10));
-            liters--;
+            liters--;*/
 
         }
     }

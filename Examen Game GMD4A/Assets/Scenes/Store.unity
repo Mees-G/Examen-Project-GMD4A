@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f21590a0908ec8147b5116320a740c05,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 4b6efba88fba5e44aabb9e019135cee4,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2268,11 +2270,14 @@ MonoBehaviour:
   buyableCars:
   - {fileID: 11400000, guid: 550f08b44d39981488a241bc5db0c5dd, type: 2}
   - {fileID: 11400000, guid: 41f06dccca196524f8492d719ae9861d, type: 2}
+  - {fileID: 11400000, guid: 478ea18e1283b8c42aec0fb2b0b009a6, type: 2}
   cameraCarData:
   - car: {fileID: 11400000, guid: 550f08b44d39981488a241bc5db0c5dd, type: 2}
     cameraTransform: {fileID: 1584857009}
   - car: {fileID: 11400000, guid: 41f06dccca196524f8492d719ae9861d, type: 2}
     cameraTransform: {fileID: 1420425791}
+  - car: {fileID: 11400000, guid: 478ea18e1283b8c42aec0fb2b0b009a6, type: 2}
+    cameraTransform: {fileID: 306385629}
   confirmPanel: {fileID: 869694927}
   scrollRect: {fileID: 922458380}
   scrollAnimation:
@@ -2305,6 +2310,7 @@ MonoBehaviour:
   upgradePanel: {fileID: 1820842399}
   coinAmount: {fileID: 429702899}
   buyPriceText: {fileID: 93888810}
+  uiLevelPathHandler: {fileID: 1363534875}
 --- !u!4 &261635387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4242482566615763485, guid: 05b9566e94bb9ea4b83e710cb42bc2c3,
@@ -3097,7 +3103,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 200
+  m_Spacing: 960
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -13285,11 +13291,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  missionOutOfText: {fileID: 562770787}
+  moneyText: {fileID: 1667246883}
   unlockedColor: {r: 1, g: 0.12919629, b: 0, a: 1}
   thickness: 16.7
   curved: 1
   segments: 35
-  timer: 0.86840373
+  timer: 0
   carHummingAnimation:
     serializedVersion: 2
     m_Curve:
@@ -13532,6 +13540,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   scrollRect: {fileID: 2142542923}
   contentPanel: {fileID: 1025941573}
+  shouldDoAnimation: 0
 --- !u!1001 &1363673781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18580,6 +18589,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1156388826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1843609973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843609974}
+  - component: {fileID: 1843609975}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1843609974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843609973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 956.4294, y: 547.81866, z: 692.124}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1843609975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843609973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa578c50b09d614989e4a881a2b1851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCar: {fileID: 0}
 --- !u!4 &1844688948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1141351364510159114, guid: 6fa12c8ebe0289c4189e806d91c899d9,
@@ -19739,7 +19793,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2050438169}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1118352788}
+        m_TargetAssemblyTypeName: UILevelSelectPopup, Assembly-CSharp
+        m_MethodName: PlayCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2050438169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20441,3 +20507,4 @@ SceneRoots:
   - {fileID: 757470586}
   - {fileID: 786295551}
   - {fileID: 540952004}
+  - {fileID: 1843609974}

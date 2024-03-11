@@ -17,4 +17,5 @@ MonoBehaviour:
   car: {fileID: 0}
   icon: {fileID: 0}
   price: 300
-  unlocked: 1
+  unlocked: 0
+  upgrades: []

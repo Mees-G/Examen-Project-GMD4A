@@ -2,22 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager
+public class GameManager : MonoBehaviour
 {
+    public static GameManager INSTANCE;
 
-    private static GameManager _INSTANCE;
-    public static GameManager INSTANCE
+    private void Awake()
     {
-        get
-        {
-            if (_INSTANCE == null)
-            {
-                _INSTANCE = new GameManager();
-            }
-            return _INSTANCE;
-        }
+        INSTANCE = this;
     }
 
-    public GameObject currentCar;
+    public Buyable currentCar;
 
 }

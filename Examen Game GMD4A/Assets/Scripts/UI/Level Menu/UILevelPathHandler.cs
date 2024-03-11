@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,10 @@ public class UILevelPathHandler : MaskableGraphic
     public Transform car;
     public AnimationCurve pathingAnimation;
 
+    [Header("UI")]
+    public TMP_Text missionOutOfText;
+    public TMP_Text moneyText;
+
     [Header("Map")]
     public Color unlockedColor;
     public float thickness = 10f;
@@ -22,13 +27,59 @@ public class UILevelPathHandler : MaskableGraphic
     public AnimationCurve carHummingAnimation;
     public ScrollRect scrollRect;
     public RectTransform contentPanel;
+    public bool shouldDoAnimation;
 
 
     protected override void Start()
     {
-        LevelManager.INSTANCE.onChangeLevelIndex += OnChangeLevelIndex;
-        OnChangeLevelIndex(LevelManager.INSTANCE.currentLevelIndex);
-        Debug.Log(LevelManager.INSTANCE.currentLevelIndex);
+        if (Application.isPlaying)
+        {
+            LevelManager.INSTANCE.onChangeLevelIndex += OnChangeLevelIndex;
+            LevelManager.INSTANCE.UpdateCurrentLevelIndex();
+            Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
+   
+            car.transform.localPosition = startPoint;
+
+            missionOutOfText.text = (LevelManager.INSTANCE.currentLevelIndex) + "/" + LevelManager.INSTANCE.levels.Count;
+            moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
+
+
+        }
+    }
+
+    private void Update()
+    {
+        if (Application.isPlaying && shouldDoAnimation)
+        {
+            Vector2 previousPosition = car.transform.position;
+            Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
+            Vector2 endPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex).localPosition;
+
+            //car pathing
+            timer = Mathf.Min(timer + Time.deltaTime * 0.15f, 1);
+
+
+            if (LevelManager.INSTANCE.currentLevelIndex != 0)
+            {
+                if (timer != 1)
+                {
+                    Vector2[] controlPoints = CalculateControlPoints(startPoint, endPoint);
+                    Vector2 point = CalculateCubicSplinePoint(controlPoints[0], controlPoints[1], controlPoints[2], controlPoints[3], pathingAnimation.Evaluate(timer));
+
+                    car.transform.localPosition = point;
+                    car.transform.rotation = Quaternion.Lerp(car.transform.rotation, Quaternion.Euler(0, 0, RotatePointTowards(previousPosition, car.transform.position) - 90), Time.deltaTime * 5);
+                    float scale = carHummingAnimation.Evaluate(Time.time % 1);
+                    car.localScale = new Vector3(scale, scale, scale);
+                    Canvas.ForceUpdateCanvases();
+
+                    /*contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, (Vector2)scrollRect.transform.InverseTransformPoint(contentPanel.position)
+                            - (Vector2)scrollRect.transform.InverseTransformPoint(car.transform.position), Time.deltaTime * 5);*/
+                } else
+                {
+                    shouldDoAnimation = false;
+                }
+            }
+        }
     }
 
     protected override void OnPopulateMesh(VertexHelper vh)
@@ -65,41 +116,6 @@ public class UILevelPathHandler : MaskableGraphic
             button.enabled = i <= index;
         }
         SetAllDirty();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            LevelManager.INSTANCE.UpdateCurrentLevelIndex();
-        }
-        Vector2 previousPosition = car.transform.position;
-        Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
-        Vector2 endPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex).localPosition;
-
-        //car pathing
-        timer = Mathf.Min(timer + Time.deltaTime * 0.15f, 1);
-
-
-      
-
-        if (LevelManager.INSTANCE.currentLevelIndex != 0)
-        {
-            if (timer != 1)
-            {
-                Vector2[] controlPoints = CalculateControlPoints(startPoint, endPoint);
-                Vector2 point = CalculateCubicSplinePoint(controlPoints[0], controlPoints[1], controlPoints[2], controlPoints[3], pathingAnimation.Evaluate(timer));
-                
-                car.transform.localPosition = point;
-                car.transform.rotation = Quaternion.Lerp(car.transform.rotation, Quaternion.Euler(0, 0, RotatePointTowards(previousPosition, car.transform.position) - 90), Time.deltaTime * 5);
-                float scale = carHummingAnimation.Evaluate(Time.time % 1);
-                car.localScale = new Vector3(scale, scale, scale);
-                Canvas.ForceUpdateCanvases();
-
-                /*contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, (Vector2)scrollRect.transform.InverseTransformPoint(contentPanel.position)
-                        - (Vector2)scrollRect.transform.InverseTransformPoint(car.transform.position), Time.deltaTime * 5);*/
-            }
-        }
     }
 
 

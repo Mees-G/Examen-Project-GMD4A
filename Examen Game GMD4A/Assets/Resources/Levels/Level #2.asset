@@ -17,4 +17,4 @@ MonoBehaviour:
   levelDescription: Geen idee
   highscore: 0
   fastestTime: 0
-  completed: 1
+  completed: 0

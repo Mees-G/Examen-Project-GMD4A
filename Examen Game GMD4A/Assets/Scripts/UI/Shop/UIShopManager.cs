@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIShopManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class UIShopManager : MonoBehaviour
     public ScrollRect scrollRect;
     public AnimationCurve scrollAnimation;
 
-    public Button buyButton;
+    public UnityEngine.UI.Button buyButton;
 
     public GameObject confirmMapPanel;
     public Transform mapCameraTransform;
@@ -30,8 +31,11 @@ public class UIShopManager : MonoBehaviour
     public TMP_Text coinAmount;
     public TMP_Text buyPriceText;
 
+    public UILevelPathHandler uiLevelPathHandler;
+
     private Coroutine lastRoutine;
 
+    private Action onFinishMapAnimation = delegate { };
 
     private int _currentEquiped = -1;
     public int currentEquiped
@@ -42,6 +46,8 @@ public class UIShopManager : MonoBehaviour
                 uiBuyableCars[_currentEquiped].border.SetActive(false);
             _currentEquiped = value;
             uiBuyableCars[_currentEquiped].border.SetActive(true);
+            GameManager.INSTANCE.currentCar = buyableCars[_currentEquiped];
+
         }
         get { return _currentEquiped; }
     }
@@ -134,7 +140,7 @@ public class UIShopManager : MonoBehaviour
             carBuyUI.buyable = buyable;
             carBuyUI.UpdateUI();
 
-            carBuyUI.GetComponent<Button>().onClick.AddListener(delegate ()
+            carBuyUI.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate ()
             {
                 OnClickButton(carBuyUI);
             });
@@ -164,21 +170,24 @@ public class UIShopManager : MonoBehaviour
 
             //200 = spacing
             float contentPosition = scrollRect.content.localPosition.x;
-            float spaceBetweenItems = 200;
+            float spaceBetweenItems = 960;
             float itemSize = 300;
             float half = itemSize / 2;
 
 
             float f = -(contentPosition + half) / (spaceBetweenItems + itemSize);
-            int affectedIndex1 = (int)f;
-            int affectedIndex2 = (int)Math.Ceiling(f);
+
+            int firstPoint = Mathf.CeilToInt(f);
+            int secondPoint = Mathf.FloorToInt(f);
 
             float extraScale = 0.2F;
-            float scale1 = (1 - f) * extraScale;
-            float scale2 = f * extraScale;
+            float centeredScale = (f % 1) * extraScale;
+            float otherScale = (1 - (f % 1)) * extraScale;
 
-            uiBuyableCars[affectedIndex2].transform.localScale = new Vector3(1 + scale2, 1 + scale2, 1 + scale2);
-            uiBuyableCars[affectedIndex1].transform.localScale = new Vector3(1 + scale1, 1 + scale1, 1 + scale1);
+
+            // uiBuyableCars[affectedIndex2].transform.localScale = new Vector3(1 + scale2, 1 + scale2, 1 + scale2);
+            uiBuyableCars[firstPoint].transform.localScale = new Vector3(1 + centeredScale, 1 + centeredScale, 1 + centeredScale);
+            uiBuyableCars[secondPoint].transform.localScale = new Vector3(1 + otherScale, 1 + otherScale, 1 + otherScale);
 
             float add = Time.deltaTime * animationSpeed;
             yield return new WaitForSeconds(Time.deltaTime);
@@ -209,8 +218,8 @@ public class UIShopManager : MonoBehaviour
 
     public void OnClickButtonMap(MonoBehaviour monoBehaviour)
     {
-        // onFinishMapAnimation += OnLoadedMap;
-        Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1);
+        onFinishMapAnimation += OnLoadedMap;
+        Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1, onFinishMapAnimation);
         confirmMapPanel.SetActive(false);
         gameObject.SetActive(false);
 
@@ -218,8 +227,8 @@ public class UIShopManager : MonoBehaviour
 
     public void OnLoadedMap()
     {
-        Debug.Log("jAWEL");
-        gameObject.SetActive(false);
+        //do map animation
+        uiLevelPathHandler.shouldDoAnimation = true;
     }
 
     public void IncreaseIndex()

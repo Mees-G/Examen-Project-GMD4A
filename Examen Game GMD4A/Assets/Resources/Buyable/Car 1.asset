@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75becdf22887f54ab1b17695a824321, type: 3}
   m_Name: Car 1
   m_EditorClassIdentifier: 
+  _name: Basic Car
+  description: A Basic Car, nothing special yet...
   car: {fileID: 0}
   icon: {fileID: 0}
-  description: A Basic Car, nothing special yet...
   price: 100
   unlocked: 1
+  upgrades:
+  - {fileID: 11400000, guid: 50221b76f65f9a14b95c371f5f402b26, type: 2}

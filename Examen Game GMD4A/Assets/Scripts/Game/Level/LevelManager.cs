@@ -22,12 +22,14 @@ public class LevelManager
 
     public List<Level> levels = new List<Level>();
 
-    public event System.Action<int> onChangeLevelIndex;
+    public System.Action<int> onChangeLevelIndex = delegate { };
 
     private int _currentLevelIndex;
     public int currentLevelIndex
     {
-        get { return _currentLevelIndex; }
+        get {
+            Debug.Log(_currentLevelIndex +" - AAA");
+            return _currentLevelIndex; }
         set
         {
             if (_currentLevelIndex != value)
@@ -35,7 +37,7 @@ public class LevelManager
                 _currentLevelIndex = value;
 
                 Debug.Log(onChangeLevelIndex + " - " + _currentLevelIndex);
-                onChangeLevelIndex.Invoke(_currentLevelIndex);
+                onChangeLevelIndex.Invoke(_currentLevelIndex);  
             }
         }
     }
