@@ -17,4 +17,8 @@ MonoBehaviour:
   - {fileID: 5642129510480453497, guid: 5699dbf3e34e65d44a51f8d021c80c44, type: 3}
   - {fileID: 170268993454516883, guid: 016a4759c0d01e5488c1e6bf61228ab5, type: 3}
   - {fileID: 2502554517912554660, guid: 8a8ee3f13c0c47d41bf53b633034d353, type: 3}
-  editor_PrefabAssetPaths: []
+  editor_PrefabAssetPaths:
+  - Assets/Prefabs/Environment/Forest/ForestTree(1).prefab
+  - Assets/Prefabs/Environment/Forest/ForestTree(2).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsTree(1).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsTree(2).prefab

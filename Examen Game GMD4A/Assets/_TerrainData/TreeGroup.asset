@@ -24,7 +24,7 @@ MonoBehaviour:
     billboardReceiveShadow: 0
     layer: 0
     keepPrefabLayer: 0
-    billboard: {fileID: 0}
+    billboard: {fileID: 22600000, guid: 5f8f0bc124bacd3479bf05de64ce0f9c, type: 2}
     hasCollider: 0
     colliderInfo:
       center: {x: 0, y: 0, z: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
     billboardReceiveShadow: 0
     layer: 0
     keepPrefabLayer: 0
-    billboard: {fileID: 0}
+    billboard: {fileID: 22600000, guid: 9d523d3bd3bd7fa4e9976f31d2529ba9, type: 2}
     hasCollider: 0
     colliderInfo:
       center: {x: 0, y: 0, z: 0}
@@ -69,7 +69,7 @@ MonoBehaviour:
     billboardReceiveShadow: 0
     layer: 0
     keepPrefabLayer: 0
-    billboard: {fileID: 0}
+    billboard: {fileID: 22600000, guid: 0d7a8eb5556f90c43a0100efe214220c, type: 2}
     hasCollider: 0
     colliderInfo:
       center: {x: 0, y: 0, z: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
     billboardReceiveShadow: 0
     layer: 0
     keepPrefabLayer: 0
-    billboard: {fileID: 0}
+    billboard: {fileID: 22600000, guid: 4ce8f9f5519795447a338cdbe93ae6f3, type: 2}
     hasCollider: 0
     colliderInfo:
       center: {x: 0, y: 0, z: 0}
