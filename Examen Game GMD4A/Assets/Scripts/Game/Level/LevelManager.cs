@@ -78,6 +78,7 @@ public class LevelManager
 
     public void LoadLevel(Level level)
     {
+        GameManager.INSTANCE.currentLevel = level;
         SceneManager.LoadScene(level.sceneName);
     }
 

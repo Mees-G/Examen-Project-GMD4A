@@ -126,6 +126,11 @@ public class UIShopManager : MonoBehaviour
         this.InitializeUI();
     }
 
+    private void OnDestroy()
+    {
+        CurrencyManager.INSTANCE.OnChangeAmount -= OnChangeMoneyAmount;
+    }
+
     public void InitializeUI()
     {
         CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;

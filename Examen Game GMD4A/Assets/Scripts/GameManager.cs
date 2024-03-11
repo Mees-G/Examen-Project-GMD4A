@@ -12,5 +12,6 @@ public class GameManager : MonoBehaviour
     }
 
     public Buyable currentCar;
+    public Level currentLevel;
 
 }

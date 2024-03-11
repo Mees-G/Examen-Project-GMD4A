@@ -15,6 +15,11 @@ public class FinishUI : MonoBehaviour
     private TMP_Text timeText;
 
 
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void ShowFinishUI(string place, int score, string time)
     {
         SetPlace(place);
@@ -40,7 +45,9 @@ public class FinishUI : MonoBehaviour
 
     public void ButtonClickContinue()
     {
+        GameManager.INSTANCE.currentLevel.completed = true;
         SceneManager.LoadScene("Store");
+
     }
 
 }
