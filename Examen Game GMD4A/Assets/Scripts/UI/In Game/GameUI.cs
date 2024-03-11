@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,8 @@ public class GameUI : MonoBehaviour
     public Transform leaderboardPanel;
     public GameObject leaderboardPanelPrefab;
 
-    //public FinishUI finishUI;
+    public TMP_Text countDownTime;
+    public FinishUI finishUI;
 
     List<LeaderboardItem> leaderboardList;
     private void Awake()

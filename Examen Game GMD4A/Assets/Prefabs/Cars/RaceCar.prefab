@@ -1046,7 +1046,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4807425240006615165}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32852215, y: -0.24646658, z: 0.089233205, w: 0.9073946}
+  m_LocalRotation: {x: 0.32852218, y: -0.24646656, z: 0.0892332, w: 0.9073946}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1304,7 +1304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCarController: {fileID: 0}
+  rb: {fileID: 0}
   cameraControl: {fileID: 0}
+  collisionComponent: {fileID: 5180547841428749545}
   frontWheels:
   - {fileID: 1542552980945924401}
   - {fileID: 8489496688043946990}
@@ -1321,6 +1323,9 @@ MonoBehaviour:
   steeringRangeAtMaxSpeed: 15
   engineAudio: {fileID: 5100490409881774596}
   engineIdle: {fileID: 8300000, guid: 2d4a8d45fbda47744a3a4789565d81f3, type: 3}
+  forwardSpeed: 0
+  currentSteerRange: 0
+  wheelBase: 0
 --- !u!54 &4164490735471078841
 Rigidbody:
   m_ObjectHideFlags: 0

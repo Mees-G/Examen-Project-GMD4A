@@ -247,6 +247,7 @@ MonoBehaviour:
   currentCarController: {fileID: 0}
   rb: {fileID: 0}
   cameraControl: {fileID: 0}
+  collisionComponent: {fileID: 6090408615857362110}
   frontWheels:
   - {fileID: 528263918979295567}
   - {fileID: 1748499121384930934}
@@ -422,8 +423,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801781126838461883}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21691659, y: -0.53761536, z: 0.14545895, w: 0.80172235}
-  m_LocalPosition: {x: 2.8926668, y: 0, z: 1.8588521}
+  m_LocalRotation: {x: 0.21691424, y: -0.5376158, z: 0.1454574, w: 0.80172294}
+  m_LocalPosition: {x: 2.8926997, y: 0, z: 1.8588383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1401,8 +1402,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6394586066005335085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15683146, y: -0.5469263, z: 0.10516734, w: 0.8156073}
-  m_LocalPosition: {x: 2.8926668, y: 0, z: 1.8588521}
+  m_LocalRotation: {x: 0.1568295, y: -0.54692656, z: 0.10516603, w: 0.8156077}
+  m_LocalPosition: {x: 2.8926997, y: 0, z: 1.8588383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1480,8 +1481,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6638015867666246997}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2827421, y: -0.5236797, z: 0.18959992, w: 0.78094065}
-  m_LocalPosition: {x: 2.8926668, y: 0, z: 1.8588521}
+  m_LocalRotation: {x: 0.28273985, y: -0.52368027, z: 0.18959837, w: 0.78094155}
+  m_LocalPosition: {x: 2.8926997, y: 0, z: 1.8588383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

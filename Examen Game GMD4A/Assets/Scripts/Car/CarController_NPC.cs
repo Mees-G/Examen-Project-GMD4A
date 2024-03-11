@@ -40,8 +40,10 @@ public class CarController_NPC : Controller_Base
         NpcActivated = activate;
     }
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
             StartCoroutine(FlipDetection());

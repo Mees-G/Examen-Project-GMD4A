@@ -12,7 +12,16 @@ public abstract class GameModeManager : MonoBehaviour
     private void Start()
     {
         SetupGame();
-        StartGame();
+    }
+
+    public virtual void Update()
+    {
+        timer -= Time.deltaTime;
+        GameUI.instance.countDownTime.text = Mathf.Floor(timer).ToString();
+        if(timer < 0)
+        {
+            StartGame();
+        }
     }
 
     public abstract void SetupGame();

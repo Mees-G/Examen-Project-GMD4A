@@ -12,6 +12,8 @@ public class Car : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public CinemachineFreeLook cameraControl;
 
+    public Transform collisionComponent;
+
     [Header("Wheels and Input")]
     public WheelCollider[] frontWheels;
     public WheelCollider[] backWheels;

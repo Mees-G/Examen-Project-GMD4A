@@ -68,11 +68,6 @@ public class RacerManager : GameModeManager
         }
     }
 
-    private void Update()
-    {
-        //Mechanic that keeps track of placement and participants finishing the race
-    }
-
     public void UpdatePlacement(Transform checkPoint, Controller_Base participant)
     {
         int newPosition = participants.IndexOf(participant);
@@ -113,7 +108,7 @@ public class RacerManager : GameModeManager
 
         if (!participant.NPC)
         {
-            //GameUI.FinishUI. TODO
+            //player finished UI ding doen
         }
     }
 }
