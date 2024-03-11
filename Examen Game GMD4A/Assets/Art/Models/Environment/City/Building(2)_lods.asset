@@ -1,55 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e927627221206e04dba83232f13d1949, type: 3}
-  m_Name: Building(2)_lods
-  m_EditorClassIdentifier: 
-  overrideDefaults: 0
-  importSettings:
-    generateOnImport: 1
-    meshSimplifier: Unity.AutoLOD.QuadricMeshSimplifier, Unity.AutoLOD.Editor, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    batcher: 
-    maxLODGenerated: 2
-    initialLODMaxPolyCount: 500000
-  lod0:
-  - {fileID: -7511558181221131132, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
-  lod1:
-  - {fileID: 6346913777137800439, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
-  lod2:
-  - {fileID: -8369246541385337507, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
-  lod3: []
-  lod4: []
-  lod5: []
-  lod6: []
-  lod7: []
---- !u!43 &873388962180868125
+--- !u!43 &-2734303144668822930
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Building(2) LOD1
+  m_Name: Building(2) LOD2
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 18
+    indexCount: 0
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 11
+    vertexCount: 0
     localAABB:
-      m_Center: {x: 0, y: 20.000002, z: 0}
-      m_Extent: {x: 32.385464, y: 19.999998, z: 20}
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -66,31 +35,23 @@ Mesh:
   m_KeepVertices: 0
   m_KeepIndices: 0
   m_IndexFormat: 1
-  m_IndexBuffer: 00000000010000000200000003000000050000000800000003000000080000000400000005000000060000000700000005000000070000000800000008000000090000000a000000
+  m_IndexBuffer: 
   m_VertexData:
     serializedVersion: 3
-    m_VertexCount: 11
+    m_VertexCount: 0
     m_Channels:
     - stream: 0
       offset: 0
       format: 0
-      dimension: 3
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 24
-      format: 0
-      dimension: 4
+      dimension: 0
     - stream: 0
       offset: 0
       format: 0
       dimension: 0
     - stream: 0
-      offset: 40
+      offset: 0
       format: 0
-      dimension: 2
+      dimension: 0
     - stream: 0
       offset: 0
       format: 0
@@ -127,8 +88,16 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 528
-    _typelessdata: b78a0142000020365555d5c00000803f0000000000000000000000000000803f00000000000080bf0000c03eabaa2a3eb78a0142000020420000a0c10000803f0000000000000000000000000000803f00000000000080bf0000203f0000803eb78a0142000020420000a0410000803f0000000000000000000000000000803f00000000000080bf0000203f00000000b78a0142000020365555d5c00000000000000000000080bf000000000000803f00000000000080bf0000c03e0000803eb78a0142000020420000a0c10000000000000000000080bf000000000000803f00000000000080bf0000203f0000803eb78a01c2000020365555d540000080bf0000000000000000000000000000803f00000000000080bf0000c03eabaa2a3fb78a0142000020365555d5c000000000000000000000803f000000000000803f00000000000080bf0000c03e0000803fb78a0142000020420000a04100000000000000000000803f000000000000803f00000000000080bf0000203f0000803fb78a01c2000020425555d5c0000000000000803f000000000000803f0000000000000000000080bf0000203f5655153fb78a0142000020420000a041000000000000803f000000000000803f0000000000000000000080bf0000603f0000403fb78a0142000020420000a0c1000000000000803f000000000000803f0000000000000000000080bf0000603f0000003f
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -196,25 +165,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!43 &6128710949309344063
+--- !u!43 &-30131195466170341
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Building(2) LOD2
+  m_Name: Building(2) LOD1
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 6
+    indexCount: 0
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 5
+    vertexCount: 0
     localAABB:
-      m_Center: {x: 0, y: 28, z: -8}
-      m_Extent: {x: 32.385464, y: 11.999999, z: 12}
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -231,31 +200,23 @@ Mesh:
   m_KeepVertices: 0
   m_KeepIndices: 0
   m_IndexFormat: 1
-  m_IndexBuffer: 000000000200000001000000020000000300000004000000
+  m_IndexBuffer: 
   m_VertexData:
     serializedVersion: 3
-    m_VertexCount: 5
+    m_VertexCount: 0
     m_Channels:
     - stream: 0
       offset: 0
       format: 0
-      dimension: 3
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 24
-      format: 0
-      dimension: 4
+      dimension: 0
     - stream: 0
       offset: 0
       format: 0
       dimension: 0
     - stream: 0
-      offset: 40
+      offset: 0
       format: 0
-      dimension: 2
+      dimension: 0
     - stream: 0
       offset: 0
       format: 0
@@ -292,8 +253,16 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 240
-    _typelessdata: b78a014201008041000080400000000000000000000080bf000000000000803f00000000000080bf0000c03e0000803eb78a0142000020420000a0c10000000000000000000080bf000000000000803f00000000000080bf0000203f0000803eb78a01c20100a04100000080f30435bff304353f00000000f304353ff304353f00000000000080bf0000003f0000203fb78a01420100804100008040000000000000803f000000000000803f0000000000000000000080bf0000603f0000403fb78a0142000020420000a0c1000000000000803f000000000000803f0000000000000000000080bf0000603f0000003f
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -347,8 +316,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 0, y: 28, z: -8}
-    m_Extent: {x: 32.385464, y: 11.999999, z: 12}
+    m_Center: {x: 0, y: 20.000002, z: 0}
+    m_Extent: {x: 32.385464, y: 19.999998, z: 20}
   m_MeshUsageFlags: 0
   m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
@@ -361,3 +330,34 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e927627221206e04dba83232f13d1949, type: 3}
+  m_Name: Building(2)_lods
+  m_EditorClassIdentifier: 
+  overrideDefaults: 0
+  importSettings:
+    generateOnImport: 1
+    meshSimplifier: Unity.AutoLOD.QuadricMeshSimplifier, Unity.AutoLOD.Editor, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    batcher: 
+    maxLODGenerated: 2
+    initialLODMaxPolyCount: 500000
+  lod0:
+  - {fileID: -7511558181221131132, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
+  lod1:
+  - {fileID: 6346913777137800439, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
+  lod2:
+  - {fileID: -8369246541385337507, guid: b60660defc314da4fa8ed7ac60da9535, type: 3}
+  lod3: []
+  lod4: []
+  lod5: []
+  lod6: []
+  lod7: []

@@ -8,6 +8,7 @@ public abstract class GameModeManager : MonoBehaviour
 
     public float startCountdown;
     float timer;
+
     private void Start()
     {
         SetupGame();

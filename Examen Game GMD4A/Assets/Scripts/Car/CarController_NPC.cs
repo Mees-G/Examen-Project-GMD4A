@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -11,9 +12,7 @@ public class CarController_NPC : Controller_Base
 {
     public float detectionDistance;
     [Range(0, 100)] public float agressiveness;
-
-    public Vector3 driveTarget;
-    public Transform checkpointToReach;
+    public float respawnTime;
 
     [Header("NPC Driving Values")]
     public float brakeDistance = 20f;
@@ -30,28 +29,38 @@ public class CarController_NPC : Controller_Base
     void Start()
     {
         NPC = true;
-        car.currentCarController = this;
-        ActivateControl();
     }
 
-    public override void ActivateControl()
+    public override void SwitchControl(bool activate)
     {
-        checkpointToReach = track.checkpoints[0];
-        driveTarget = checkpointToReach.position;
-        NpcActivated = true;
+        if (activate) 
+        {
+            driveTarget = checkpointToReach.position;
+        }
+        NpcActivated = activate;
     }
 
     void FixedUpdate()
     {
+        if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
+        {
+            StartCoroutine(FlipDetection());
+        }
+        
         Detection();
         Driving();
+    }
+
+    IEnumerator FlipDetection()
+    {
+        yield return new WaitForSeconds(3);
+        RespawnCar();
     }
 
     void Detection()
     {
         
     }
-
     void Driving()
     {
         if (!NpcActivated)
@@ -104,22 +113,14 @@ public class CarController_NPC : Controller_Base
         car.throttleInput = Mathf.Clamp(Mathf.MoveTowards(car.throttleInput, targetThrottle, Time.deltaTime * 0.5f), -1f, 1f);
         car.steeringDirectionInput = Mathf.Clamp(Mathf.SmoothDamp(car.steeringDirectionInput, targetSteeringInput, ref smoothVelocity, 0.2f), -1f, 1f);
 
-        Debug.Log($"Corner Radius: {cornerRadius}, Throttle: {car.throttleInput}, Can Make Turn: {canMakeTurn}");
-    }
-
-
-
-    public override void NextCheckpoint(Transform checkpoint)
-    {
-        if(checkpoint == checkpointToReach)
-        {
-            checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
-            driveTarget = checkpointToReach.position;
-        }
+        //Debug.Log($"Corner Radius: {cornerRadius}, Throttle: {car.throttleInput}, Can Make Turn: {canMakeTurn}");
     }
 
     private void OnDrawGizmos()
     {
+        if (car == null)
+            return;
+
         if (canMakeTurn)
         {
             Gizmos.color = Color.green;

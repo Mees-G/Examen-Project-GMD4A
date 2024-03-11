@@ -106,7 +106,7 @@ public class Car : MonoBehaviour
     {
         if (other.gameObject.tag == "Checkpoint")
         {
-            if (currentCarController && currentCarController.NPC)
+            if (currentCarController != null)
             {
                 currentCarController.NextCheckpoint(other.transform);
             }

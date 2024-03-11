@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Track : MonoBehaviour
+public class RaceTrack : MonoBehaviour
 {
     public List<Transform> checkpoints;
     public StartPosition[] startPositions;

@@ -1,19 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class RacerManager : GameModeManager
 {
+    public static RacerManager instance;
+    
     public List<Controller_Base> participants;
-    public Track raceTrack;
+    public RaceTrack raceTrack;
 
     public GameObject[] NPCcars;
     public GameObject playerCarPrefab;
 
+    public Transform banner;
+
+    public int laps = 1;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public override void SetupGame()
     {
         SpawnParticipants();
+        GameUI.instance.SetupLeaderBoard();
     }
 
     public void SpawnParticipants()
@@ -21,16 +34,19 @@ public class RacerManager : GameModeManager
         //Spawn Player
 
         //Select one of the track's start positions at random
-        int spawnPosIndex = Random.Range(0, raceTrack.startPositions.Length);
+        int spawnPosIndex = UnityEngine.Random.Range(0, raceTrack.startPositions.Length);
         Transform spawnPoint = raceTrack.startPositions[spawnPosIndex].startTransform;
 
         //Mark it as occupied
         raceTrack.startPositions[spawnPosIndex].occupied = true;
 
         //Instantiate the player's car at the selected start position
-        Car plyrCar = CarSpawner.instance.InstantiateCar(playerCarPrefab, spawnPoint);
+        Car plyrCar = CarSpawner.instance.InstantiateCar(playerCarPrefab, spawnPoint, CarController_Player.instance);
 
+        //Assign the track and car to the player component
         CarController_Player.instance.car = plyrCar;
+        CarController_Player.instance.track = raceTrack;
+
         participants.Add(CarController_Player.instance);
 
         //Spawn NPC Participants
@@ -41,8 +57,8 @@ public class RacerManager : GameModeManager
             {
                 //Spawn a opponent at every free start position
                 Transform spawnPos = raceTrack.startPositions[i].startTransform;
-                Car NPCcar = CarSpawner.instance.InstantiateCar(NPCcars[Random.Range(0, NPCcars.Length)], spawnPos);
                 Controller_Base Npc = Instantiate(NpcObject, transform.GetChild(0)).GetComponent<Controller_Base>();
+                Car NPCcar = CarSpawner.instance.InstantiateCar(NPCcars[UnityEngine.Random.Range(0, NPCcars.Length)], spawnPos, Npc);
 
                 participants.Add(Npc);
 
@@ -51,22 +67,53 @@ public class RacerManager : GameModeManager
             }
         }
     }
+
+    private void Update()
+    {
+        //Mechanic that keeps track of placement and participants finishing the race
+    }
+
+    public void UpdatePlacement(Transform checkPoint, Controller_Base participant)
+    {
+        int newPosition = participants.IndexOf(participant);
+
+        for (int i = 0; i < participants.Count; i++)
+        {
+            if (raceTrack.checkpoints.IndexOf(participants[i].checkpointToReach) <
+                raceTrack.checkpoints.IndexOf(participant.checkpointToReach))
+            {
+                if (participants.IndexOf(participant) > participants.IndexOf(participants[i]))
+                {
+                    newPosition = participants.IndexOf(participants[i]);
+                }
+            }
+        }
+
+        participants.RemoveAt(participants.IndexOf(participant));
+        participants.Insert(newPosition, participant);
+
+        //Update game UI
+        GameUI.instance.UpdateLeaderBoard(participant, newPosition);
+    }
+
     public override void StartGame()
     {
         foreach (Controller_Base controller in participants)
         {
+            controller.checkpointToReach = raceTrack.checkpoints[0];
             controller.car.handBrake = false;
-            controller.ActivateControl();
+            controller.SwitchControl(true);
         }
     }
 
-    public void PlayerFinished()
+    public void ParticipantFinished(Controller_Base participant)
     {
+        //if multiple laps
+        participant.SwitchControl(false);
 
-    }
-
-    public void NPCFinished(CarController_NPC npc)
-    {
-
+        if (!participant.NPC)
+        {
+            //GameUI.FinishUI. TODO
+        }
     }
 }

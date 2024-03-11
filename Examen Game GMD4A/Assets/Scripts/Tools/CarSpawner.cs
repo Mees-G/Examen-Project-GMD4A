@@ -10,11 +10,11 @@ public class CarSpawner : MonoBehaviour
     {
         instance = this;
     }
-    public Car InstantiateCar(GameObject car, Transform spawnPosition)
+    public Car InstantiateCar(GameObject car, Transform spawnPosition, Controller_Base controller)
     {
         GameObject spawnedCar = Instantiate(car, spawnPosition.position, spawnPosition.rotation);
         Car carScript = spawnedCar.GetComponent<Car>();
-
+        carScript.currentCarController = controller;
         //Apply upgrades and modifiers
 
         //carScript.motorTorque = 

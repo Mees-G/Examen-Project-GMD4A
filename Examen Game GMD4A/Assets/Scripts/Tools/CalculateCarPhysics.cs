@@ -13,8 +13,8 @@ public class CalculateCarPhysics
         Vector3 beforeTurnDir = (currentCheckpoint.position - car.position).normalized;
         Vector3 afterTurnDir = (nextCheckpoint.position - currentCheckpoint.position).normalized;
 
-        Debug.DrawLine(car.transform.position, car.transform.position + beforeTurnDir * 15f, Color.blue); // Extend the line by multiplying with a factor (e.g., 5f)
-        Debug.DrawLine(car.transform.position, car.transform.position + afterTurnDir * 15f, Color.red); // Extend the line by multiplying with a factor (e.g., 5f)
+        Debug.DrawLine(car.transform.position, car.transform.position + beforeTurnDir * 15f, Color.blue);
+        Debug.DrawLine(car.transform.position, car.transform.position + afterTurnDir * 15f, Color.red);
 
         // Calculate the angle in radians using the cross product and the arctangent function
         float angleRad = Mathf.Atan2(Vector3.Cross(beforeTurnDir, afterTurnDir).magnitude, Vector3.Dot(beforeTurnDir, afterTurnDir));

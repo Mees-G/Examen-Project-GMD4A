@@ -18,8 +18,6 @@ public class CarController_Player : Controller_Base
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        car.currentCarController = this;
-        ActivateControl();
     }
 
     private void Update()
@@ -30,9 +28,16 @@ public class CarController_Player : Controller_Base
         }
     }
 
-    public override void ActivateControl()
+    public override void SwitchControl(bool activate)
     {
-        playerInput.ActivateInput();
+        if (activate)
+        {
+            playerInput.ActivateInput();
+        }
+        else
+        {
+            playerInput.DeactivateInput();
+        }
     }
 
     //Controls
@@ -47,5 +52,9 @@ public class CarController_Player : Controller_Base
     {
         if(!car.handBrake) car.handBrake = value.isPressed;
         else car.handBrake = false;
+    }
+    public void OnRespawn()
+    {
+        RespawnCar();
     }
 }
