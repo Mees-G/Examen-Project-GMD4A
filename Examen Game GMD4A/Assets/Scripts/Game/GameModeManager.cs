@@ -7,7 +7,7 @@ public abstract class GameModeManager : MonoBehaviour
     public GameObject NpcObject;
 
     public float startCountdown;
-    float timer;
+    float countDownTime = 10;
 
     private void Start()
     {
@@ -16,10 +16,11 @@ public abstract class GameModeManager : MonoBehaviour
 
     public virtual void Update()
     {
-        timer -= Time.deltaTime;
-        GameUI.instance.countDownTime.text = Mathf.Floor(timer).ToString();
-        if(timer < 0)
+        countDownTime -= Time.deltaTime;
+        GameUI.instance.countDownTime.text = Mathf.Floor(countDownTime).ToString();
+        if(countDownTime <= 0)
         {
+            GameUI.instance.countDownTime.gameObject.SetActive(false);
             StartGame();
         }
     }

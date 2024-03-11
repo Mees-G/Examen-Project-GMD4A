@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a846f4293e9074e9b58daebd07a74f, type: 3}
   m_Name: Level #1
   m_EditorClassIdentifier: 
-  sceneName: Level 1
+  sceneName: GameScene
   levelName: Level 1
   levelDescription: Geen idee
   highscore: 0

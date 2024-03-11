@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class RacerManager : GameModeManager
 {
     public static RacerManager instance;
-    
+
     public List<Controller_Base> participants;
     public RaceTrack raceTrack;
 
@@ -16,6 +17,12 @@ public class RacerManager : GameModeManager
     public GameObject playerCarPrefab;
 
     public Transform banner;
+
+    public TMP_Text timer;
+    public float currentTime;
+
+    public bool gameRunning = false;
+
 
     public int laps = 1;
     private void Awake()
@@ -27,6 +34,16 @@ public class RacerManager : GameModeManager
     {
         SpawnParticipants();
         GameUI.instance.SetupLeaderBoard();
+    }
+
+    private void Update()
+    {
+        if (gameRunning)
+        {
+            currentTime += Time.deltaTime;
+        }
+        timer.text = Mathf.FloorToInt(currentTime).ToString();
+        base.Update();
     }
 
     public void SpawnParticipants()
@@ -99,6 +116,8 @@ public class RacerManager : GameModeManager
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
+
+        gameRunning = true;
     }
 
     public void ParticipantFinished(Controller_Base participant)
@@ -108,7 +127,17 @@ public class RacerManager : GameModeManager
 
         if (!participant.NPC)
         {
-            //player finished UI ding doen
+            int placent = participants.IndexOf(CarController_Player.instance);
+
+            //  float time = ;
+            int score = (int)((participants.Count - placent) * (currentTime - (60 * 8)));
+
+
+            //  finishUI.ShowFinishUI();
+            //GameUI.FinishUI. TODO
+
+            GameUI.instance.finishUI.ShowFinishUI(placent.ToString(), score, timer.text);
+            gameRunning = false;
         }
     }
 }
