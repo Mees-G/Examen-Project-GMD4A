@@ -92,7 +92,7 @@ public class CarController_NPC : Controller_Base
         // Calculate the angle between the car, the current checkpoint to reach, and the next checkpoint
         float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1], car.wheelBase);
 
-        float centripetalForce = (car.rb.mass * car.forwardSpeed * (car.forwardSpeed / 2)) / cornerRadius;
+        float centripetalForce = (car.rb.mass * (car.forwardSpeed * car.forwardSpeed / 2)) / cornerRadius;
         float frictionForce = car.frontWheels[0].forwardFriction.stiffness * CalculateCarPhysics.CalculateNormalForce(car.rb.mass);
 
         canMakeTurn = centripetalForce <= frictionForce;

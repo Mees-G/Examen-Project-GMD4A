@@ -12,7 +12,6 @@ public class RacerManager : GameModeManager
     public RaceTrack raceTrack;
 
     public GameObject[] NPCcars;
-    public GameObject playerCarPrefab;
 
     public Transform banner;
 
@@ -54,7 +53,10 @@ public class RacerManager : GameModeManager
         raceTrack.startPositions[spawnPosIndex].occupied = true;
 
         //Instantiate the player's car at the selected start position
-        Car plyrCar = CarSpawner.instance.InstantiateCar(playerCarPrefab, spawnPoint, CarController_Player.instance);
+        Debug.Log(GameManager.INSTANCE.currentCar.car);
+        Debug.Log(CarController_Player.instance);
+        Debug.Log(CarSpawner.instance);
+        Car plyrCar = CarSpawner.instance.InstantiateCar(GameManager.INSTANCE.currentCar.car, spawnPoint, CarController_Player.instance);
 
         //Assign the track and car to the player component
         CarController_Player.instance.car = plyrCar;

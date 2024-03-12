@@ -12,16 +12,7 @@ public class CarSpawner : MonoBehaviour
     }
     public Car InstantiateCar(GameObject car, Transform spawnPosition, Controller_Base controller)
     {
-        GameObject spawnedCar;
-
-        if (!controller.NPC)
-        {
-            spawnedCar = Instantiate(GameManager.INSTANCE.currentCar.car, spawnPosition.position, spawnPosition.rotation);
-        }
-        else
-        {
-            spawnedCar = Instantiate(car, spawnPosition.position, spawnPosition.rotation);
-        }
+        GameObject spawnedCar = Instantiate(car, spawnPosition.position, spawnPosition.rotation);
 
         Car carScript = spawnedCar.GetComponent<Car>();
         carScript.currentCarController = controller;
