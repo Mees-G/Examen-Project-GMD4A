@@ -58,6 +58,9 @@ public abstract class Controller_Base : MonoBehaviour
             StartCoroutine(CollisionControl());
 
             car.collisionComponent.gameObject.layer = LayerMask.NameToLayer("Car_Body_NoCollision");
+            car.rb.velocity = new Vector3(0, 0, 0);
+            foreach (WheelCollider wheel in car.backWheels) { wheel.rotationSpeed = 0f; }
+            foreach (WheelCollider wheel in car.frontWheels) { wheel.rotationSpeed = 0f; }
             car.rb.MovePosition(new Vector3(respawnCheckpoint.position.x, respawnCheckpoint.position.y + 1, respawnCheckpoint.position.z));
             car.rb.MoveRotation(respawnCheckpoint.rotation);
             carRespawning = true;

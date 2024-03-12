@@ -21,6 +21,7 @@ public class RacerManager : GameModeManager
     public bool finished;
 
     public int laps = 1;
+
     private void Awake()
     {
         instance = this;
@@ -48,25 +49,27 @@ public class RacerManager : GameModeManager
     public void SpawnParticipants()
     {
         //Spawn Player
+        if (!dontSpawnPlayer)
+        {
+            //Select one of the track's start positions at random
+            int spawnPosIndex = UnityEngine.Random.Range(0, raceTrack.startPositions.Length);
+            Transform spawnPoint = raceTrack.startPositions[spawnPosIndex].startTransform;
 
-        //Select one of the track's start positions at random
-        int spawnPosIndex = UnityEngine.Random.Range(0, raceTrack.startPositions.Length);
-        Transform spawnPoint = raceTrack.startPositions[spawnPosIndex].startTransform;
+            //Mark it as occupied
+            raceTrack.startPositions[spawnPosIndex].occupied = true;
 
-        //Mark it as occupied
-        raceTrack.startPositions[spawnPosIndex].occupied = true;
+            //Instantiate the player's car at the selected start position
+            Debug.Log(GameManager.INSTANCE.currentCar.car);
+            Debug.Log(CarController_Player.instance);
+            Debug.Log(CarSpawner.instance);
+            Car plyrCar = CarSpawner.instance.InstantiateCar(GameManager.INSTANCE.currentCar.car, spawnPoint, CarController_Player.instance);
 
-        //Instantiate the player's car at the selected start position
-        Debug.Log(GameManager.INSTANCE.currentCar.car);
-        Debug.Log(CarController_Player.instance);
-        Debug.Log(CarSpawner.instance);
-        Car plyrCar = CarSpawner.instance.InstantiateCar(GameManager.INSTANCE.currentCar.car, spawnPoint, CarController_Player.instance);
-
-        //Assign the track and car to the player component
-        CarController_Player.instance.car = plyrCar;
-        CarController_Player.instance.track = raceTrack;
-        CarController_Player.instance.checkpointToReach = raceTrack.checkpoints[0];
-        participants.Add(CarController_Player.instance);
+            //Assign the track and car to the player component
+            CarController_Player.instance.car = plyrCar;
+            CarController_Player.instance.track = raceTrack;
+            CarController_Player.instance.checkpointToReach = raceTrack.checkpoints[0];
+            participants.Add(CarController_Player.instance);
+        }
 
         //Spawn NPC Participants
 

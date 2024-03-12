@@ -8,7 +8,11 @@ public abstract class GameModeManager : MonoBehaviour
 
     public float startCountdown;
     public bool started = false;
-    float countDownTime = 10;
+    public float countDownTime = 10;
+
+#if UNITY_EDITOR
+    public bool dontSpawnPlayer;
+#endif
 
     private void Start()
     {

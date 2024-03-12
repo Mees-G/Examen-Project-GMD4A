@@ -1316,11 +1316,11 @@ MonoBehaviour:
   throttleInput: 0
   steeringDirectionInput: 0
   handBrake: 1
-  motorTorque: 265
+  motorTorque: 400
   brakeTorque: 200
-  topSpeed: 17
+  topSpeed: 32
   steeringRange: 30
-  steeringRangeAtMaxSpeed: 8
+  steeringRangeAtMaxSpeed: 6
   engineAudio: {fileID: 5100490409881774596}
   engineIdle: {fileID: 8300000, guid: 2d4a8d45fbda47744a3a4789565d81f3, type: 3}
   forwardSpeed: 0
@@ -1334,9 +1334,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7330877813689086507}
   serializedVersion: 4
-  m_Mass: 300
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 250
+  m_Drag: 0.17
+  m_AngularDrag: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
