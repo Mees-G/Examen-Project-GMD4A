@@ -37,7 +37,10 @@ public class RacerManager : GameModeManager
         if (started)
         {
             currentTime += Time.deltaTime;
-            timer.text = Mathf.FloorToInt(currentTime).ToString();
+            int minutes = Mathf.FloorToInt(currentTime / 60);
+            int remainingSeconds = Mathf.FloorToInt(currentTime % 60);
+            string timeFormatted = string.Format("{0}:{1:00}", minutes, remainingSeconds);
+            timer.text = timeFormatted;
         }
     }
 
