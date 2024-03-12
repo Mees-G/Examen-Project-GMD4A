@@ -34,7 +34,7 @@ public class RacerManager : GameModeManager
 
     private new void Update()
     {
-        if (gameRunning)
+        if (started)
         {
             currentTime += Time.deltaTime;
         }
