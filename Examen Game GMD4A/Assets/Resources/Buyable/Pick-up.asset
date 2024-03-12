@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75becdf22887f54ab1b17695a824321, type: 3}
   m_Name: Pick-up
   m_EditorClassIdentifier: 
-  _name: Basic Car 3
+  _name: Pick-up
   description: A Basic Car, nothing special yet...
   car: {fileID: 1049237415070352878, guid: 2d7c23825cf591143957561f5181d2aa, type: 3}
   icon: {fileID: 0}
@@ -20,3 +20,5 @@ MonoBehaviour:
   unlocked: 1
   upgrades:
   - {fileID: 11400000, guid: 1fb2fb5472623794ca79def8f1dfdeaa, type: 2}
+  - {fileID: 11400000, guid: d5986ee4f7093544f82536f4a19fd4f2, type: 2}
+  - {fileID: 11400000, guid: b147e2047fe35f540ad574c84c0e9014, type: 2}

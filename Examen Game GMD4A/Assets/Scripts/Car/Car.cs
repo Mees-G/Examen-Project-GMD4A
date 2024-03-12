@@ -22,7 +22,7 @@ public class Car : MonoBehaviour
     [Header("Engine")]
     public float motorTorque = 2000;
     public float brakeTorque = 2000;
-    public float maxSpeed = 20;
+    public float topSpeed = 20;
     public float steeringRange = 30;
     public float steeringRangeAtMaxSpeed = 10;
 
@@ -56,7 +56,7 @@ public class Car : MonoBehaviour
         forwardSpeed = Vector3.Dot(transform.forward, rb.velocity);
 
         //calculate how close the car is to top speed
-        float speedFactor = Mathf.InverseLerp(0, maxSpeed, forwardSpeed);
+        float speedFactor = Mathf.InverseLerp(0, topSpeed, forwardSpeed);
 
         //calculate how much torque is available 
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);

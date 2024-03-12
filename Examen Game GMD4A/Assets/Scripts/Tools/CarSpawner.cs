@@ -19,7 +19,9 @@ public class CarSpawner : MonoBehaviour
 
         //Apply upgrades and modifiers
 
-        carScript.motorTorque += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Engine").GetValue<int>() * 5);
+        carScript.motorTorque += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Transmission").GetValue<int>() * 5);
+        carScript.topSpeed += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Engine").GetValue<int>());
+        carScript.brakeTorque += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Brakes").GetValue<int>() * 10);
 
         return carScript;
     }

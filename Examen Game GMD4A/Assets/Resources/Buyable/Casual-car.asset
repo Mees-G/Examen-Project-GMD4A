@@ -20,3 +20,5 @@ MonoBehaviour:
   unlocked: 1
   upgrades:
   - {fileID: 11400000, guid: 50221b76f65f9a14b95c371f5f402b26, type: 2}
+  - {fileID: 11400000, guid: bd5af4750932af1489b9575255ba3cee, type: 2}
+  - {fileID: 11400000, guid: 8d0ce69ef86c9d64e8c4b1938d6b6e0b, type: 2}

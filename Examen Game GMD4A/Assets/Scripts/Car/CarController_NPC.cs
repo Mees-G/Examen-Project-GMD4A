@@ -85,7 +85,7 @@ public class CarController_NPC : Controller_Base
             // Keep straight
             targetSteeringInput = 0;
         }
-
+         
         // Throttle Control
         float targetThrottle = 1f;
 

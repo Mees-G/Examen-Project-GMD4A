@@ -258,8 +258,8 @@ MonoBehaviour:
   steeringDirectionInput: 0
   handBrake: 1
   motorTorque: 550
-  brakeTorque: 2000
-  maxSpeed: 18
+  brakeTorque: 750
+  topSpeed: 15
   steeringRange: 40
   steeringRangeAtMaxSpeed: 10
   engineAudio: {fileID: 3926398561092373734}

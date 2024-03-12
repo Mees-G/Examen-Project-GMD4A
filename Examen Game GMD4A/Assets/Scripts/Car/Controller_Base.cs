@@ -28,7 +28,6 @@ public abstract class Controller_Base : MonoBehaviour
             }
             else
             {
-                Debug.Log(track.checkpoints.IndexOf(checkpoint) + 1);
                 checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
                 
                 if(NPC)
