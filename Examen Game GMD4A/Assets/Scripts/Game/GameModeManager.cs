@@ -15,7 +15,7 @@ public abstract class GameModeManager : MonoBehaviour
         SetupGame();
     }
 
-    public virtual void Update()
+    public void Update()
     {
         countDownTime -= Time.deltaTime;
         GameUI.instance.countDownTime.text = Mathf.Floor(countDownTime).ToString();

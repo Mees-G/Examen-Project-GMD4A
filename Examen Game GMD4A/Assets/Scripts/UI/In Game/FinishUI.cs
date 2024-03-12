@@ -17,11 +17,11 @@ public class FinishUI : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
-
     }
 
     public void ShowFinishUI(string place, int score, string time)
     {
+        Cursor.lockState = CursorLockMode.None;
         gameObject.SetActive(true);
         SetPlace(place);
         SetScore(score);

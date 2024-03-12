@@ -31,14 +31,14 @@ public class RacerManager : GameModeManager
         GameUI.instance.SetupLeaderBoard();
     }
 
-    private new void Update()
+    private void Update()
     {
+        base.Update();
         if (started)
         {
             currentTime += Time.deltaTime;
+            timer.text = Mathf.FloorToInt(currentTime).ToString();
         }
-        timer.text = Mathf.FloorToInt(currentTime).ToString();
-        base.Update();
     }
 
     public void SpawnParticipants()
@@ -109,12 +109,12 @@ public class RacerManager : GameModeManager
 
     public override void StartGame()
     {
+        Debug.Log("vader");
         foreach (Controller_Base controller in participants)
         {
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
-        
 
     }
 
@@ -133,7 +133,6 @@ public class RacerManager : GameModeManager
             //GameUI.FinishUI. TODO
 
             GameUI.instance.finishUI.ShowFinishUI(placent.ToString(), score, timer.text);
-            started = false;
         }
     }
 }

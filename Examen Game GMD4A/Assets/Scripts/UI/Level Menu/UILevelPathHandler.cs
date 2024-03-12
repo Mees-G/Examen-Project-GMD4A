@@ -37,13 +37,12 @@ public class UILevelPathHandler : MaskableGraphic
             LevelManager.INSTANCE.onChangeLevelIndex += OnChangeLevelIndex;
             LevelManager.INSTANCE.UpdateCurrentLevelIndex();
             Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
-   
+
             car.transform.localPosition = startPoint;
 
             missionOutOfText.text = (LevelManager.INSTANCE.currentLevelIndex) + "/" + LevelManager.INSTANCE.levels.Count;
             moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
-
-
+            SetAllDirty();
         }
     }
 
@@ -79,7 +78,8 @@ public class UILevelPathHandler : MaskableGraphic
 
                     /*contentPanel.anchoredPosition = Vector2.Lerp(contentPanel.anchoredPosition, (Vector2)scrollRect.transform.InverseTransformPoint(contentPanel.position)
                             - (Vector2)scrollRect.transform.InverseTransformPoint(car.transform.position), Time.deltaTime * 5);*/
-                } else
+                }
+                else
                 {
                     shouldDoAnimation = false;
                 }
@@ -91,6 +91,7 @@ public class UILevelPathHandler : MaskableGraphic
     {
         vh.Clear();
         timer = 0;
+        Debug.Log("EHYEFWVFEWBIUJFW ");
         for (int i = 0; i < gameObject.transform.childCount - 1; i++)
         {
             Vector2 startPoint = gameObject.transform.GetChild(i).localPosition;
@@ -117,10 +118,9 @@ public class UILevelPathHandler : MaskableGraphic
     {
         for (int i = 0; i < gameObject.transform.childCount - 1; i++)
         {
-            Button button =  gameObject.transform.GetChild(i).GetComponent<Button>();
+            Button button = gameObject.transform.GetChild(i).GetComponent<Button>();
             button.enabled = i <= index;
         }
-        SetAllDirty();
     }
 
 

@@ -32,7 +32,7 @@ public class CarController_Player : Controller_Base
         else
         {
             Cursor.lockState = CursorLockMode.None;
-            playerInput.DeactivateInput();
+          //  playerInput.DeactivateInput();
         }
     }
 
