@@ -1,12 +1,6 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Splines;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CarController_NPC : Controller_Base
 {
@@ -16,7 +10,6 @@ public class CarController_NPC : Controller_Base
 
     [Header("NPC Driving Values")]
     public float brakeDistance = 20f;
-
 
     float smoothVelocity = 0.1f;
     bool NpcActivated;

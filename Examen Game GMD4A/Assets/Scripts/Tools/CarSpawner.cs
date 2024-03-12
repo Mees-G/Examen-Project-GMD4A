@@ -12,7 +12,7 @@ public class CarSpawner : MonoBehaviour
     }
     public Car InstantiateCar(GameObject car, Transform spawnPosition, Controller_Base controller)
     {
-        GameObject spawnedCar = null;
+        GameObject spawnedCar;
 
         if (!controller.NPC)
         {

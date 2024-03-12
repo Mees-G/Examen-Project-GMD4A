@@ -52,6 +52,7 @@ public class Upgrade : ScriptableObject
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(Upgrade))]
 public class UpgradeEditor : Editor
 {
@@ -82,3 +83,4 @@ public class UpgradeEditor : Editor
         EditorGUILayout.EndHorizontal();
     }
 }
+#endif

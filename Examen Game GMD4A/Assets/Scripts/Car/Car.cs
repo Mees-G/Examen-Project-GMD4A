@@ -1,10 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class Car : MonoBehaviour
 {
@@ -106,7 +103,7 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Checkpoint")
+        if (other.gameObject.CompareTag("Checkpoint"))
         {
             if (currentCarController != null)
             {

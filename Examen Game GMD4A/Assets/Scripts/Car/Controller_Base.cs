@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +15,22 @@ public abstract class Controller_Base : MonoBehaviour
     bool carRespawning;
     public virtual void NextCheckpoint(Transform checkpoint)
     {
+        Debug.Log("checkpoint Triggered");
+
         if (checkpoint == checkpointToReach)
         {
+            Debug.Log("checkpoint reached");
+
             if (checkpointToReach == track.checkpoints.Last())
             {
+                Debug.Log("last checkpoint reached (finish)");
                 RacerManager.instance.ParticipantFinished(this);
             }
             else
             {
+                Debug.Log(track.checkpoints.IndexOf(checkpoint) + 1);
                 checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
-
+                
                 if(NPC)
                 {
                     driveTarget = checkpointToReach.position;
@@ -38,7 +43,7 @@ public abstract class Controller_Base : MonoBehaviour
     public abstract void SwitchControl(bool activate);
     public virtual void RespawnCar()
     {
-        Transform respawnCheckpoint = null;
+        Transform respawnCheckpoint;
 
         if (checkpointToReach == track.checkpoints.First())
         {

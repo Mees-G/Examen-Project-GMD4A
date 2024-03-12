@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +7,11 @@ public class CarController_Player : Controller_Base
 {
     public static CarController_Player instance;
     public PlayerInput playerInput;
-
+    
     private void Awake()
     {
         instance = this;
         playerInput.DeactivateInput();
-    }
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -32,10 +26,12 @@ public class CarController_Player : Controller_Base
     {
         if (activate)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             playerInput.ActivateInput();
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
             playerInput.DeactivateInput();
         }
     }

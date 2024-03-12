@@ -1,14 +1,10 @@
-using Pinwheel.Griffin.SplineTool;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.UIElements;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(InstantiateCheckpoints))]
 public class YourScriptEditor : Editor
 {
@@ -24,6 +20,7 @@ public class YourScriptEditor : Editor
         }
     }
 }
+#endif
 
 [ExecuteInEditMode]
 public class InstantiateCheckpoints : MonoBehaviour

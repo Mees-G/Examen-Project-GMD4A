@@ -28,7 +28,7 @@ public class LevelManager
     public int currentLevelIndex
     {
         get {
-            Debug.Log(_currentLevelIndex +" - AAA");
+            //Debug.Log(_currentLevelIndex +" - AAA");
             return _currentLevelIndex; }
         set
         {

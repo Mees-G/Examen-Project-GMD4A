@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class RacerManager : GameModeManager
@@ -36,7 +34,7 @@ public class RacerManager : GameModeManager
         GameUI.instance.SetupLeaderBoard();
     }
 
-    private void Update()
+    private new void Update()
     {
         if (gameRunning)
         {
@@ -63,7 +61,7 @@ public class RacerManager : GameModeManager
         //Assign the track and car to the player component
         CarController_Player.instance.car = plyrCar;
         CarController_Player.instance.track = raceTrack;
-
+        CarController_Player.instance.checkpointToReach = raceTrack.checkpoints[0];
         participants.Add(CarController_Player.instance);
 
         //Spawn NPC Participants
@@ -81,6 +79,7 @@ public class RacerManager : GameModeManager
 
                 Npc.car = NPCcar;
                 Npc.track = raceTrack;
+                Npc.checkpointToReach = raceTrack.checkpoints[0];
             }
         }
     }
@@ -112,7 +111,6 @@ public class RacerManager : GameModeManager
     {
         foreach (Controller_Base controller in participants)
         {
-            controller.checkpointToReach = raceTrack.checkpoints[0];
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
@@ -131,7 +129,6 @@ public class RacerManager : GameModeManager
 
             //  float time = ;
             int score = (int)((participants.Count - placent) * (currentTime - (60 * 8)));
-
 
             //  finishUI.ShowFinishUI();
             //GameUI.FinishUI. TODO
