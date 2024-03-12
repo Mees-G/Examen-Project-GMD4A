@@ -471,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328196438732410681}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18222398, y: -0.25740728, z: 0.049495686, w: 0.94767404}
+  m_LocalRotation: {x: 0.18222396, y: -0.25740728, z: 0.04949568, w: 0.94767404}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -569,9 +569,9 @@ WheelCollider:
   m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.31
   m_SuspensionSpring:
-    spring: 25000
-    damper: 3500
-    targetPosition: 0.5
+    spring: 30000
+    damper: 500
+    targetPosition: 0.85
   m_SuspensionDistance: 0.2
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -587,7 +587,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.5
+    m_Stiffness: 0.6
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -641,9 +641,9 @@ WheelCollider:
   m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.31
   m_SuspensionSpring:
-    spring: 25000
-    damper: 3500
-    targetPosition: 0.5
+    spring: 30000
+    damper: 500
+    targetPosition: 0.85
   m_SuspensionDistance: 0.2
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -659,7 +659,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.5
+    m_Stiffness: 0.6
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1125,7 +1125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6273137493841379337}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25203785, y: -0.25302523, z: 0.06845852, w: 0.931541}
+  m_LocalRotation: {x: 0.25203785, y: -0.25302523, z: 0.06845851, w: 0.931541}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1223,9 +1223,9 @@ WheelCollider:
   m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.31
   m_SuspensionSpring:
-    spring: 25000
-    damper: 3500
-    targetPosition: 0.5
+    spring: 30000
+    damper: 500
+    targetPosition: 0.85
   m_SuspensionDistance: 0.2
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -1241,7 +1241,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.5
+    m_Stiffness: 0.6
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1316,11 +1316,11 @@ MonoBehaviour:
   throttleInput: 0
   steeringDirectionInput: 0
   handBrake: 1
-  motorTorque: 400
+  motorTorque: 265
   brakeTorque: 2000
   maxSpeed: 20
-  steeringRange: 35
-  steeringRangeAtMaxSpeed: 15
+  steeringRange: 30
+  steeringRangeAtMaxSpeed: 8
   engineAudio: {fileID: 5100490409881774596}
   engineIdle: {fileID: 8300000, guid: 2d4a8d45fbda47744a3a4789565d81f3, type: 3}
   forwardSpeed: 0
@@ -1534,9 +1534,9 @@ WheelCollider:
   m_Center: {x: 0, y: 0.1, z: 0}
   m_Radius: 0.31
   m_SuspensionSpring:
-    spring: 25000
-    damper: 3500
-    targetPosition: 0.5
+    spring: 30000
+    damper: 500
+    targetPosition: 0.85
   m_SuspensionDistance: 0.2
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -1552,7 +1552,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.5
+    m_Stiffness: 0.6
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -18,4 +18,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   price: 0
   unlocked: 1
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: 1fb2fb5472623794ca79def8f1dfdeaa, type: 2}
