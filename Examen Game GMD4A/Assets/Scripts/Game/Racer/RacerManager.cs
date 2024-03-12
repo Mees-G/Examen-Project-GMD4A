@@ -18,6 +18,7 @@ public class RacerManager : GameModeManager
     public TMP_Text timer;
     public float currentTime;
 
+    public bool finished;
 
     public int laps = 1;
     private void Awake()
@@ -34,7 +35,7 @@ public class RacerManager : GameModeManager
     private void Update()
     {
         base.Update();
-        if (started)
+        if (started && !finished)
         {
             currentTime += Time.deltaTime;
             int minutes = Mathf.FloorToInt(currentTime / 60);
@@ -136,6 +137,7 @@ public class RacerManager : GameModeManager
             //GameUI.FinishUI. TODO
 
             GameUI.instance.finishUI.ShowFinishUI(placent.ToString(), score, timer.text);
+            finished = true;
         }
     }
 }
