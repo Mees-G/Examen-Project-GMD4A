@@ -131,7 +131,7 @@ public class RacerManager : GameModeManager
             //GameUI.FinishUI. TODO
 
             GameUI.instance.finishUI.ShowFinishUI(placent.ToString(), score, timer.text);
-            gameRunning = false;
+            started = false;
         }
     }
 }
