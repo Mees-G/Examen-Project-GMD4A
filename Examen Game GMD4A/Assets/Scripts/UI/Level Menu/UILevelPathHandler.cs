@@ -47,6 +47,11 @@ public class UILevelPathHandler : MaskableGraphic
         }
     }
 
+    protected override void OnDestroy()
+    {
+        LevelManager.INSTANCE.onChangeLevelIndex -= OnChangeLevelIndex;
+    }
+
     private void Update()
     {
         if (Application.isPlaying && shouldDoAnimation)

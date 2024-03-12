@@ -14,6 +14,12 @@ public class FinishUI : MonoBehaviour
     [SerializeField]
     private TMP_Text timeText;
 
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+
+    }
+
     public void ShowFinishUI(string place, int score, string time)
     {
         gameObject.SetActive(true);

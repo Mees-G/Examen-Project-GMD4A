@@ -19,8 +19,6 @@ public class RacerManager : GameModeManager
     public TMP_Text timer;
     public float currentTime;
 
-    public bool gameRunning = false;
-
 
     public int laps = 1;
     private void Awake()
@@ -114,21 +112,20 @@ public class RacerManager : GameModeManager
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
+        
 
-        gameRunning = true;
     }
 
     public void ParticipantFinished(Controller_Base participant)
     {
         //if multiple laps
         participant.SwitchControl(false);
-
         if (!participant.NPC)
         {
             int placent = participants.IndexOf(CarController_Player.instance);
 
             //  float time = ;
-            int score = (int)((participants.Count - placent) * (currentTime - (60 * 8)));
+            int score = (int)((participants.Count - placent) * ((60 * 8) - currentTime));
 
             //  finishUI.ShowFinishUI();
             //GameUI.FinishUI. TODO
