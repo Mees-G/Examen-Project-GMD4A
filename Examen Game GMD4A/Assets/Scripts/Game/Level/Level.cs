@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(menuName = "The Racing 20s/Level")]
 public class Level : ScriptableObject
 {
-
     public string sceneName;
     public string levelName;
-    public string levelDescription;
+    [TextArea]public string levelDescription;
+    public RaceTrack track;
     public int highscore = 0;
     public float fastestTime = 0.0F;
 

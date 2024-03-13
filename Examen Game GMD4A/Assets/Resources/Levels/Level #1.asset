@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Level #1
   m_EditorClassIdentifier: 
   sceneName: GameScene
-  levelName: Level 1
-  levelDescription: Geen idee
+  levelName: 
   highscore: 0
   fastestTime: 0
   completed: 0

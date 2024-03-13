@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a846f4293e9074e9b58daebd07a74f, type: 3}
   m_Name: Level #2
   m_EditorClassIdentifier: 
-  sceneName: Level 2
+  sceneName: GameScene
   levelName: Level 2
-  levelDescription: Geen idee
   highscore: 0
   fastestTime: 0
   completed: 0

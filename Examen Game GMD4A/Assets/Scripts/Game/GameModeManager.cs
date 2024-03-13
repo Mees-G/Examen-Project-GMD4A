@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class GameModeManager : MonoBehaviour
 {
@@ -10,9 +11,7 @@ public abstract class GameModeManager : MonoBehaviour
     public bool started = false;
     public float countDownTime = 10;
 
-#if UNITY_EDITOR
     public bool dontSpawnPlayer;
-#endif
 
     private void Start()
     {
