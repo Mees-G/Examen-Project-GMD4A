@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,20 +5,25 @@ using UnityEngine.UI;
 public class UILevelSelectPopup : MonoBehaviour
 {
 
+    public UILevelPathHandler uiLevelPathHandler;
     public Level currentLevel;
+    public Button button;
     public TMP_Text missionText, descriptionText;
 
-    public void ShowPopup(Button button)
+    public void ShowPopup(UILevelSelectButton uiLevelSelectButton)
     {
-        currentLevel = LevelManager.INSTANCE.GetLevel(button.transform.GetSiblingIndex());
+        currentLevel = uiLevelSelectButton.level;
         missionText.text = currentLevel.levelName;
         descriptionText.text = currentLevel.levelDescription;
         gameObject.SetActive(true);
+        this.button = uiLevelSelectButton.GetComponent<Button>();
     }
 
     public void PlayCurrent()
     {
-        LevelManager.INSTANCE.LoadLevel(currentLevel);
+        //LevelManager.INSTANCE.LoadLevel(currentLevel);
+        GameManager.INSTANCE.latestLevelPosition = button.transform.localPosition;
+        uiLevelPathHandler.shouldDoAnimation = true;
     }
 
     public void ClosePopup()

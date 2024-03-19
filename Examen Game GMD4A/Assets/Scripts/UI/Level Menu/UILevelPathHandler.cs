@@ -1,14 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
-using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
-public class UILevelPathHandler : MaskableGraphic
+public class UILevelPathHandler : MonoBehaviour
 {
     [Header("Car")]
     public Transform car;
@@ -27,43 +22,61 @@ public class UILevelPathHandler : MaskableGraphic
     public AnimationCurve carHummingAnimation;
     public ScrollRect scrollRect;
     public RectTransform contentPanel;
-    public bool shouldDoAnimation;
 
 
-    protected override void Start()
+    private Vector2 startAnimationPosition;
+
+    [SerializeField]
+    private bool _shouldDoAnimation;
+    public bool shouldDoAnimation
     {
-        if (Application.isPlaying)
+        get
         {
-            LevelManager.INSTANCE.onChangeLevelIndex += OnChangeLevelIndex;
-            LevelManager.INSTANCE.UpdateCurrentLevelIndex();
-            Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
-
-            car.transform.localPosition = startPoint;
-
-            missionOutOfText.text = (LevelManager.INSTANCE.currentLevelIndex) + "/" + LevelManager.INSTANCE.levels.Count;
-            moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
-            SetAllDirty();
+            return _shouldDoAnimation;
+        } 
+        set
+        {
+            _shouldDoAnimation = value;
+            if (_shouldDoAnimation)
+            {
+                timer = 0;
+                startAnimationPosition = car.transform.localPosition;
+            }
         }
     }
 
-    protected override void OnDestroy()
+
+    public void Start()
     {
-        LevelManager.INSTANCE.onChangeLevelIndex -= OnChangeLevelIndex;
+
+        Vector2 startPoint = GameManager.INSTANCE.latestLevelPosition;
+
+        car.transform.localPosition = startPoint;
+
+        missionOutOfText.text = (LevelManager.INSTANCE.completedLevelCount) + "/" + gameObject.transform.childCount;
+
+        if (GameManager.INSTANCE.latestLevelPosition != Vector3.zero)
+        {
+            car.transform.position = GameManager.INSTANCE.latestLevelPosition;
+        }
+        UpdateLevelButtons();
     }
 
     private void Update()
     {
-        if (Application.isPlaying && shouldDoAnimation)
+        moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
+        if (shouldDoAnimation)
         {
             Vector2 previousPosition = car.transform.position;
-            Vector2 startPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex == 0 ? 0 : LevelManager.INSTANCE.currentLevelIndex - 1).localPosition;
-            Vector2 endPoint = gameObject.transform.GetChild(LevelManager.INSTANCE.currentLevelIndex).localPosition;
+            Vector2 startPoint = startAnimationPosition;
+            Vector2 endPoint = GameManager.INSTANCE.latestLevelPosition;
+            Debug.Log(startPoint + " - " + endPoint);
 
             //car pathing
             timer = Mathf.Min(timer + Time.deltaTime * 0.15f, 1);
 
 
-            if (LevelManager.INSTANCE.currentLevelIndex != 0)
+            if (Vector3.Distance(startPoint, endPoint) != 0)
             {
                 if (timer != 1)
                 {
@@ -87,39 +100,18 @@ public class UILevelPathHandler : MaskableGraphic
         }
     }
 
-    protected override void OnPopulateMesh(VertexHelper vh)
+    private void UpdateLevelButtons()
     {
-        vh.Clear();
-        timer = 0;
-        Debug.Log("EHYEFWVFEWBIUJFW ");
-        for (int i = 0; i < gameObject.transform.childCount - 1; i++)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            Vector2 startPoint = gameObject.transform.GetChild(i).localPosition;
-            Vector2 endPoint = gameObject.transform.GetChild(i + 1).localPosition;
-
-            Vector2[] controlPoints = CalculateControlPoints(startPoint, endPoint);
-            Vector2[] curvePoints = CubicSpline(controlPoints[0], controlPoints[1], controlPoints[2], controlPoints[3]);
-
-            for (int j = 0; j < curvePoints.Length - 1; j++)
-            {
-                //lines instead of 1 line
-                if (j % 2 == 0)
-                {
-                    Vector2 point1 = curvePoints[j];
-                    Vector2 point2 = curvePoints[j + 1];
-
-                    CreateLineSegment(point1, point2, vh, LevelManager.INSTANCE.currentLevelIndex * segments > i * segments ? unlockedColor : color);
-                }
-            }
-        }
-    }
-
-    private void OnChangeLevelIndex(int index)
-    {
-        for (int i = 0; i < gameObject.transform.childCount - 1; i++)
-        {
+            UILevelSelectButton levelSelectButton = gameObject.transform.GetChild(i).GetComponent<UILevelSelectButton>();
             Button button = gameObject.transform.GetChild(i).GetComponent<Button>();
-            button.enabled = i <= index;
+            LevelType indexedLevelType = levelSelectButton.level.levelType;
+            levelSelectButton.completedImage.gameObject.SetActive(levelSelectButton.level.completed);
+            levelSelectButton.pinTop.color = indexedLevelType == LevelType.RACER ? Color.red : Color.blue;
+            button.interactable = (levelSelectButton.level.parentLevel == null || levelSelectButton.level.parentLevel.completed)/* && indexedLevelType == currentLevelType*/;
+            Debug.Log(i + " - " + button.interactable);
+            
         }
     }
 
@@ -150,33 +142,6 @@ public class UILevelPathHandler : MaskableGraphic
     private Vector2 CalculateCubicSplinePoint(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t)
     {
         return Vector2.Lerp(Vector2.Lerp(Vector2.Lerp(p0, p1, t), Vector2.Lerp(p1, p2, t), t), Vector2.Lerp(Vector2.Lerp(p1, p2, t), Vector2.Lerp(p2, p3, t), t), t);
-    }
-
-    private void CreateLineSegment(Vector3 point1, Vector3 point2, VertexHelper vh, Color color)
-    {
-        Vector3 offset = Vector2.zero;
-
-        UIVertex vertex = UIVertex.simpleVert;
-        vertex.color = color;
-
-        Quaternion point1Rotation = Quaternion.Euler(0, 0, RotatePointTowards(point1, point2) + 90);
-        Vector3 p1 = point1Rotation * new Vector3(-thickness / 2, 0) + point1 - offset;
-        Vector3 p2 = point1Rotation * new Vector3(thickness / 2, 0) + point1 - offset;
-
-        Quaternion point2Rotation = Quaternion.Euler(0, 0, RotatePointTowards(point2, point1) - 90);
-        Vector3 p3 = point2Rotation * new Vector3(-thickness / 2, 0) + point2 - offset;
-        Vector3 p4 = point2Rotation * new Vector3(thickness / 2, 0) + point2 - offset;
-
-        // Add the vertices
-        vh.AddVert(p1, color, Vector2.zero);
-        vh.AddVert(p2, color, Vector2.zero);
-        vh.AddVert(p3, color, Vector2.zero);
-        vh.AddVert(p4, color, Vector2.zero);
-
-        // Add the triangles
-        int vertIndex = vh.currentVertCount - 4;
-        vh.AddTriangle(vertIndex, vertIndex + 1, vertIndex + 2);
-        vh.AddTriangle(vertIndex + 1, vertIndex + 3, vertIndex + 2);
     }
 
     private float RotatePointTowards(Vector2 vertex, Vector2 target)

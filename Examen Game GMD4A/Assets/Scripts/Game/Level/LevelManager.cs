@@ -20,24 +20,24 @@ public class LevelManager
     }
 
 
-    public List<Level> levels = new List<Level>();
+    [HideInInspector]
+    public List<Level> levels;
+    public System.Action<int> onLevelCompleted = delegate { };
 
-    public System.Action<int> onChangeLevelIndex = delegate { };
-
-    private int _currentLevelIndex;
-    public int currentLevelIndex
+    private int _completedLevelCount;
+    public int completedLevelCount
     {
         get {
             //Debug.Log(_currentLevelIndex +" - AAA");
-            return _currentLevelIndex; }
+            return _completedLevelCount; }
         set
         {
-            if (_currentLevelIndex != value)
+            if (_completedLevelCount != value)
             {
-                _currentLevelIndex = value;
+                _completedLevelCount = value;
 
-                Debug.Log(onChangeLevelIndex + " - " + _currentLevelIndex);
-                onChangeLevelIndex.Invoke(_currentLevelIndex);  
+                //Debug.Log(onChangeLevelIndex + " - " + _currentLevelIndex);
+                onLevelCompleted.Invoke(_completedLevelCount);  
             }
         }
     }
@@ -52,7 +52,14 @@ public class LevelManager
             {
                 Level level = loadedObject as Level;
                 levels.Add(loadedObject as Level);
-                level.onChangeCompleted += UpdateCurrentLevelIndex;
+                if (level.completed)
+                {
+                    completedLevelCount++;
+                }
+                else
+                {
+                    level.onChangeCompleted += UpdateCurrentLevelIndex;
+                }
             }
         }
     }
@@ -61,14 +68,11 @@ public class LevelManager
     {
         for (int i = 0; i < levels.Count - 1; i++)
         {
-            if (!levels[i].completed)
+            if (levels[i].completed)
             {
-                currentLevelIndex = i;
-                return;
+                completedLevelCount++;
             }
         }
-        int newIndex = levels.Count - 1;
-        currentLevelIndex = newIndex;
     }
 
     public Level GetLevel(int index)

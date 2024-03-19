@@ -22,3 +22,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1fb2fb5472623794ca79def8f1dfdeaa, type: 2}
   - {fileID: 11400000, guid: d5986ee4f7093544f82536f4a19fd4f2, type: 2}
   - {fileID: 11400000, guid: b147e2047fe35f540ad574c84c0e9014, type: 2}
+  meshSkins:
+  - {fileID: 6671029932765710207, guid: fb9ba7108bca9f849941b2c852c53e1d, type: 3}

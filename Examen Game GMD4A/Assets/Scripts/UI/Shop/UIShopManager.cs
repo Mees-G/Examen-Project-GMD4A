@@ -154,6 +154,7 @@ public class UIShopManager : MonoBehaviour
         //uiBuyableCar[_currentEquiped].border.SetActive(true);
     }
 
+
     private IEnumerator SmoothScrollToObject(int index)
     {
         doingAnimation = true;
@@ -223,18 +224,25 @@ public class UIShopManager : MonoBehaviour
 
     public void OnClickButtonMap(MonoBehaviour monoBehaviour)
     {
-        onFinishMapAnimation += OnLoadedMap;
         Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1, onFinishMapAnimation);
         confirmMapPanel.SetActive(false);
         gameObject.SetActive(false);
 
     }
 
-    public void OnLoadedMap()
+    public void OnClickButtonSkin()
+    {
+
+        Buyable buyable = buyableCars[_index];
+        SkinManager skinManager = cameraCarData[_index].carObj.GetComponent<SkinManager>();
+        int skindex = buyable.meshSkins.IndexOf(skinManager.meshFilter.sharedMesh);
+        Debug.Log(skindex);
+        skinManager.SetSkin(buyable.meshSkins[(skindex + 1) % buyable.meshSkins.Count]);
+    }
+  /*  public void OnLoadedMap()
     {
         //do map animation
-        uiLevelPathHandler.shouldDoAnimation = true;
-    }
+    }*/
 
     public void IncreaseIndex()
     {
@@ -250,6 +258,7 @@ public class UIShopManager : MonoBehaviour
     public class CarCameraData
     {
         public Buyable car;
+        public GameObject carObj;
         public Transform cameraTransform;
     }
 

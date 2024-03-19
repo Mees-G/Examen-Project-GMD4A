@@ -22,3 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74e70a86dd1c17a4381a6b2ebc150a5d, type: 2}
   - {fileID: 11400000, guid: dbf12270c2314ce4f9eceb9ceeda7df1, type: 2}
   - {fileID: 11400000, guid: 6d10fd1d710d2044a98b0a86a0077535, type: 2}
+  meshSkins:
+  - {fileID: -118324654951945886, guid: 522f69b311cdb064a8fca89244fca1d7, type: 3}
+  - {fileID: 1414734452471397305, guid: 0eda46202609e104b85625db8fc476d4, type: 3}
+  - {fileID: -3675923930889691461, guid: 3bf9a58cefc7e8c43aacdc49f32b5a1f, type: 3}

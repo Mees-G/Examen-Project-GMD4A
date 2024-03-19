@@ -22,6 +22,8 @@ public class Buyable : ScriptableObject
 
     public Upgrade[] upgrades;
 
+    public List<Mesh> meshSkins;
+
     //public Dictionary<string, UpgradeData> upgrades;
 
     public Upgrade GetUpgradeByName(string name)

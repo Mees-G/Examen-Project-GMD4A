@@ -9,10 +9,19 @@ public class Level : ScriptableObject
 {
     public string sceneName;
     public string levelName;
-    [TextArea]public string levelDescription;
-    public RaceTrack track;
+    [TextArea] public string levelDescription;
     public int highscore = 0;
     public float fastestTime = 0.0F;
+
+    public Level parentLevel;
+    public LevelType levelType;
+    public int trackIndex;
+    public List<GameObject> NPC_Cars;
+    public List<GameObject> SPECIAL_NPC_Cars;
+    //npc difficulty value?
+    //generic NPC list?
+    //special npc list?
+    //
 
     public bool completed;
     public bool _completed
@@ -28,6 +37,6 @@ public class Level : ScriptableObject
         }
     }
     [HideInInspector]
-    public Action onChangeCompleted;
+    public Action onChangeCompleted; 
 
 }

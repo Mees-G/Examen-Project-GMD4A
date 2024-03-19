@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Level #1
   m_EditorClassIdentifier: 
   sceneName: GameScene
-  levelName: 
+  levelName: Level #1
+  levelDescription: Cool leveltje 1 met coole dingen
   highscore: 0
   fastestTime: 0
-  completed: 0
+  parentLevel: {fileID: 0}
+  levelType: 0
+  track: {fileID: 0}
+  completed: 1
