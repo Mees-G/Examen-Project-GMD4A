@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Controller_Base : MonoBehaviour
 {
-    public GameModeManager modeManager;
+    public GameModeBase modeManager;
 
     [HideInInspector]public bool NPC;
     protected Vector3 driveTarget;

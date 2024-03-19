@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RacerManager : GameModeManager
+public class RacerManager : GameModeBase
 {
     public static RacerManager instance;
 
     [Header("Racer variables")]
-    public GameObject[] NPCcars;
     public Transform banner;
     public int laps = 1;
 
@@ -72,7 +71,7 @@ public class RacerManager : GameModeManager
                 //Spawn a opponent at every free start position
                 Transform spawnPos = currentTrack.startPositions[i].startTransform;
                 Controller_Base npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<Controller_Base>();
-                Car npcCar = CarSpawner.instance.InstantiateCar(NPCcars[UnityEngine.Random.Range(0, NPCcars.Length)], spawnPos, npc);
+                Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[UnityEngine.Random.Range(0, currentLevel.NPC_Cars.Count)], spawnPos, npc);
 
                 participants.Add(npc);
 

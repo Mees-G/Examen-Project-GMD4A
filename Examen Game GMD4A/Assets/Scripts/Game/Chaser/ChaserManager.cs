@@ -4,12 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChaserManager : GameModeManager
+public class ChaserManager : GameModeBase
 {
     public static ChaserManager instance;
 
-    [Header("Chaser variables")]
-    public GameObject[] pursuitCars;
+    //[Header("Chaser variables")]
 
     //[Header("runtime variables")]
 
@@ -50,7 +49,7 @@ public class ChaserManager : GameModeManager
         for (int i = 1; i < currentTrack.startPositions.Length; i++)
         {
             Controller_Base npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<Controller_Base>();
-            Car npcCar = CarSpawner.instance.InstantiateCar(pursuitCars[Random.Range(0, pursuitCars.Length)], currentTrack.startPositions[i].startTransform, npc);
+            Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[Random.Range(0, currentLevel.NPC_Cars.Count)], currentTrack.startPositions[i].startTransform, npc);
 
             participants.Add(npc);
 
