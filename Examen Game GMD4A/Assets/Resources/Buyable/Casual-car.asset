@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Basic Car
   description: A Basic Car, nothing special yet...
-  car: {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
+  car: {fileID: 7356915829096649769, guid: 68be0b2834deda14eba4a06bd64f51c6, type: 3}
   icon: {fileID: 0}
   price: 100
   unlocked: 1
@@ -22,6 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50221b76f65f9a14b95c371f5f402b26, type: 2}
   - {fileID: 11400000, guid: bd5af4750932af1489b9575255ba3cee, type: 2}
   - {fileID: 11400000, guid: 8d0ce69ef86c9d64e8c4b1938d6b6e0b, type: 2}
-  meshSkins:
-  - {fileID: 2184417954113621166, guid: 75bb203cfda83544c8264695d0a2530c, type: 3}
-  - {fileID: -4881608619863546620, guid: 04fb159cb50219d4db6324f0a65a9be3, type: 3}
+  meshSkins: []

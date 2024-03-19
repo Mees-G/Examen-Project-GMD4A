@@ -8,23 +8,18 @@ public class RacerManager : GameModeManager
 {
     public static RacerManager instance;
 
-    public List<Controller_Base> participants;
-    public RaceTrack raceTrack;
-
+    [Header("Racer variables")]
     public GameObject[] NPCcars;
-
     public Transform banner;
-
-    public TMP_Text timer;
-    public float currentTime;
-
-    public bool finished;
-
     public int laps = 1;
+
+    [Header("Runtime variables")]
+    public bool finished;
 
     private void Awake()
     {
         instance = this;
+        gameMode = GameMode.racer;
     }
 
     public override void SetupGame()
@@ -33,7 +28,7 @@ public class RacerManager : GameModeManager
         GameUI.instance.SetupLeaderBoard();
     }
 
-    private void Update()
+    public override void Update()
     {
         base.Update();
         if (started && !finished)
@@ -52,77 +47,50 @@ public class RacerManager : GameModeManager
         if (!dontSpawnPlayer)
         {
             //Select one of the track's start positions at random
-            int spawnPosIndex = UnityEngine.Random.Range(0, raceTrack.startPositions.Length);
-            Transform spawnPoint = raceTrack.startPositions[spawnPosIndex].startTransform;
+            int spawnPosIndex = UnityEngine.Random.Range(0, currentTrack.startPositions.Length);
+            Transform spawnPoint = currentTrack.startPositions[spawnPosIndex].startTransform;
 
             //Mark it as occupied
-            raceTrack.startPositions[spawnPosIndex].occupied = true;
+            currentTrack.startPositions[spawnPosIndex].occupied = true;
 
             //Instantiate the player's car at the selected start position
-            Debug.Log(GameManager.INSTANCE.currentCar.car);
-            Debug.Log(CarController_Player.instance);
-            Debug.Log(CarSpawner.instance);
             Car plyrCar = CarSpawner.instance.InstantiateCar(GameManager.INSTANCE.currentCar.car, spawnPoint, CarController_Player.instance);
 
             //Assign the track and car to the player component
             CarController_Player.instance.car = plyrCar;
-            CarController_Player.instance.track = raceTrack;
-            CarController_Player.instance.checkpointToReach = raceTrack.checkpoints[0];
+            CarController_Player.instance.track = currentTrack;
+            CarController_Player.instance.checkpointToReach = currentTrack.checkpoints[0];
             participants.Add(CarController_Player.instance);
         }
 
         //Spawn NPC Participants
 
-        for (int i = 0; i < raceTrack.startPositions.Length; i++)
+        for (int i = 0; i < currentTrack.startPositions.Length; i++)
         {
-            if (!raceTrack.startPositions[i].occupied)
+            if (!currentTrack.startPositions[i].occupied)
             {
                 //Spawn a opponent at every free start position
-                Transform spawnPos = raceTrack.startPositions[i].startTransform;
-                Controller_Base Npc = Instantiate(NpcObject, transform.GetChild(0)).GetComponent<Controller_Base>();
-                Car NPCcar = CarSpawner.instance.InstantiateCar(NPCcars[UnityEngine.Random.Range(0, NPCcars.Length)], spawnPos, Npc);
+                Transform spawnPos = currentTrack.startPositions[i].startTransform;
+                Controller_Base npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<Controller_Base>();
+                Car npcCar = CarSpawner.instance.InstantiateCar(NPCcars[UnityEngine.Random.Range(0, NPCcars.Length)], spawnPos, npc);
 
-                participants.Add(Npc);
+                participants.Add(npc);
 
-                Npc.car = NPCcar;
-                Npc.track = raceTrack;
-                Npc.checkpointToReach = raceTrack.checkpoints[0];
+                npc.modeManager = this;
+                npc.car = npcCar;
+                npc.track = currentTrack;
+                npc.checkpointToReach = currentTrack.checkpoints[0];
             }
         }
-    }
-
-    public void UpdatePlacement(Transform checkPoint, Controller_Base participant)
-    {
-        int newPosition = participants.IndexOf(participant);
-
-        for (int i = 0; i < participants.Count; i++)
-        {
-            if (raceTrack.checkpoints.IndexOf(participants[i].checkpointToReach) <
-                raceTrack.checkpoints.IndexOf(participant.checkpointToReach))
-            {
-                if (participants.IndexOf(participant) > participants.IndexOf(participants[i]))
-                {
-                    newPosition = participants.IndexOf(participants[i]);
-                }
-            }
-        }
-
-        participants.RemoveAt(participants.IndexOf(participant));
-        participants.Insert(newPosition, participant);
-
-        //Update game UI
-        GameUI.instance.UpdateLeaderBoard(participant, newPosition);
     }
 
     public override void StartGame()
     {
-        Debug.Log("vader");
         foreach (Controller_Base controller in participants)
         {
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
-
     }
 
     public void ParticipantFinished(Controller_Base participant)

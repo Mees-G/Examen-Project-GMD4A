@@ -30,7 +30,7 @@ public class InstantiateCheckpoints : MonoBehaviour
 
     public void InstantiateItems()
     {
-        RaceTrack thisTrack = GetComponent<RaceTrack>();
+        Track thisTrack = GetComponent<Track>();
 
         if (splineContainer != null)
         {

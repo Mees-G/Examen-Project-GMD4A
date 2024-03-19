@@ -5,11 +5,11 @@ using UnityEngine;
 public class CalculateCarPhysics
 
 {
-    public static float CornerRadius(Transform car, Transform currentCheckpoint, Transform nextCheckpoint, float wheelbase)
+    public static float CornerRadius(Transform car, Transform currentCheckpoint, Vector3 nextCheckpoint, float wheelbase)
     {
         // Calculate vectors representing the direction of the car before and after the turn
         Vector3 beforeTurnDir = (currentCheckpoint.position - car.position).normalized;
-        Vector3 afterTurnDir = (nextCheckpoint.position - currentCheckpoint.position).normalized;
+        Vector3 afterTurnDir = (nextCheckpoint - currentCheckpoint.position).normalized;
 
         Debug.DrawLine(car.transform.position, car.transform.position + beforeTurnDir * 15f, Color.blue);
         Debug.DrawLine(car.transform.position, car.transform.position + afterTurnDir * 15f, Color.red);

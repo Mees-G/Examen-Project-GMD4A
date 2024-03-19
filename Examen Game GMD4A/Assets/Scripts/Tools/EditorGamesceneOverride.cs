@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class EditorGamesceneOverride : MonoBehaviour
 {
-    public void StartRace()
+    public float timeScale = 1;
+
+    public void SpeedTime()
     {
-        RacerManager.instance.dontSpawnPlayer = true;
+        Time.timeScale++;
+        timeScale= Time.timeScale;
+    }
+    public void SlowTime()
+    {
+        Time.timeScale--;
+        timeScale= Time.timeScale;
     }
 }
 
@@ -22,9 +30,14 @@ public class GamesceneoverrideButtons : Editor
         EditorGamesceneOverride yourScript = (EditorGamesceneOverride)target;
 
         //buttons
-        if (GUILayout.Button("Startrace"))
+
+        if (GUILayout.Button("Speed Time + 1"))
         {
-            yourScript.StartRace();
+            yourScript.SpeedTime();
+        }
+        if (GUILayout.Button("Slow Time - 1"))
+        {
+            yourScript.SlowTime();
         }
     }
 }

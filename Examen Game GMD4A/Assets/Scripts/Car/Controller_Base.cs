@@ -5,26 +5,28 @@ using UnityEngine;
 
 public abstract class Controller_Base : MonoBehaviour
 {
+    public GameModeManager modeManager;
+
     [HideInInspector]public bool NPC;
     protected Vector3 driveTarget;
     [Tooltip("What car does this control")] public Car car;
 
-    public RaceTrack track;
+    public Track track;
     public Transform checkpointToReach;
+    public int lapIndex;
 
     bool carRespawning;
     public virtual void NextCheckpoint(Transform checkpoint)
     {
-        Debug.Log("checkpoint Triggered");
-
         if (checkpoint == checkpointToReach)
         {
-            Debug.Log("checkpoint reached");
-
             if (checkpointToReach == track.checkpoints.Last())
             {
-                Debug.Log("last checkpoint reached (finish)");
-                RacerManager.instance.ParticipantFinished(this);
+                checkpointToReach = track.checkpoints.First();
+                if (lapIndex >= RacerManager.instance.laps)
+                {
+                    RacerManager.instance.ParticipantFinished(this);
+                }
             }
             else
             {
@@ -37,7 +39,7 @@ public abstract class Controller_Base : MonoBehaviour
             }
         }
 
-        RacerManager.instance.UpdatePlacement(checkpoint, this);
+        modeManager.UpdatePlacement(checkpoint, this);
     }
     public abstract void SwitchControl(bool activate);
     public virtual void RespawnCar()

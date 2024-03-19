@@ -18,10 +18,10 @@ public class CarController_Player : Controller_Base
 
     private void Update()
     {
-        if(car.cameraControl != null)
-        {
-            car.cameraControl.enabled = true;
-        }
+        //if(car.cameraControl != null)
+        //{
+        //    car.cameraControl.enabled = true;
+        //}
     }
 
     private void FixedUpdate()

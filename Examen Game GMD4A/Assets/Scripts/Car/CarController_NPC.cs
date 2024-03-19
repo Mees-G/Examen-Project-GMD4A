@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CarController_NPC : Controller_Base
@@ -19,7 +20,6 @@ public class CarController_NPC : Controller_Base
     [Header("NPC driving variables")]
     public float angleThreshold = 20f;
     public float angleBuffer = 2f; // Introduce a buffer to avoid rapid switching
-
 
     void Start()
     {
@@ -66,8 +66,20 @@ public class CarController_NPC : Controller_Base
         // Throttle Control
         float targetThrottle = 1f;
 
+
         // Calculate the angle between the car, the current checkpoint to reach, and the next checkpoint
-        float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1], car.wheelBase);
+        Vector3 nextCheckpoint;
+
+        if (checkpointToReach == track.checkpoints.Last())
+        {
+            nextCheckpoint = track.checkpoints.First().position;
+        }
+        else
+        {
+            nextCheckpoint = track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1].position;
+        }
+
+        float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, nextCheckpoint, car.wheelBase);
 
         float centripetalForce = (car.rb.mass * (car.forwardSpeed * car.forwardSpeed / 4)) / cornerRadius;
         float frictionForce = car.frontWheels[0].forwardFriction.stiffness * CalculateCarPhysics.CalculateNormalForce(car.rb.mass);
