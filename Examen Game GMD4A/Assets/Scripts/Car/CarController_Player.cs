@@ -7,7 +7,9 @@ public class CarController_Player : Controller_Base
 {
     public static CarController_Player instance;
     public PlayerInput playerInput;
-    
+
+    public Vector3 previousVelocity;
+
     private void Awake()
     {
         instance = this;
@@ -20,6 +22,19 @@ public class CarController_Player : Controller_Base
         {
             car.cameraControl.enabled = true;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        float difference = Vector3.Distance(car.rb.velocity, previousVelocity);
+        float factor = Mathf.Min(difference / (car.topSpeed * Time.deltaTime), 1);
+        // if (Vector3.Distance(rb.velocity, previousVelocity) > topSpeed / 5)
+        {
+            Debug.Log(factor);
+        }
+        previousVelocity = car.rb.velocity;
     }
 
     public override void SwitchControl(bool activate)
@@ -43,6 +58,7 @@ public class CarController_Player : Controller_Base
 
         car.throttleInput = inputVector.y;
         car.steeringDirectionInput = inputVector.x;
+
     }
     public void OnHandBrake(InputValue value)
     {

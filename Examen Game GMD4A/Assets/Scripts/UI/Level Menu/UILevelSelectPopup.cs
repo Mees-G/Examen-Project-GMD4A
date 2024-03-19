@@ -21,7 +21,7 @@ public class UILevelSelectPopup : MonoBehaviour
 
     public void PlayCurrent()
     {
-        //LevelManager.INSTANCE.LoadLevel(currentLevel);
+        LevelManager.INSTANCE.LoadLevel(currentLevel);
         GameManager.INSTANCE.latestLevelPosition = button.transform.localPosition;
         uiLevelPathHandler.shouldDoAnimation = true;
     }
