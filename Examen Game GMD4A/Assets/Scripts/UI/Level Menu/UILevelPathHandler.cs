@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -27,11 +28,13 @@ public class UILevelPathHandler : MonoBehaviour
     public RectTransform contentPanel;
     public Transform controllerCursor;
     public bool isMapFocused;
+    public GraphicRaycaster graphicRaycaster;
+    private List<RaycastResult> graphicRaycastResults;
 
     private Input playerInput;
 
     private Vector2 startAnimationPosition;
-
+    private int UI_LAYER;
 
 
     [SerializeField]
@@ -62,7 +65,8 @@ public class UILevelPathHandler : MonoBehaviour
 
     public void OnClickMap(InputAction.CallbackContext context)
     {
-        if (isMapFocused) {
+        if (isMapFocused)
+        {
             if (context.performed)
             {
                 Debug.Log("Aaahh");
@@ -141,6 +145,17 @@ public class UILevelPathHandler : MonoBehaviour
 
         if (isMapFocused)
         {
+         
+
+            graphicRaycastResults = new List<RaycastResult>();
+            PointerEventData ed = new PointerEventData(EventSystem.current);
+            ed.position = (playerInput.UI.Point.ReadValue<Vector2>());
+            graphicRaycaster.Raycast(ed, graphicRaycastResults);
+            foreach(RaycastResult result in graphicRaycastResults)
+            {   
+                controllerCursor.position = result.worldPosition;
+            }
+
             Vector2 inputVector = playerInput.UI.Move.ReadValue<Vector2>();
             Vector3 added = inputVector * Time.deltaTime * 500;
             controllerCursor.localPosition += added;
@@ -154,7 +169,7 @@ public class UILevelPathHandler : MonoBehaviour
                 controllerCursor.localPosition -= added;
             }
 
-            
+
         }
 
     }

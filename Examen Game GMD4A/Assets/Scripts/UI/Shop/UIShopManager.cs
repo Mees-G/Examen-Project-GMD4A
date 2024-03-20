@@ -56,7 +56,7 @@ public class UIShopManager : MonoBehaviour
 
     private bool doingAnimation = false;
 
-    private int _index = -1;
+    private int _index = 0;
     public int index
     {
         get
@@ -91,7 +91,7 @@ public class UIShopManager : MonoBehaviour
                 upgradePanel.SetActive(buyableCars[_index].unlocked);
                 if (buyableCars[_index].unlocked)
                 {
-                    UnityEngine.UI.Button previousButton = null;
+                    Button previousButton = null;
                     foreach (Upgrade upgrade in buyableCars[_index].upgrades)
                     {
                         UIUpgrade upgradeUI = Instantiate(uiUpgradePrefab, upgradePanel.transform);
@@ -127,6 +127,7 @@ public class UIShopManager : MonoBehaviour
                     buyButton.interactable = buyableCars[_index].price <= CurrencyManager.INSTANCE.amount;
                     buyPriceText.text = buyableCars[_index].price.ToString();
                     confirmPanel.SetActive(true);
+                    confirmPanel.GetComponentInChildren<Button>().Select();
                     HorizontalLayoutGroup layout = buyPriceText.transform.parent.GetComponent<HorizontalLayoutGroup>();
 
                     //bug fix
@@ -137,6 +138,7 @@ public class UIShopManager : MonoBehaviour
                 {
                     currentEquiped = _index;
                     confirmMapPanel.SetActive(true);
+                    confirmMapPanel.GetComponentInChildren<Button>().Select();
                 }
             }
         }
@@ -166,12 +168,12 @@ public class UIShopManager : MonoBehaviour
             carBuyUI.buyable = buyable;
             carBuyUI.UpdateUI();
 
-            carBuyUI.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate ()
+            carBuyUI.GetComponent<Button>().onClick.AddListener(delegate ()
             {
                 OnClickButton(carBuyUI);
             });
         }
-
+        this.UpdateSelectionButtons();
         //uiBuyableCar[_currentEquiped].border.SetActive(true);
     }
 
@@ -261,10 +263,10 @@ public class UIShopManager : MonoBehaviour
         Debug.Log(skindex);
         skinManager.SetSkin(buyable.meshSkins[(skindex + 1) % buyable.meshSkins.Count]);
     }
-  /*  public void OnLoadedMap()
-    {
-        //do map animation
-    }*/
+    /*  public void OnLoadedMap()
+      {
+          //do map animation
+      }*/
 
     public void SelectCurrentCarButton()
     {
@@ -274,31 +276,29 @@ public class UIShopManager : MonoBehaviour
     public void IncreaseIndex(Button button)
     {
         index++;
-        Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnLeft = uiBuyableCars[_index].button;
-        button.navigation = navigation;
-
-        Navigation navigationL = buttonLeft.navigation;
-        navigationL.mode = Navigation.Mode.Explicit;
-        navigationL.selectOnRight = uiBuyableCars[_index].button;
-        buttonLeft.navigation = navigationL;
+        this.UpdateSelectionButtons();
     }
 
     public void DecreaseIndex(Button button)
     {
         index--;
-        Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnRight = uiBuyableCars[_index].button;
-        button.navigation = navigation;
+        this.UpdateSelectionButtons();
+
+
+    }
+
+    private void UpdateSelectionButtons()
+    {
+        Debug.Log("jatoch?!");
+        Navigation navigationL = buttonLeft.navigation;
+        navigationL.mode = Navigation.Mode.Explicit;
+        navigationL.selectOnRight = uiBuyableCars[_index].button;
+        buttonLeft.navigation = navigationL;
 
         Navigation navigationR = buttonRight.navigation;
         navigationR.mode = Navigation.Mode.Explicit;
         navigationR.selectOnLeft = uiBuyableCars[_index].button;
         buttonRight.navigation = navigationR;
-
-
     }
 
     [Serializable]
