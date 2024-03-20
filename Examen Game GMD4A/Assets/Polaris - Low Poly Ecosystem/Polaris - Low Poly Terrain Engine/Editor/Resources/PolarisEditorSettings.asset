@@ -65,7 +65,7 @@ MonoBehaviour:
     selectedElementColor: {r: 1, g: 1, b: 0, a: 1}
     positiveHighlightColor: {r: 0.5019608, g: 0.5019608, b: 1, a: 0.7490196}
     negativeHighlightColor: {r: 1, g: 0, b: 0, a: 0.7490196}
-    showMesh: 1
+    showMesh: 0
     autoTangent: 1
     raycastLayer:
       serializedVersion: 2
