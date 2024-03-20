@@ -13,7 +13,7 @@ public class CarController_Player : Controller_Base
     private void Awake()
     {
         instance = this;
-        playerInput.DeactivateInput();
+        //playerInput.DeactivateInput();
     }
 
     private void Update()
