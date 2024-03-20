@@ -60,17 +60,19 @@ public class UILevelPathHandler : MonoBehaviour
         playerInput.UI.Enable();
     }
 
-    private void OnClick(InputAction.CallbackContext context)
+    public void OnClickMap(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            Debug.Log("Aaahh");
-            for (int i = 0; i < transform.childCount; i++)
+        if (isMapFocused) {
+            if (context.performed)
             {
-                RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
-                if (buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
+                Debug.Log("Aaahh");
+                for (int i = 0; i < transform.childCount; i++)
                 {
-                    buttonRect.GetComponent<Button>().onClick.Invoke();
+                    RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
+                    if (buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
+                    {
+                        buttonRect.GetComponent<Button>().Select();
+                    }
                 }
             }
         }
@@ -79,7 +81,7 @@ public class UILevelPathHandler : MonoBehaviour
     private void OnDisable()
     {
         playerInput.UI.Disable();
-        playerInput.UI.Submit.performed -= OnClick;
+        playerInput.UI.Submit.performed -= OnClickMap;
     }
 
     public void Start()
@@ -210,6 +212,6 @@ public class UILevelPathHandler : MonoBehaviour
     {
         isMapFocused = true;
         Debug.Log("AAAA");
-        playerInput.UI.Submit.performed += OnClick;
+        playerInput.UI.Submit.performed += OnClickMap;
     }
 }
