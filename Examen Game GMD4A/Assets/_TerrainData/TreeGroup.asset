@@ -21,7 +21,7 @@ MonoBehaviour:
     shadowCastingMode: 1
     receiveShadow: 1
     billboardShadowCastingMode: 0
-    billboardReceiveShadow: 0
+    billboardReceiveShadow: 1
     layer: 0
     keepPrefabLayer: 0
     billboard: {fileID: 22600000, guid: 5f8f0bc124bacd3479bf05de64ce0f9c, type: 2}
@@ -44,7 +44,7 @@ MonoBehaviour:
     shadowCastingMode: 1
     receiveShadow: 1
     billboardShadowCastingMode: 0
-    billboardReceiveShadow: 0
+    billboardReceiveShadow: 1
     layer: 0
     keepPrefabLayer: 0
     billboard: {fileID: 22600000, guid: 9d523d3bd3bd7fa4e9976f31d2529ba9, type: 2}
@@ -66,7 +66,7 @@ MonoBehaviour:
     shadowCastingMode: 1
     receiveShadow: 1
     billboardShadowCastingMode: 0
-    billboardReceiveShadow: 0
+    billboardReceiveShadow: 1
     layer: 0
     keepPrefabLayer: 0
     billboard: {fileID: 22600000, guid: 0d7a8eb5556f90c43a0100efe214220c, type: 2}
@@ -89,7 +89,7 @@ MonoBehaviour:
     shadowCastingMode: 1
     receiveShadow: 1
     billboardShadowCastingMode: 0
-    billboardReceiveShadow: 0
+    billboardReceiveShadow: 1
     layer: 0
     keepPrefabLayer: 0
     billboard: {fileID: 22600000, guid: 4ce8f9f5519795447a338cdbe93ae6f3, type: 2}
@@ -103,3 +103,72 @@ MonoBehaviour:
     baseRotation: {x: 0, y: 0, z: 0, w: 1}
     baseScale: {x: 1, y: 1, z: 1}
     editor_PrefabAssetPath: Assets/Prefabs/Environment/Plains/PlainsTree(2).prefab
+  - prefab: {fileID: 6940158967514051930, guid: 1baf53e727af4a04a9beab9adcd6c7c6,
+      type: 3}
+    sharedMesh: {fileID: -8450203449467639564, guid: 1bdfe8e34fe8f6e4780120989cf9f94b,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: 1bdfe8e34fe8f6e4780120989cf9f94b, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 1
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 22600000, guid: cdf63496447ab7f44bb4be0009ea42da, type: 2}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/Mountains/PineTree(1).prefab
+  - prefab: {fileID: 5479052983597742844, guid: aca9609f01ccc1740bab7789f1092b3e,
+      type: 3}
+    sharedMesh: {fileID: 208502296333486923, guid: 6cc256015d7607f43837b15c39c95200,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 5032788614518317635, guid: 6cc256015d7607f43837b15c39c95200, type: 3}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 1
+    layer: 0
+    keepPrefabLayer: 0
+    billboard: {fileID: 22600000, guid: 6ee92b33a00eed3409bf7c597c285527, type: 2}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/Prairie/PrairieTree(1).prefab
+  - prefab: {fileID: 6388041066067341124, guid: 5257c2a1187bbbb4e918672c5e2a097d,
+      type: 3}
+    sharedMesh: {fileID: 4463435217936460288, guid: f70c1db0375648c43ae96dff58eca20b,
+      type: 3}
+    sharedMaterials:
+    - {fileID: 2100000, guid: efe97f9487747cb4189560246c57dce3, type: 2}
+    shadowCastingMode: 1
+    receiveShadow: 1
+    billboardShadowCastingMode: 0
+    billboardReceiveShadow: 1
+    layer: 0
+    keepPrefabLayer: 1
+    billboard: {fileID: 22600000, guid: 10c5645d26e1dc446917fd6ad8b0c5f0, type: 2}
+    hasCollider: 0
+    colliderInfo:
+      center: {x: 0, y: 0, z: 0}
+      radius: 0
+      height: 0
+      direction: 0
+    pivotOffset: 0
+    baseRotation: {x: 0, y: 0, z: 0, w: 1}
+    baseScale: {x: 1, y: 1, z: 1}
+    editor_PrefabAssetPath: Assets/Prefabs/Environment/Forest/ForestTree(3).prefab

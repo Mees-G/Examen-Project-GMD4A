@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b712840779f4647baae93e0b9355d2, type: 3}
+  m_Name: TreeGroup_Prefabs_628509481439464836
+  m_EditorClassIdentifier: 
+  prototypes:
+  - {fileID: 536507721039140095, guid: 792456bd3dc7a3e40b3e2f382ddcba11, type: 3}
+  - {fileID: 5642129510480453497, guid: 5699dbf3e34e65d44a51f8d021c80c44, type: 3}
+  - {fileID: 170268993454516883, guid: 016a4759c0d01e5488c1e6bf61228ab5, type: 3}
+  - {fileID: 2502554517912554660, guid: 8a8ee3f13c0c47d41bf53b633034d353, type: 3}
+  - {fileID: 6940158967514051930, guid: 1baf53e727af4a04a9beab9adcd6c7c6, type: 3}
+  - {fileID: 5479052983597742844, guid: aca9609f01ccc1740bab7789f1092b3e, type: 3}
+  - {fileID: 6388041066067341124, guid: 5257c2a1187bbbb4e918672c5e2a097d, type: 3}
+  editor_PrefabAssetPaths: []

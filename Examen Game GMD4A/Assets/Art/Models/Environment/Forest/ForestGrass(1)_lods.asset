@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overrideDefaults: 0
   importSettings:
-    generateOnImport: 1
+    generateOnImport: 0
     meshSimplifier: Unity.AutoLOD.QuadricMeshSimplifier, Unity.AutoLOD.Editor, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    batcher: 
+    batcher: Unity.AutoLOD.MaterialPreservingBatcher, Unity.AutoLOD.Editor, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     maxLODGenerated: 2
     initialLODMaxPolyCount: 500000
   lod0:

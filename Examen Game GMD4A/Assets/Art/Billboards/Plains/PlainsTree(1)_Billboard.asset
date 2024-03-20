@@ -8,9 +8,9 @@ BillboardAsset:
   m_PrefabAsset: {fileID: 0}
   m_Name: PlainsTree(1)_Billboard
   serializedVersion: 2
-  width: 7.9455495
+  width: 6.3040366
   bottom: 0
-  height: 7.9455495
+  height: 6.3040366
   imageTexCoords:
   - {x: 0, y: 0, z: 0.25, w: 0.25}
   - {x: 0.25, y: 0, z: 0.25, w: 0.25}

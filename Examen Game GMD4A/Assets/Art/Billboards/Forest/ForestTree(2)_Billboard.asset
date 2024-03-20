@@ -9,7 +9,7 @@ BillboardAsset:
   m_Name: ForestTree(2)_Billboard
   serializedVersion: 2
   width: 5.6059594
-  bottom: -0.098167896
+  bottom: 0
   height: 5.7041273
   imageTexCoords:
   - {x: 0, y: 0, z: 0.25, w: 0.25}

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b712840779f4647baae93e0b9355d2, type: 3}
+  m_Name: FoliageGroup_Prefabs_351068201439464836
+  m_EditorClassIdentifier: 
+  prototypes:
+  - {fileID: 919132149155446097, guid: 9ef7c9391726a9b428796b1b78b1c4a7, type: 3}
+  - {fileID: 919132149155446097, guid: a886f1adf9d4f5f4290fee9754a2b56f, type: 3}
+  - {fileID: 919132149155446097, guid: e3b5a5db62fc0e344b68e37bcb048ef8, type: 3}
+  - {fileID: 919132149155446097, guid: 51b5231c0109f014fb50ba5619f1e731, type: 3}
+  - {fileID: 919132149155446097, guid: 110a89fff0ed2fe41b85b9d87eec88d5, type: 3}
+  - {fileID: 146554742251468144, guid: 9dd27c77def12674d9a51c800a0e5f61, type: 3}
+  - {fileID: 3095536020133652624, guid: 7b1f774c7eb50bd49bb80fcae7662f91, type: 3}
+  - {fileID: 5381911902255700218, guid: 40227617894019c48803ce4fc0f73808, type: 3}
+  - {fileID: 2427499362306775370, guid: 55d7351f8aadcca44917b4d38c4477d7, type: 3}
+  - {fileID: 5213394294498101016, guid: 16f6b9c86d04e854587a93de14261ec5, type: 3}
+  - {fileID: 2114677234895745781, guid: 1479ed0381dcce1499516a3166bb3d93, type: 3}
+  - {fileID: 4817991527666997330, guid: aeef9bd97ac98034684633fd0651d2c2, type: 3}
+  - {fileID: 3716092969032211999, guid: bd7bff656f5b3f7479436c521579769b, type: 3}
+  - {fileID: 3852030378386290064, guid: b092e09eaf336db499f5790d5b92401b, type: 3}
+  - {fileID: 399502140500123649, guid: ab63c185252ec69429d49feb386d6dd1, type: 3}
+  - {fileID: 2862712296520266407, guid: efb929b77fca31b49a27444bf74b1268, type: 3}
+  - {fileID: 1435480888801553834, guid: 22b55f678acdba74ea4bfbce0867de84, type: 3}
+  - {fileID: 8023871440690923934, guid: 85270b88a042db74f94e9d1b7ebfa53c, type: 3}
+  - {fileID: 5342067102417410955, guid: 16f255a937fcffa40b4118ecb9b41822, type: 3}
+  - {fileID: 4150698914930459634, guid: 28aa9bf90f135cf4eb6d456064a88f7c, type: 3}
+  - {fileID: 8896278041439099813, guid: 4cfde4517e79131418aa7b4616b63800, type: 3}
+  - {fileID: 7788970329063521535, guid: 4a69113eda75ce24bb5ee637ea3e55bc, type: 3}
+  - {fileID: 1745842669985698247, guid: a85807380534782488bc8bb714228467, type: 3}
+  - {fileID: 7980264133642531162, guid: a8cd03d0fa5058241a0360224f2e8543, type: 3}
+  - {fileID: 2734430990757567181, guid: ec8f2db754ac0004a986e32ec805f515, type: 3}
+  editor_PrefabAssetPaths:
+  - Assets/Art/Models/Environment/Forest/ForestGrass(1).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(2).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(3).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(4).fbx
+  - Assets/Art/Models/Environment/Forest/ForestGrass(5).fbx
+  - Assets/Prefabs/Environment/Forest/ForestPlant(1).prefab
+  - Assets/Prefabs/Environment/Forest/Mushroom(1).prefab
+  - Assets/Prefabs/Environment/Forest/Mushroom(2).prefab
+  - Assets/Prefabs/Environment/Forest/Mushroom(3).prefab
+  - Assets/Prefabs/Environment/Forest/Mushroom(4).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsGrass(1).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsGrass(2).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsGrass(3).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsGrass(4).prefab
+  - Assets/Prefabs/Environment/Plains/PlainsGrass(5).prefab
+  - Assets/Prefabs/Environment/Plains/Reeds(1).prefab
+  - Assets/Prefabs/Environment/Plains/Reeds(2).prefab
+  - Assets/Prefabs/Environment/Plains/Reeds(3).prefab
+  - Assets/Prefabs/Environment/Prairie/DeadBush(1).prefab
+  - Assets/Prefabs/Environment/Prairie/DeadBush(2).prefab
+  - Assets/Prefabs/Environment/Prairie/PrairieGrass(1).prefab
+  - Assets/Prefabs/Environment/Prairie/PrairieGrass(2).prefab
+  - Assets/Prefabs/Environment/Prairie/PrairieGrass(3).prefab
+  - Assets/Prefabs/Environment/Prairie/PrairieGrass(4).prefab
+  - Assets/Prefabs/Environment/Prairie/PrairieGrass(5).prefab

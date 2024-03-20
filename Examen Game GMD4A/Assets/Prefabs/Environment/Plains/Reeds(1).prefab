@@ -63,10 +63,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: efe97f9487747cb4189560246c57dce3, type: 2}
+    - target: {fileID: -4611392003776577584, guid: e3554e145e280b84f8bda8eaacffcbc7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e3554e145e280b84f8bda8eaacffcbc7,
         type: 3}
       propertyPath: m_Name
       value: Reeds(1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e3554e145e280b84f8bda8eaacffcbc7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2407594350980407268, guid: e3554e145e280b84f8bda8eaacffcbc7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
