@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UILevelPathHandler : MonoBehaviour
@@ -20,11 +22,17 @@ public class UILevelPathHandler : MonoBehaviour
     public int segments = 5;
     public float timer;
     public AnimationCurve carHummingAnimation;
-    public ScrollRect scrollRect;
+    public ScrollRect mapHolderScrollRect;
+    public RectTransform mapRectTransform;
     public RectTransform contentPanel;
+    public Transform controllerCursor;
+    public bool isMapFocused;
 
+    private Input playerInput;
 
     private Vector2 startAnimationPosition;
+
+
 
     [SerializeField]
     private bool _shouldDoAnimation;
@@ -33,7 +41,7 @@ public class UILevelPathHandler : MonoBehaviour
         get
         {
             return _shouldDoAnimation;
-        } 
+        }
         set
         {
             _shouldDoAnimation = value;
@@ -46,9 +54,36 @@ public class UILevelPathHandler : MonoBehaviour
     }
 
 
+    private void OnEnable()
+    {
+        playerInput = new Input();
+        playerInput.UI.Enable();
+    }
+
+    private void OnClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Aaahh");
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
+                if (buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
+                {
+                    buttonRect.GetComponent<Button>().onClick.Invoke();
+                }
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        playerInput.UI.Disable();
+        playerInput.UI.Submit.performed -= OnClick;
+    }
+
     public void Start()
     {
-
         Vector2 startPoint = GameManager.INSTANCE.latestLevelPosition;
 
         car.transform.localPosition = startPoint;
@@ -98,6 +133,28 @@ public class UILevelPathHandler : MonoBehaviour
                 }
             }
         }
+
+
+
+
+        if (isMapFocused)
+        {
+            Vector2 inputVector = playerInput.UI.Move.ReadValue<Vector2>();
+            Vector3 added = inputVector * Time.deltaTime * 500;
+            controllerCursor.localPosition += added;
+
+            if (Mathf.Abs(controllerCursor.localPosition.x) >= mapRectTransform.rect.width / 2 || Mathf.Abs(controllerCursor.localPosition.y) >= mapRectTransform.rect.height / 2)
+            {
+                /*contentPanel.anchoredPosition = (Vector2)mapHolderScrollRect.transform.InverseTransformPoint(contentPanel.position) - (Vector2)mapHolderScrollRect.transform.InverseTransformPoint(controllerCursor.transform.position);
+                controllerCursor.transform.localPosition = Vector2.zero;*/
+                contentPanel.localPosition -= added;
+                //undo pos
+                controllerCursor.localPosition -= added;
+            }
+
+            
+        }
+
     }
 
     private void UpdateLevelButtons()
@@ -111,7 +168,7 @@ public class UILevelPathHandler : MonoBehaviour
             levelSelectButton.pinTop.color = indexedLevelType == LevelType.RACER ? Color.red : Color.blue;
             button.interactable = (levelSelectButton.level.parentLevel == null || levelSelectButton.level.parentLevel.completed)/* && indexedLevelType == currentLevelType*/;
             Debug.Log(i + " - " + button.interactable);
-            
+
         }
     }
 
@@ -147,5 +204,12 @@ public class UILevelPathHandler : MonoBehaviour
     private float RotatePointTowards(Vector2 vertex, Vector2 target)
     {
         return (float)(Mathf.Atan2(target.y - vertex.y, target.x - vertex.x) * (180 / Mathf.PI));
+    }
+
+    public void SetMapFocused()
+    {
+        isMapFocused = true;
+        Debug.Log("AAAA");
+        playerInput.UI.Submit.performed += OnClick;
     }
 }

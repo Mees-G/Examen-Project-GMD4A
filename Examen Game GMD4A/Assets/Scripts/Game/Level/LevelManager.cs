@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -80,10 +82,14 @@ public class LevelManager
         return levels[index];
     }
 
-    public void LoadLevel(Level level)
+    public IEnumerator LoadLevel(Level level)
     {
         GameManager.INSTANCE.currentLevel = level;
-        SceneManager.LoadScene(level.sceneName);
+        AsyncOperation async = SceneManager.LoadSceneAsync(level.sceneName);
+        while (!async.isDone)
+        {
+            yield return null;
+        }
     }
 
     public void LoadLevel(int index)

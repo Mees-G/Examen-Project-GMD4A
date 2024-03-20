@@ -11,6 +11,7 @@ public class UIBuyableCar : MonoBehaviour
     public TMP_Text carNameText;
     public TMP_Text carPriceText;
     public Image carDisplay;
+    public Button button;
 
     public Transform lockedTransform;
 

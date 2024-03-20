@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UILevelSelectPopup : MonoBehaviour
@@ -21,10 +24,13 @@ public class UILevelSelectPopup : MonoBehaviour
 
     public void PlayCurrent()
     {
-        LevelManager.INSTANCE.LoadLevel(currentLevel);
+        gameObject.SetActive(false);
+        uiLevelPathHandler.StartCoroutine(LevelManager.INSTANCE.LoadLevel(currentLevel));
         GameManager.INSTANCE.latestLevelPosition = button.transform.localPosition;
         uiLevelPathHandler.shouldDoAnimation = true;
+        Debug.Log("AA");
     }
+
 
     public void ClosePopup()
     {

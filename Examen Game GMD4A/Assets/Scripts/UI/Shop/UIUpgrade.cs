@@ -32,6 +32,7 @@ public class UIUpgrade : MonoBehaviour
 
     public void OnClickButton()
     {
+       
         int price = upgrade.CalculateCurrentPrice();
         CurrencyManager.INSTANCE.amount -= price;
         upgrade.currentValue += 1;

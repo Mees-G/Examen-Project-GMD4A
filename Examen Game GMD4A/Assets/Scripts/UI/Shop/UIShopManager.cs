@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UIShopManager : MonoBehaviour
 {
@@ -26,6 +25,9 @@ public class UIShopManager : MonoBehaviour
     public Transform mapCameraTransform;
 
     public GameObject upgradePanel;
+
+    public Button buttonLeft;
+    public Button buttonRight;
 
 
     public TMP_Text coinAmount;
@@ -89,10 +91,29 @@ public class UIShopManager : MonoBehaviour
                 upgradePanel.SetActive(buyableCars[_index].unlocked);
                 if (buyableCars[_index].unlocked)
                 {
+                    UnityEngine.UI.Button previousButton = null;
                     foreach (Upgrade upgrade in buyableCars[_index].upgrades)
                     {
                         UIUpgrade upgradeUI = Instantiate(uiUpgradePrefab, upgradePanel.transform);
                         upgradeUI.upgrade = upgrade;
+
+                        Button upgradeButton = upgradeUI.upgradeButton;
+                        Navigation navigation = upgradeButton.navigation;
+                        navigation.mode = Navigation.Mode.Explicit;
+                        navigation.selectOnLeft = previousButton;
+                        navigation.selectOnDown = uiBuyableCars[_index].button;
+
+                        //set previous
+                        if (previousButton != null)
+                        {
+                            Navigation previousNavigation = previousButton.navigation;
+                            previousNavigation.mode = Navigation.Mode.Explicit;
+                            previousNavigation.selectOnRight = upgradeButton;
+                            previousButton.navigation = previousNavigation;
+                        }
+
+                        upgradeButton.navigation = navigation;
+                        previousButton = upgradeButton;
                     }
                 }
 
@@ -224,6 +245,7 @@ public class UIShopManager : MonoBehaviour
 
     public void OnClickButtonMap(MonoBehaviour monoBehaviour)
     {
+        onFinishMapAnimation += uiLevelPathHandler.SetMapFocused;
         Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1, onFinishMapAnimation);
         confirmMapPanel.SetActive(false);
         gameObject.SetActive(false);
@@ -244,14 +266,39 @@ public class UIShopManager : MonoBehaviour
         //do map animation
     }*/
 
-    public void IncreaseIndex()
+    public void SelectCurrentCarButton()
     {
-        index++;
+        uiBuyableCars[_index].button.Select();
     }
 
-    public void DecreaseIndex()
+    public void IncreaseIndex(Button button)
+    {
+        index++;
+        Navigation navigation = button.navigation;
+        navigation.mode = Navigation.Mode.Explicit;
+        navigation.selectOnLeft = uiBuyableCars[_index].button;
+        button.navigation = navigation;
+
+        Navigation navigationL = buttonLeft.navigation;
+        navigationL.mode = Navigation.Mode.Explicit;
+        navigationL.selectOnRight = uiBuyableCars[_index].button;
+        buttonLeft.navigation = navigationL;
+    }
+
+    public void DecreaseIndex(Button button)
     {
         index--;
+        Navigation navigation = button.navigation;
+        navigation.mode = Navigation.Mode.Explicit;
+        navigation.selectOnRight = uiBuyableCars[_index].button;
+        button.navigation = navigation;
+
+        Navigation navigationR = buttonRight.navigation;
+        navigationR.mode = Navigation.Mode.Explicit;
+        navigationR.selectOnLeft = uiBuyableCars[_index].button;
+        buttonRight.navigation = navigationR;
+
+
     }
 
     [Serializable]

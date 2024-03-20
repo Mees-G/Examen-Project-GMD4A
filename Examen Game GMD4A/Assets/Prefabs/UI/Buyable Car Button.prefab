@@ -511,7 +511,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
     m_DisabledColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -563,6 +563,7 @@ MonoBehaviour:
   carNameText: {fileID: 1787077899507733671}
   carPriceText: {fileID: 6192778770444574807}
   carDisplay: {fileID: 6102416214367657906}
+  button: {fileID: 546643933647273833}
   lockedTransform: {fileID: 2420812132557261289}
   border: {fileID: 8370205199332909561}
 --- !u!1 &5225404312959172493

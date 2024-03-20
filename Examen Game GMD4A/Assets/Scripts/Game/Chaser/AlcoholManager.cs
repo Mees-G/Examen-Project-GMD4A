@@ -38,10 +38,10 @@ public class AlcoholManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             AttemptToLoseAlcohol();
-        }
+        }*/
 
         foreach (Coin coin in coinList)
         {
