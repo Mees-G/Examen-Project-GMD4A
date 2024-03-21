@@ -18,14 +18,17 @@ public class CarController_Player : Controller_Base
 
     private void Update()
     {
-        if(car.cameraControl != null)
+        if(car && car.cameraControl != null)
         {
             car.cameraControl.enabled = true;
         }
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
+        if (car == null)
+            return;
+
         base.FixedUpdate();
 
         float difference = Vector3.Distance(car.rb.velocity, previousVelocity);
@@ -64,6 +67,10 @@ public class CarController_Player : Controller_Base
     {
         if(!car.handBrake) car.handBrake = value.isPressed;
         else car.handBrake = false;
+    }
+    public void OnLights()
+    {
+        car.lights.SetActive(!car.lights.activeInHierarchy);
     }
     public void OnRespawn()
     {

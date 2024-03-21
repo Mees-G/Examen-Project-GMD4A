@@ -21,6 +21,6 @@ MonoBehaviour:
   levelType: 0
   trackIndex: 0
   NPC_Cars:
-  - {fileID: 7356915829096649769, guid: 68be0b2834deda14eba4a06bd64f51c6, type: 3}
+  - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
   SPECIAL_NPC_Cars: []
   completed: 0

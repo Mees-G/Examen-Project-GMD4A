@@ -19,6 +19,10 @@ public class Car : MonoBehaviour
     public float steeringDirectionInput;
     public bool handBrake;
 
+    public GameObject lights;
+    public float maxLoad;
+    [HideInInspector] public float currentLoad;
+
     [Header("Engine")]
     public float motorTorque = 2000;
     public float brakeTorque = 2000;
@@ -54,7 +58,7 @@ public class Car : MonoBehaviour
 
         //calculate current speed in relation to the forward direction of the car
         forwardSpeed = Vector3.Dot(transform.forward, rb.velocity);
-
+        
         //calculate how close the car is to top speed
         float speedFactor = Mathf.InverseLerp(0, topSpeed, forwardSpeed);
 

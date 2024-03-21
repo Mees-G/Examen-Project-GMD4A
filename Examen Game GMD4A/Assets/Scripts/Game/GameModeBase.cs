@@ -29,8 +29,11 @@ public abstract class GameModeBase : MonoBehaviour
     {
         CarController_Player.instance.modeManager = this;
 
-        currentLevel = GameManager.INSTANCE.currentLevel;
-        currentTrack = raceTracks[GameManager.INSTANCE.currentLevel.trackIndex];
+        if(GameManager.INSTANCE)
+        {
+            currentLevel = GameManager.INSTANCE.currentLevel;
+            currentTrack = raceTracks[GameManager.INSTANCE.currentLevel.trackIndex];
+        }
 
         if (currentTrack)
             SetupGame();

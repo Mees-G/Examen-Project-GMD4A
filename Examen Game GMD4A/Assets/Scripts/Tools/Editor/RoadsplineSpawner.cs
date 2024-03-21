@@ -4,6 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using Pinwheel.Griffin.SplineTool;
 using UnityEngine.Splines;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
+using System.Linq;
+using System;
 
 public class RoadsplineSpawner : EditorWindow
 {
@@ -18,14 +21,21 @@ public class RoadsplineSpawner : EditorWindow
     public Vector3 offset;
     public void InstantiateSpline()
     {
+        GSplineAnchor[] anchors = griffinSpline.Spline.Anchors.ToArray();
+
         Spline unitySpline = unitySplineContainer.AddSpline();
-        for (int i = 0; i < griffinSpline.Spline.Anchors.Count; i++)
+        unitySpline.Resize(anchors.Length);
+
+        for (int i = 0; i < anchors.Length; i++)
         {
             BezierKnot knot = new BezierKnot();
-            knot.Position = griffinSpline.Spline.Anchors[i].Position + offset;
-            knot.Rotation = griffinSpline.Spline.Anchors[i].Rotation;
-            unitySpline.Add(knot);
+            knot.Position = anchors[i].Position + offset;
+            knot.Rotation = anchors[i].Rotation;
+
+            unitySpline.RemoveAt(i); 
+            unitySpline.Insert(i, knot);
         }
+        
         unitySpline.SetTangentMode(TangentMode.AutoSmooth);
     }
 
