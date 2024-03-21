@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 745811279224153853}
   - component: {fileID: 3821188568673359493}
   m_Layer: 0
-  m_Name: Checkpoint_NPC
+  m_Name: NPC POINT
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

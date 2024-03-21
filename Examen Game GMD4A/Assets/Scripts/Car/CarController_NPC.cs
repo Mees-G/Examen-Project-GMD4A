@@ -63,7 +63,7 @@ public class CarController_NPC : Controller_Base
                     if (NpcActivated = (Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position) < 40))
                     {
                         Debug.Log("Actuvardd!");
-                        this.NextCheckpoint(CarController_Player.instance.checkpointToReach);
+                        this.NextCheckpoint(track.checkpoints[track.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach)]);
 
                         car.handBrake = false;
                     }
@@ -138,6 +138,11 @@ public class CarController_NPC : Controller_Base
         else
         {
             nextCheckpoint = track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1].position;
+        }
+
+        if (gameMode == LevelType.CHASER && checkpointToReach == CarController_Player.instance.checkpointToReach)
+        {
+            driveTarget = CarController_Player.instance.car.transform.position;
         }
 
         float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, nextCheckpoint, car.wheelBase);
