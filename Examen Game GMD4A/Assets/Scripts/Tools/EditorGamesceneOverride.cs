@@ -17,6 +17,10 @@ public class EditorGamesceneOverride : MonoBehaviour
         Time.timeScale--;
         timeScale= Time.timeScale;
     }
+    public void RecalculateNormals()
+    {
+        //NormalSolver.RecalculateNormals();
+    }
 }
 
 #if UNITY_EDITOR
