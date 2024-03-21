@@ -15,7 +15,7 @@ public class RacerManager : GameModeBase
     private void Awake()
     {
         instance = this;
-        gameMode = GameMode.racer;
+        gameMode = LevelType.RACER;
     }
 
     public override void SetupGame()

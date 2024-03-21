@@ -23,8 +23,7 @@ public abstract class GameModeBase : MonoBehaviour
     [Header("Debugging")]
     public bool dontSpawnPlayer;
     public List<Controller_Base> participants;
-    protected GameMode gameMode;
-    public enum GameMode { racer, chaser }
+    protected LevelType gameMode;
 
     private void OnEnable()
     {
@@ -56,7 +55,7 @@ public abstract class GameModeBase : MonoBehaviour
         //Update game UI
         switch (gameMode)
         {
-            case GameMode.racer:
+            case LevelType.RACER:
                 int newPosition = participants.IndexOf(participant);
 
                 for (int i = 0; i < participants.Count; i++)
@@ -77,7 +76,7 @@ public abstract class GameModeBase : MonoBehaviour
                 GameUI.instance.UpdateLeaderBoard(participant, newPosition);
                 break;
 
-            case GameMode.chaser:
+            case LevelType.CHASER:
                 //TODO: change music ofzo
                 break;
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class CarController_NPC : Controller_Base
@@ -22,8 +23,7 @@ public class CarController_NPC : Controller_Base
     public float angleThreshold = 20f;
     public float angleBuffer = 2f; // Introduce a buffer to avoid rapid switching
 
-    public ControlType controlType;
-    public enum ControlType { Racing, Chasing }
+    public LevelType gameMode;
 
     void Awake()
     {
@@ -32,51 +32,87 @@ public class CarController_NPC : Controller_Base
 
     public override void SwitchControl(bool activate)
     {
-        if (activate) 
+
+        if (gameMode == LevelType.RACER)
         {
-            driveTarget = checkpointToReach.position;
+            if (activate)
+            {
+                driveTarget = checkpointToReach.position;
+            }
+            NpcActivated = activate;
         }
-        NpcActivated = activate;
+
     }
 
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
 
-        if (!NpcActivated)
-            return;
-
-        switch (controlType)
+        // Debug.Log("Fixed updating " + controlType);
+        switch (gameMode)
         {
-            case ControlType.Racing:
+            case LevelType.RACER:
 
 
                 break;
 
-            case ControlType.Chasing:
-
-                if (CarController_Player.instance.checkpointToReach == checkpointToReach)
+            case LevelType.CHASER:
+                //Debug.Log("chase - " + NpcActivated);
+                if (!NpcActivated)
                 {
+                    Debug.Log(Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position));
+                    if (NpcActivated = (Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position) < 40))
+                    {
+                        Debug.Log("Actuvardd!");
+                        this.NextCheckpoint(CarController_Player.instance.checkpointToReach);
 
+                        car.handBrake = false;
+                    }
                 }
 
                 break;
         }
 
-
+        base.FixedUpdate();
         Detection();
         Driving();
     }
 
+    public override void NextCheckpoint(Transform checkpoint)
+
+    {
+        this.checkpointToReach = checkpoint;
+        driveTarget = checkpointToReach.position;
+
+        if (checkpoint == checkpointToReach)
+        {
+            if (checkpointToReach != track.checkpoints.Last())
+            {
+                if (track.checkpoints.IndexOf(checkpoint) == -1)
+                {
+                    Debug.Log("jatoch! wtkk ouwe - " + checkpoint.gameObject + " - " + checkpoint.gameObject.transform.parent.name);
+                }
+                checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
+
+                if (NPC)
+                {
+                    driveTarget = checkpointToReach.position;
+                }
+            }
+        }
+
+
+    }
+
     void Detection()
     {
-        
+
     }
     void Driving()
     {
         if (!NpcActivated)
             return;
 
+     //   Debug.Log("ay shit driving biiihhh");
         // Calculate the angle between the car and the target position
         Vector3 targetDirection = (driveTarget - car.transform.position).normalized;
         Vector3 forward = car.transform.forward.normalized;
@@ -94,6 +130,7 @@ public class CarController_NPC : Controller_Base
         // Calculate the angle between the car, the current checkpoint to reach, and the next checkpoint
         Vector3 nextCheckpoint;
 
+       // Debug.Log(track.checkpoints.IndexOf(checkpointToReach) + " da index - " + track.checkpoints.Count + " - " + driveTarget);
         if (checkpointToReach == track.checkpoints.Last())
         {
             nextCheckpoint = track.checkpoints.First().position;
@@ -128,7 +165,7 @@ public class CarController_NPC : Controller_Base
             return;
 
         // Despawn Detection
-        if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
+        if (gameMode == LevelType.RACER && car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
             isFlipped = true;
             StartCoroutine(FlipDetection());
@@ -140,13 +177,13 @@ public class CarController_NPC : Controller_Base
         yield return new WaitForSeconds(3);
         if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
-            NpcActivated = false;
+            //NpcActivated = false;
             RespawnCar();
         }
         else
         {
             isFlipped = false;
-            NpcActivated = true;
+            //   NpcActivated = true;
         }
     }
 
@@ -154,7 +191,7 @@ public class CarController_NPC : Controller_Base
     {
         base.RespawnCar();
         isFlipped = false;
-        NpcActivated = true;
+        //NpcActivated = true;
     }
     private void OnDrawGizmos()
     {

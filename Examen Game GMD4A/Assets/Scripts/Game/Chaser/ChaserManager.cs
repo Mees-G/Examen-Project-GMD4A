@@ -14,7 +14,7 @@ public class ChaserManager : GameModeBase
     private void Awake()
     {
         instance = this;
-        gameMode = GameMode.chaser;
+        gameMode = LevelType.CHASER;
     }
 
     public override void Update()
@@ -27,27 +27,6 @@ public class ChaserManager : GameModeBase
             int remainingSeconds = Mathf.FloorToInt(currentTime % 60);
             string timeFormatted = string.Format("{0}:{1:00}", minutes, remainingSeconds);
             timer.text = timeFormatted;
-        }
-
-        if (!allPoliceActive)
-        {
-            int playerCheckpointIndex = currentTrack.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach);
-
-            for (int i = 0; i < participants.Count; i++)
-            {
-                allPoliceActive = false;
-
-                if (participants[i] is CarController_NPC)
-                {
-                    int checkpointIndex = currentTrack.checkpoints.IndexOf(participants[i].checkpointToReach);
-
-                    if (playerCheckpointIndex > checkpointIndex)
-                    {
-                        participants[i].SwitchControl(true);
-                        allPoliceActive = true;
-                    }
-                }
-            }
         }
     }
 
@@ -81,7 +60,7 @@ public class ChaserManager : GameModeBase
         //spawn police cars
         for (int i = 1; i < currentTrack.startPositions.Length; i++)
         {
-            Controller_Base npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<Controller_Base>();
+            CarController_NPC npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<CarController_NPC>();
             Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[Random.Range(0, currentLevel.NPC_Cars.Count)], currentTrack.startPositions[i].startTransform, npc);
 
             participants.Add(npc);
@@ -89,14 +68,17 @@ public class ChaserManager : GameModeBase
             npc.modeManager = this;
             npc.car = npcCar;
             npc.track = currentTrack;
+            npc.gameMode = LevelType.CHASER;
+
+
 
             float closestDistance = Mathf.Infinity;
             Transform newCheckpoint = currentTrack.checkpoints[0];
             for (int index = 0; index < currentTrack.checkpoints.Count; index++)
             {
-                if(Vector3.Distance(currentTrack.startPositions[index].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)
+                if(Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)    
                 {
-                    closestDistance = Vector3.Distance(currentTrack.startPositions[index].startTransform.position, currentTrack.checkpoints[index].position);
+                    closestDistance = Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position);
                 }
             }
 

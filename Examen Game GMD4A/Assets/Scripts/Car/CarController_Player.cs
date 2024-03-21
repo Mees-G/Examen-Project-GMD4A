@@ -26,7 +26,7 @@ public class CarController_Player : Controller_Base
 
     public override void FixedUpdate()
     {
-        if (car == null)
+        if (car == null || car.rb == null)
             return;
 
         base.FixedUpdate();
@@ -35,7 +35,7 @@ public class CarController_Player : Controller_Base
         float factor = Mathf.Min(difference / (car.topSpeed * Time.deltaTime), 1);
         // if (Vector3.Distance(rb.velocity, previousVelocity) > topSpeed / 5)
         {
-            Debug.Log(factor);
+           // Debug.Log(factor);
         }
         previousVelocity = car.rb.velocity;
     }

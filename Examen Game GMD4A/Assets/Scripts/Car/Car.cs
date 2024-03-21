@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -113,6 +114,8 @@ public class Car : MonoBehaviour
         {
             if (currentCarController != null)
             {
+                Debug.Log("ja godverdommeee - " + other.transform);
+                Debug.Log("ja fewfew - " + other.transform.parent);
                 currentCarController.NextCheckpoint(other.transform);
             }
         }
