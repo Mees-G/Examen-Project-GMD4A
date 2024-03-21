@@ -2,55 +2,67 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class UIShopManager : MonoBehaviour
 {
 
+    [Header("Parents")]
     public RectTransform buyableCarsParent;
+
+    [Header("Prefabs")]
     public UIBuyableCar uiBuyableCarPrefab;
     public UIUpgrade uiUpgradePrefab;
 
-    public UIBuyableCar[] uiBuyableCars;
+    [Header("Car Data & Camera Data")]
     public Buyable[] buyableCars;
     public CarCameraData[] cameraCarData;
 
+
+    [Header("Referenced Panels & Objects")]
     public GameObject confirmPanel;
     public ScrollRect scrollRect;
     public AnimationCurve scrollAnimation;
-
-    public UnityEngine.UI.Button buyButton;
-
     public GameObject confirmMapPanel;
-    public Transform mapCameraTransform;
-
-    public GameObject upgradePanel;
-
-    public Button buttonLeft;
-    public Button buttonRight;
-
-
-    public TMP_Text coinAmount;
-    public TMP_Text buyPriceText;
-
     public UILevelPathHandler uiLevelPathHandler;
 
+    public Transform mapCameraTransform;
+    public GameObject upgradePanel;
+
+    //for start press any key thing
     public GameObject pressAnyKeyPanel;
     public VolumeProfile profile;
 
-    public bool hasPressedAny;
-    public bool initializedAnimation;
+    [Header("Buttons")]
+    public Button buyButton;
+    public Button buttonLeft;
+    public Button buttonRight;
+
+    [Header("Text")]
+    public TMP_Text coinAmount;
+    public TMP_Text buyPriceText;
 
 
-    private Coroutine lastRoutine;
+    //Instansiated car UI buttons
+    private UIBuyableCar[] uiBuyableCars;
+
+    //press any key
     private CanvasGroup canvasGroup;
+    private bool hasPressedAny;
+    private bool initializedAnimation;
+    private Input input;
+
+    //outline meuk
+    private GameObject previousSelected;
+    private Outline previousOutline;
+
 
     private Action onFinishMapAnimation = delegate { };
-
-    private Input input;
 
     private int _currentEquiped = 0;
     public int currentEquiped
@@ -66,8 +78,6 @@ public class UIShopManager : MonoBehaviour
         }
         get { return _currentEquiped; }
     }
-
-    private bool doingAnimation = false;
 
     private int _index = -1;
     public int index
@@ -88,7 +98,7 @@ public class UIShopManager : MonoBehaviour
                     if (_index < 0) _index = buyableCarsParent.transform.childCount - 1;
                     StopAllCoroutines();
                     StartCoroutine(SmoothScrollToObject(_index));
-                    lastRoutine = Camera.main.SmoothToTransform(this, cameraCarData[_index].cameraTransform, scrollAnimation);
+                    Camera.main.SmoothToTransform(this, cameraCarData[_index].cameraTransform, scrollAnimation);
                 }
 
                 if (upgradePanel.transform.childCount != 0)
@@ -104,29 +114,29 @@ public class UIShopManager : MonoBehaviour
                 upgradePanel.SetActive(buyableCars[_index].unlocked);
                 if (buyableCars[_index].unlocked)
                 {
-                    Button previousButton = null;
+                    // Button previousButton = null;
                     foreach (Upgrade upgrade in buyableCars[_index].upgrades)
                     {
                         UIUpgrade upgradeUI = Instantiate(uiUpgradePrefab, upgradePanel.transform);
                         upgradeUI.upgrade = upgrade;
 
                         Button upgradeButton = upgradeUI.upgradeButton;
-                        Navigation navigation = upgradeButton.navigation;
-                        navigation.mode = Navigation.Mode.Explicit;
-                        navigation.selectOnLeft = previousButton;
-                        navigation.selectOnDown = uiBuyableCars[_index].button;
+                        /* Navigation navigation = upgradeButton.navigation;
+                         navigation.mode = Navigation.Mode.Explicit;
+                         navigation.selectOnLeft = previousButton;
+                         navigation.selectOnDown = uiBuyableCars[_index].button;
 
-                        //set previous
-                        if (previousButton != null)
-                        {
-                            Navigation previousNavigation = previousButton.navigation;
-                            previousNavigation.mode = Navigation.Mode.Explicit;
-                            previousNavigation.selectOnRight = upgradeButton;
-                            previousButton.navigation = previousNavigation;
-                        }
+                         //set previous
+                         if (previousButton != null)
+                         {
+                             Navigation previousNavigation = previousButton.navigation;
+                             previousNavigation.mode = Navigation.Mode.Explicit;
+                             previousNavigation.selectOnRight = upgradeButton;
+                             previousButton.navigation = previousNavigation;
+                         }
 
-                        upgradeButton.navigation = navigation;
-                        previousButton = upgradeButton;
+                         upgradeButton.navigation = navigation;
+                         previousButton = upgradeButton;*/
                     }
                 }
 
@@ -168,9 +178,6 @@ public class UIShopManager : MonoBehaviour
             depth.active = GameManager.INSTANCE.isFirstLaunch;
         }
         this.InitializeUI();
-        input = new Input();
-        input.UI.Any.performed += OnAnyPressed;
-        input.UI.Enable();
     }
 
     private void OnDestroy()
@@ -180,11 +187,18 @@ public class UIShopManager : MonoBehaviour
         input.UI.Disable();
     }
 
+    private void Awake()
+    {
+        input = new Input();
+        input.UI.Any.performed += OnAnyPressed;
+        input.UI.Enable();
+
+        CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;
+    }
+
     public void InitializeUI()
     {
 
-
-        CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;
         coinAmount.SetValue(this, CurrencyManager.INSTANCE.amount, 1);
 
         uiBuyableCars = new UIBuyableCar[buyableCars.Length];
@@ -207,30 +221,57 @@ public class UIShopManager : MonoBehaviour
 
     private void Update()
     {
-        if (!initializedAnimation && hasPressedAny)
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+        if (previousSelected != selected)
         {
-            if (profile.TryGet(out DepthOfField depth))
-            {
-                depth.active = false;
-            }
-            pressAnyKeyPanel.SetActive(false);
-            index = 0;
-            this.UpdateSelectionButtons();
-            this.SelectCurrentCarButton();
-            initializedAnimation = true;
-            canvasGroup.alpha = 1;
+            Outline outline = selected.GetComponent<Outline>();
 
+            if (previousOutline != null)
+                previousOutline.enabled = false;
+
+            if (outline == null)
+                outline = selected.AddComponent<Outline>();
+
+
+            outline.enabled = true;
+            outline.effectDistance = new Vector2(4, 4);
+            outline.effectColor = Color.black;
+
+            previousSelected = selected;
+            previousOutline = outline;
+        }
+        //Debug.Log(EventSystem.current.currentSelectedGameObject);
+        if (hasPressedAny)
+        {
+            if (!initializedAnimation)
+            {
+                if (profile.TryGet(out DepthOfField depth))
+                {
+                    depth.active = false;
+                }
+                pressAnyKeyPanel.SetActive(false);
+                index = 0;
+                this.UpdateSelectionButtons();
+                this.SelectCurrentCarButton();
+                initializedAnimation = true;
+            }
+
+            if (canvasGroup.alpha != 1)
+                canvasGroup.alpha += Time.deltaTime * 2;
         }
     }
 
     private void OnAnyPressed(InputAction.CallbackContext context)
     {
+        //Debug.Log(context.control.device is Mouse);
+        //Debug.Log(context.control.device is Gamepad);
+        //Debug.Log(context.control.device is Keyboard);
+
         hasPressedAny = true;
     }
 
     private IEnumerator SmoothScrollToObject(int index)
     {
-        doingAnimation = true;
         float factor = 0;
         float animationSpeed = 2.0F;
         Canvas.ForceUpdateCanvases();
@@ -272,13 +313,11 @@ public class UIShopManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             factor += add;
         }
-        doingAnimation = false;
     }
 
     private void OnChangeMoneyAmount(int amount)
     {
         coinAmount.SetValue(this, amount, 1);
-        Debug.Log("jaja " + amount);
     }
 
 
@@ -301,6 +340,8 @@ public class UIShopManager : MonoBehaviour
         Camera.main.SmoothToTransform(monoBehaviour, mapCameraTransform, scrollAnimation, 1, onFinishMapAnimation);
         confirmMapPanel.SetActive(false);
         gameObject.SetActive(false);
+        uiLevelPathHandler.GetComponent<CanvasGroup>().interactable = true;
+
 
     }
 
@@ -313,10 +354,6 @@ public class UIShopManager : MonoBehaviour
         Debug.Log(skindex);
         skinManager.SetSkin(buyable.meshSkins[(skindex + 1) % buyable.meshSkins.Count]);
     }
-    /*  public void OnLoadedMap()
-      {
-          //do map animation
-      }*/
 
     public void SelectCurrentCarButton()
     {
@@ -333,13 +370,11 @@ public class UIShopManager : MonoBehaviour
     {
         index--;
         this.UpdateSelectionButtons();
-
-
     }
 
+    /* sets the buttons left & right from the car selection so they can only target the car button */
     private void UpdateSelectionButtons()
     {
-        Debug.Log("jatoch?!");
         Navigation navigationL = buttonLeft.navigation;
         navigationL.mode = Navigation.Mode.Explicit;
         navigationL.selectOnRight = uiBuyableCars[_index].button;

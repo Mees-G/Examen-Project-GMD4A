@@ -17,4 +17,9 @@ MonoBehaviour:
   levelDescription: Geen idee
   highscore: 0
   fastestTime: 0
+  parentLevel: {fileID: 11400000, guid: 9021dc2545c49ce4abe5f0b70ea8f535, type: 2}
+  levelType: 0
+  trackIndex: 0
+  NPC_Cars: []
+  SPECIAL_NPC_Cars: []
   completed: 0

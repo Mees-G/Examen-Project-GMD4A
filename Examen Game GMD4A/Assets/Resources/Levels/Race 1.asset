@@ -23,4 +23,4 @@ MonoBehaviour:
   NPC_Cars:
   - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
   SPECIAL_NPC_Cars: []
-  completed: 0
+  completed: 1

@@ -28,6 +28,8 @@ public class UILevelPathHandler : MonoBehaviour
     public RectTransform contentPanel;
     public Transform controllerCursor;
     public bool isMapFocused;
+    public UILevelSelectPopup popup;
+
     public GraphicRaycaster graphicRaycaster;
     private List<RaycastResult> graphicRaycastResults;
 
@@ -63,24 +65,6 @@ public class UILevelPathHandler : MonoBehaviour
         playerInput.UI.Enable();
     }
 
-    public void OnClickMap(InputAction.CallbackContext context)
-    {
-        if (isMapFocused)
-        {
-            if (context.performed)
-            {
-                Debug.Log("Aaahh");
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
-                    if (buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
-                    {
-                        buttonRect.GetComponent<Button>().Select();
-                    }
-                }
-            }
-        }
-    }
 
     private void OnDisable()
     {
@@ -105,6 +89,7 @@ public class UILevelPathHandler : MonoBehaviour
 
     private void Update()
     {
+      
         moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
         if (shouldDoAnimation)
         {
@@ -143,7 +128,7 @@ public class UILevelPathHandler : MonoBehaviour
 
 
 
-        if (isMapFocused)
+        if (isMapFocused && !popup.gameObject.activeSelf)
         {
          
 
@@ -174,6 +159,24 @@ public class UILevelPathHandler : MonoBehaviour
 
     }
 
+    public void OnClickMap(InputAction.CallbackContext context)
+    {
+        if (isMapFocused && !popup.gameObject.activeSelf)
+        {
+            if (context.performed)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
+                    if (buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
+                    {
+                        buttonRect.GetComponent<Button>().Select();
+                    }
+                }
+            }
+        }
+    }
+
     private void UpdateLevelButtons()
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -197,20 +200,6 @@ public class UILevelPathHandler : MonoBehaviour
         Vector2 middlePoint2 = new Vector2(startPoint.x + (curved ? -2f * (endPoint.x - startPoint.x) / 3f : 2f * (endPoint.x - startPoint.x) / 3f), endPoint.y);
 
         return new Vector2[] { startPoint, middlePoint1, middlePoint2, endPoint };
-    }
-
-    private Vector2[] CubicSpline(Vector2 P0, Vector2 P1, Vector2 P2, Vector2 P3)
-    {
-        List<Vector2> splinePoints = new List<Vector2>();
-
-        for (int i = 0; i <= segments; i++)
-        {
-            float t = (float)i / segments;
-            Vector2 point = Vector2.Lerp(Vector2.Lerp(Vector2.Lerp(P0, P1, t), Vector2.Lerp(P1, P2, t), t), Vector2.Lerp(Vector2.Lerp(P1, P2, t), Vector2.Lerp(P2, P3, t), t), t);
-            splinePoints.Add(point);
-        }
-
-        return splinePoints.ToArray();
     }
 
     private Vector2 CalculateCubicSplinePoint(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t)
