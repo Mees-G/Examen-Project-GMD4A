@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class CarController_NPC : Controller_Base
     public float brakeDistance = 20f;
 
     float smoothVelocity = 0.1f;
-    bool NpcActivated;
+    [HideInInspector] public bool NpcActivated;
     bool canMakeTurn;
     bool isFlipped;
 
@@ -21,7 +22,10 @@ public class CarController_NPC : Controller_Base
     public float angleThreshold = 20f;
     public float angleBuffer = 2f; // Introduce a buffer to avoid rapid switching
 
-    void Start()
+    public ControlType controlType;
+    public enum ControlType { Racing, Chasing }
+
+    void Awake()
     {
         NPC = true;
     }
@@ -38,6 +42,27 @@ public class CarController_NPC : Controller_Base
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        if (!NpcActivated)
+            return;
+
+        switch (controlType)
+        {
+            case ControlType.Racing:
+
+
+                break;
+
+            case ControlType.Chasing:
+
+                if (CarController_Player.instance.checkpointToReach == checkpointToReach)
+                {
+
+                }
+
+                break;
+        }
+
 
         Detection();
         Driving();
@@ -65,7 +90,6 @@ public class CarController_NPC : Controller_Base
 
         // Throttle Control
         float targetThrottle = 1f;
-
 
         // Calculate the angle between the car, the current checkpoint to reach, and the next checkpoint
         Vector3 nextCheckpoint;

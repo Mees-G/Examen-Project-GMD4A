@@ -24,6 +24,7 @@ public class RoadsplineSpawner : EditorWindow
         GSplineAnchor[] anchors = griffinSpline.Spline.Anchors.ToArray();
 
         Spline unitySpline = unitySplineContainer.AddSpline();
+        unitySpline.SetTangentMode(TangentMode.AutoSmooth);
         unitySpline.Resize(anchors.Length);
 
         for (int i = 0; i < anchors.Length; i++)
@@ -36,7 +37,6 @@ public class RoadsplineSpawner : EditorWindow
             unitySpline.Insert(i, knot);
         }
         
-        unitySpline.SetTangentMode(TangentMode.AutoSmooth);
     }
 
     public void OnGUI()

@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour
 {
+    public static GameSceneManager Instance;
     public Track[] tracks;
 
     public GameObject raceManager;
     public GameObject chaseManager;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

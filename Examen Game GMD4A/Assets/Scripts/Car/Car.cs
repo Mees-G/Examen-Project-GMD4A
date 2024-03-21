@@ -20,6 +20,7 @@ public class Car : MonoBehaviour
     public bool handBrake;
 
     public GameObject lights;
+    public float health;
     public float maxLoad;
     [HideInInspector] public float currentLoad;
 

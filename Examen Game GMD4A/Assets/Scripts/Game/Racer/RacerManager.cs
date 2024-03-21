@@ -12,9 +12,6 @@ public class RacerManager : GameModeBase
     public Transform banner;
     public int laps = 1;
 
-    [Header("Runtime variables")]
-    public bool finished;
-
     private void Awake()
     {
         instance = this;

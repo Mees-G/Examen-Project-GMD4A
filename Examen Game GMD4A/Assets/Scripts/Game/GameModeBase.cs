@@ -18,6 +18,7 @@ public abstract class GameModeBase : MonoBehaviour
     public TMP_Text timer;
     public float currentTime;
     public float countDownTime = 10;
+    public bool finished;
 
     [Header("Debugging")]
     public bool dontSpawnPlayer;
@@ -32,7 +33,7 @@ public abstract class GameModeBase : MonoBehaviour
         if(GameManager.INSTANCE)
         {
             currentLevel = GameManager.INSTANCE.currentLevel;
-            currentTrack = raceTracks[GameManager.INSTANCE.currentLevel.trackIndex];
+            currentTrack = GameSceneManager.Instance.tracks[GameManager.INSTANCE.currentLevel.trackIndex];
         }
 
         if (currentTrack)

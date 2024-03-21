@@ -52,16 +52,16 @@ WheelCollider:
   m_Mass: 12
   m_WheelDampingRate: 0.2
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.2
-    m_AsymptoteValue: 0.8
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.4
-    m_AsymptoteValue: 1
+    m_AsymptoteValue: 0.75
     m_Stiffness: 0.5
   m_IncludeLayers:
     serializedVersion: 2
@@ -124,16 +124,16 @@ WheelCollider:
   m_Mass: 12
   m_WheelDampingRate: 0.2
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.2
-    m_AsymptoteValue: 0.8
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.4
-    m_AsymptoteValue: 1
+    m_AsymptoteValue: 0.75
     m_Stiffness: 0.5
   m_IncludeLayers:
     serializedVersion: 2
@@ -536,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877165057946157717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31391832, y: 0.36375937, z: -0.13169904, w: 0.86705816}
+  m_LocalRotation: {x: 0.31391832, y: 0.36375937, z: -0.13169906, w: 0.8670581}
   m_LocalPosition: {x: -4.4286766, y: 0, z: -0.16188776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1079,16 +1079,16 @@ WheelCollider:
   m_Mass: 12
   m_WheelDampingRate: 0.2
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.2
-    m_AsymptoteValue: 0.8
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.4
-    m_AsymptoteValue: 1
+    m_AsymptoteValue: 0.75
     m_Stiffness: 0.5
   m_IncludeLayers:
     serializedVersion: 2
@@ -1598,16 +1598,16 @@ WheelCollider:
   m_Mass: 12
   m_WheelDampingRate: 0.2
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.2
-    m_AsymptoteValue: 0.8
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.4
-    m_AsymptoteValue: 1
+    m_AsymptoteValue: 0.75
     m_Stiffness: 0.5
   m_IncludeLayers:
     serializedVersion: 2

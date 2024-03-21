@@ -16,6 +16,7 @@ public abstract class Controller_Base : MonoBehaviour
     public int lapIndex;
 
     bool carRespawning;
+
     public virtual void NextCheckpoint(Transform checkpoint)
     {
         if (checkpoint == checkpointToReach)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a846f4293e9074e9b58daebd07a74f, type: 3}
+  m_Name: Chase 1
+  m_EditorClassIdentifier: 
+  sceneName: GameScene
+  levelName: Bobs Sneakroute
+  levelDescription: Bob has found a sneakroute over the mountain to avoid police,
+    but the police have found a way.
+  highscore: 0
+  fastestTime: 0
+  parentLevel: {fileID: 0}
+  levelType: 1
+  trackIndex: 1
+  NPC_Cars:
+  - {fileID: 314956060953134822, guid: 8730547244d2c224a96cfe6a49ade7bb, type: 3}
+  SPECIAL_NPC_Cars: []
+  completed: 0
