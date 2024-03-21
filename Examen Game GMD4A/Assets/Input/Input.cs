@@ -356,6 +356,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Any"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab20aac0-4d66-4d56-927b-4ea5010854ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -886,6 +895,17 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c2130a6-c644-47c9-8208-7ac6736bc451"",
+                    ""path"": ""*/<Button>"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Any"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -911,6 +931,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+        m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1053,6 +1074,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Move;
+    private readonly InputAction m_UI_Any;
     public struct UIActions
     {
         private @Input m_Wrapper;
@@ -1068,6 +1090,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @Move => m_Wrapper.m_UI_Move;
+        public InputAction @Any => m_Wrapper.m_UI_Any;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1110,6 +1133,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Any.started += instance.OnAny;
+            @Any.performed += instance.OnAny;
+            @Any.canceled += instance.OnAny;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1147,6 +1173,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Any.started -= instance.OnAny;
+            @Any.performed -= instance.OnAny;
+            @Any.canceled -= instance.OnAny;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1184,5 +1213,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnAny(InputAction.CallbackContext context);
     }
 }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         INSTANCE = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public Buyable currentCar;
@@ -18,4 +19,8 @@ public class GameManager : MonoBehaviour
 
     //for car anim
     public Vector3 latestLevelPosition;
+
+    //voor pressed zooi
+    public bool isFirstLaunch = true;
+
 }

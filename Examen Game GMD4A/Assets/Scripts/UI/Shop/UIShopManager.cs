@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class UIShopManager : MonoBehaviour
@@ -35,11 +38,21 @@ public class UIShopManager : MonoBehaviour
 
     public UILevelPathHandler uiLevelPathHandler;
 
+    public GameObject pressAnyKeyPanel;
+    public VolumeProfile profile;
+
+    public bool hasPressedAny;
+    public bool initializedAnimation;
+
+
     private Coroutine lastRoutine;
+    private CanvasGroup canvasGroup;
 
     private Action onFinishMapAnimation = delegate { };
 
-    private int _currentEquiped = -1;
+    private Input input;
+
+    private int _currentEquiped = 0;
     public int currentEquiped
     {
         set
@@ -56,7 +69,7 @@ public class UIShopManager : MonoBehaviour
 
     private bool doingAnimation = false;
 
-    private int _index = 0;
+    private int _index = -1;
     public int index
     {
         get
@@ -144,18 +157,33 @@ public class UIShopManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+
+    private void Start()
     {
+        canvasGroup = GetComponent<CanvasGroup>();
+        pressAnyKeyPanel.SetActive(GameManager.INSTANCE.isFirstLaunch);
+        canvasGroup.alpha = GameManager.INSTANCE.isFirstLaunch ? 0 : 1;
+        if (profile.TryGet(out DepthOfField depth))
+        {
+            depth.active = GameManager.INSTANCE.isFirstLaunch;
+        }
         this.InitializeUI();
+        input = new Input();
+        input.UI.Any.performed += OnAnyPressed;
+        input.UI.Enable();
     }
 
     private void OnDestroy()
     {
         CurrencyManager.INSTANCE.OnChangeAmount -= OnChangeMoneyAmount;
+        input.UI.Any.performed -= OnAnyPressed;
+        input.UI.Disable();
     }
 
     public void InitializeUI()
     {
+
+
         CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;
         coinAmount.SetValue(this, CurrencyManager.INSTANCE.amount, 1);
 
@@ -173,10 +201,32 @@ public class UIShopManager : MonoBehaviour
                 OnClickButton(carBuyUI);
             });
         }
-        this.UpdateSelectionButtons();
+
         //uiBuyableCar[_currentEquiped].border.SetActive(true);
     }
 
+    private void Update()
+    {
+        if (!initializedAnimation && hasPressedAny)
+        {
+            if (profile.TryGet(out DepthOfField depth))
+            {
+                depth.active = false;
+            }
+            pressAnyKeyPanel.SetActive(false);
+            index = 0;
+            this.UpdateSelectionButtons();
+            this.SelectCurrentCarButton();
+            initializedAnimation = true;
+            canvasGroup.alpha = 1;
+
+        }
+    }
+
+    private void OnAnyPressed(InputAction.CallbackContext context)
+    {
+        hasPressedAny = true;
+    }
 
     private IEnumerator SmoothScrollToObject(int index)
     {

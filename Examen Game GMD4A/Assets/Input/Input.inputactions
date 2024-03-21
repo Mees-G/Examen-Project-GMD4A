@@ -334,6 +334,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Any",
+                    "type": "Button",
+                    "id": "ab20aac0-4d66-4d56-927b-4ea5010854ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -864,6 +873,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0c2130a6-c644-47c9-8208-7ac6736bc451",
+                    "path": "*/<Button>",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Any",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
