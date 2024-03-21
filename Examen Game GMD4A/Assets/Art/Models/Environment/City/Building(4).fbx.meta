@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: ba309e3f122264d44ba818859bc3e9e5
+guid: 92571291e1d01294a89c25275f5296d9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BuildingTexture
+    second: {fileID: 2100000, guid: 81967b6b3a8488444a8b39d0067acee8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Texture Atlas
+    second: {fileID: 2100000, guid: 63c8d65b197fc3549959b076ee479678, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowTexture
+    second: {fileID: 2100000, guid: fb5ec1275923315449476c92e2ef582e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,10 +49,7 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages:
-    - 0.5
-    - 0.25
-    - 0.01
+    lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0

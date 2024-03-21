@@ -3,7 +3,22 @@ guid: ba1ce5cf497dc1a47b6042d290514848
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BuildingTexture
+    second: {fileID: 2100000, guid: 81967b6b3a8488444a8b39d0067acee8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Texture Atlas
+    second: {fileID: 2100000, guid: 63c8d65b197fc3549959b076ee479678, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowTexture
+    second: {fileID: 2100000, guid: fb5ec1275923315449476c92e2ef582e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
