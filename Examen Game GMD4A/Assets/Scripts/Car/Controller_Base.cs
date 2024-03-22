@@ -21,7 +21,10 @@ public abstract class Controller_Base : MonoBehaviour
     {
         if (checkpoint == checkpointToReach)
         {
-            if (checkpointToReach == track.checkpoints.Last())
+            if (this is CarController_Player)
+                checkpointToReach.GetChild(0).gameObject.SetActive(false);
+
+            if (checkpoint == track.checkpoints.Last())
             {
                 checkpointToReach = track.checkpoints.First();
                 if (lapIndex >= RacerManager.instance.laps)
@@ -32,12 +35,12 @@ public abstract class Controller_Base : MonoBehaviour
             else
             {
                 checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
-                
-                if(NPC)
-                {
-                    driveTarget = checkpointToReach.position;
-                }
             }
+
+            if (this is CarController_Player)
+                checkpointToReach.GetChild(0).gameObject.SetActive(true);
+
+            driveTarget = checkpointToReach.position;
         }
 
         modeManager.UpdatePlacement(checkpoint, this);

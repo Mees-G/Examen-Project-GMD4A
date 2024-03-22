@@ -37,7 +37,7 @@ public class ChaserManager : GameModeBase
 
     private void SpawnCars()
     {
-        if (!dontSpawnPlayer)
+        if (!editorDebugMode)
         {
             //spawn player
             //Select one of the track's start positions at random

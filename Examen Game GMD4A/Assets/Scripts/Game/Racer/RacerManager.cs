@@ -40,7 +40,7 @@ public class RacerManager : GameModeBase
     public void SpawnParticipants()
     {
         //Spawn Player
-        if (!dontSpawnPlayer)
+        if (!editorDebugMode)
         {
             //Select one of the track's start positions at random
             int spawnPosIndex = UnityEngine.Random.Range(0, currentTrack.startPositions.Length);
@@ -68,6 +68,7 @@ public class RacerManager : GameModeBase
                 //Spawn a opponent at every free start position
                 Transform spawnPos = currentTrack.startPositions[i].startTransform;
                 Controller_Base npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<Controller_Base>();
+
                 Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[UnityEngine.Random.Range(0, currentLevel.NPC_Cars.Count)], spawnPos, npc);
 
                 participants.Add(npc);
@@ -87,6 +88,8 @@ public class RacerManager : GameModeBase
             controller.car.handBrake = false;
             controller.SwitchControl(true);
         }
+
+        currentTrack.checkpoints[0].GetChild(0).gameObject.SetActive(true);
     }
 
     public void ParticipantFinished(Controller_Base participant)

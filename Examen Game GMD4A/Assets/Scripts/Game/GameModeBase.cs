@@ -10,7 +10,6 @@ public abstract class GameModeBase : MonoBehaviour
     [Header("GameMode Manager")]
     public GameObject NpcObject;
     public Track currentTrack;
-    public Track[] raceTracks;
     [HideInInspector] public bool started = false;
     public Level currentLevel;
 
@@ -21,7 +20,7 @@ public abstract class GameModeBase : MonoBehaviour
     public bool finished;
 
     [Header("Debugging")]
-    public bool dontSpawnPlayer;
+    public bool editorDebugMode;
     public List<Controller_Base> participants;
     protected LevelType gameMode;
 
@@ -29,7 +28,7 @@ public abstract class GameModeBase : MonoBehaviour
     {
         CarController_Player.instance.modeManager = this;
 
-        if(GameManager.INSTANCE)
+        if(GameManager.INSTANCE && !editorDebugMode)
         {
             currentLevel = GameManager.INSTANCE.currentLevel;
             currentTrack = GameSceneManager.Instance.tracks[GameManager.INSTANCE.currentLevel.trackIndex];
@@ -81,6 +80,9 @@ public abstract class GameModeBase : MonoBehaviour
                 break;
         }
     }
-    public abstract void SetupGame();
+    public virtual void SetupGame()
+    {
+        currentTrack.trackObjects.SetActive(true);
+    }
     public abstract void StartGame();
 }

@@ -152,7 +152,7 @@ MonoBehaviour:
     drawTrees: 1
     enableInstancing: 1
     billboardStart: 100
-    treeDistance: 200
+    treeDistance: 500
     treeCullBias: 10
     drawGrasses: 1
     grassDistance: 100

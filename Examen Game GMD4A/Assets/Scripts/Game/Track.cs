@@ -7,6 +7,7 @@ public class Track : MonoBehaviour
 {
     public List<Transform> checkpoints;
     public StartPosition[] startPositions;
+    public GameObject trackObjects;
 
     [Serializable]
     public class StartPosition

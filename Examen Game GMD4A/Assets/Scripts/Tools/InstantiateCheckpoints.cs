@@ -31,17 +31,18 @@ public class InstantiateCheckpoints : MonoBehaviour
     public void InstantiateItems()
     {
         Track thisTrack = GetComponent<Track>();
+        thisTrack.transform.GetChild(0).eulerAngles = Vector3.zero;
 
         if (splineContainer != null)
         {
-            if(thisTrack.checkpoints.Count > 0)
+            if (thisTrack.checkpoints.Count > 0)
             {
                 foreach (Transform checkpoint in thisTrack.checkpoints)
                 {
                     DestroyImmediate(checkpoint.gameObject);
                 }
             }
-            
+
             thisTrack.checkpoints.Clear();
 
             for (int i = 0; i < splineContainer.Spline.Count; i++)
@@ -53,5 +54,6 @@ public class InstantiateCheckpoints : MonoBehaviour
                 thisTrack.checkpoints.Add(checkpoint);
             }
         }
+        thisTrack.transform.GetChild(0).eulerAngles = transform.eulerAngles;
     }
 }

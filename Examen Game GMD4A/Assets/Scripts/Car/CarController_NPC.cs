@@ -77,31 +77,31 @@ public class CarController_NPC : Controller_Base
         Driving();
     }
 
-    public override void NextCheckpoint(Transform checkpoint)
+    //public override void NextCheckpoint(Transform checkpoint)
 
-    {
-        this.checkpointToReach = checkpoint;
-        driveTarget = checkpointToReach.position;
+    //{
+    //    this.checkpointToReach = checkpoint;
+    //    driveTarget = checkpointToReach.position;
 
-        if (checkpoint == checkpointToReach)
-        {
-            if (checkpointToReach != track.checkpoints.Last())
-            {
-                if (track.checkpoints.IndexOf(checkpoint) == -1)
-                {
-                    Debug.Log("jatoch! wtkk ouwe - " + checkpoint.gameObject + " - " + checkpoint.gameObject.transform.parent.name);
-                }
-                checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
+    //    if (checkpoint == checkpointToReach)
+    //    {
+    //        if (checkpointToReach != track.checkpoints.Last())
+    //        {
+    //            if (track.checkpoints.IndexOf(checkpoint) == -1)
+    //            {
+    //                Debug.Log("jatoch! wtkk ouwe - " + checkpoint.gameObject + " - " + checkpoint.gameObject.transform.parent.name);
+    //            }
+    //            checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
 
-                if (NPC)
-                {
-                    driveTarget = checkpointToReach.position;
-                }
-            }
-        }
+    //            if (NPC)
+    //            {
+    //                driveTarget = checkpointToReach.position;
+    //            }
+    //        }
+    //    }
 
 
-    }
+    //}
 
     void Detection()
     {
