@@ -194,7 +194,7 @@ public class UIShopManager : MonoBehaviour
     public void InitializeUI()
     {
 
-        coinAmount.SetValue(this, CurrencyManager.INSTANCE.amount, 1);
+        coinAmount.text = CurrencyManager.INSTANCE.amount.ToString();
 
         uiBuyableCars = new UIBuyableCar[buyableCars.Length];
         for (int i = 0; i < buyableCars.Length; i++)
@@ -211,6 +211,7 @@ public class UIShopManager : MonoBehaviour
             });
         }
 
+        //OnChangeMoneyAmount(CurrencyManager.INSTANCE.amount);
         //uiBuyableCar[_currentEquiped].border.SetActive(true);
     }
 

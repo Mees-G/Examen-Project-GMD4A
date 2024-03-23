@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class FinishUI : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class FinishUI : MonoBehaviour
     public void ButtonClickContinue()
     {
         GameManager.INSTANCE.currentLevel.completed = true;
+        GameManager.INSTANCE.currentLevel.highscore = int.Parse(scoreText.text);
         SceneManager.LoadScene("Store");
 
     }
