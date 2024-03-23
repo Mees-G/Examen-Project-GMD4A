@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarController_NPC : Controller_Base
@@ -32,20 +33,17 @@ public class CarController_NPC : Controller_Base
 
     public override void SwitchControl(bool activate)
     {
-
-        if (gameMode == LevelType.RACER)
+        if (activate)
         {
-            if (activate)
-            {
-                driveTarget = checkpointToReach.position;
-            }
-            NpcActivated = activate;
+            driveTarget = checkpointToReach.position;
         }
-
+        NpcActivated = activate;
     }
 
     public override void FixedUpdate()
     {
+        if (!NpcActivated)
+            return;
 
         // Debug.Log("Fixed updating " + controlType);
         switch (gameMode)
@@ -56,18 +54,22 @@ public class CarController_NPC : Controller_Base
                 break;
 
             case LevelType.CHASER:
-                //Debug.Log("chase - " + NpcActivated);
-                if (!NpcActivated)
-                {
-                    Debug.Log(Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position));
-                    if (NpcActivated = (Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position) < 40))
-                    {
-                        Debug.Log("Actuvardd!");
-                        this.NextCheckpoint(track.checkpoints[track.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach)]);
 
-                        car.handBrake = false;
-                    }
+                int playerCheckpointIndex = track.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach);
+                int thisNpcCheckpointIndex = track.checkpoints.IndexOf(checkpointToReach);
+
+                //Chase player when checkpoint is same
+                if (playerCheckpointIndex == thisNpcCheckpointIndex)
+                {
+                    driveTarget = CarController_Player.instance.car.transform.position;
                 }
+
+                //Race full speed when player is ahead
+                if (playerCheckpointIndex > thisNpcCheckpointIndex)
+                {
+                    driveTarget = checkpointToReach.position;
+                }
+                car.handBrake = false;
 
                 break;
         }
@@ -77,41 +79,12 @@ public class CarController_NPC : Controller_Base
         Driving();
     }
 
-    //public override void NextCheckpoint(Transform checkpoint)
-
-    //{
-    //    this.checkpointToReach = checkpoint;
-    //    driveTarget = checkpointToReach.position;
-
-    //    if (checkpoint == checkpointToReach)
-    //    {
-    //        if (checkpointToReach != track.checkpoints.Last())
-    //        {
-    //            if (track.checkpoints.IndexOf(checkpoint) == -1)
-    //            {
-    //                Debug.Log("jatoch! wtkk ouwe - " + checkpoint.gameObject + " - " + checkpoint.gameObject.transform.parent.name);
-    //            }
-    //            checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
-
-    //            if (NPC)
-    //            {
-    //                driveTarget = checkpointToReach.position;
-    //            }
-    //        }
-    //    }
-
-
-    //}
-
     void Detection()
     {
 
     }
     void Driving()
     {
-        if (!NpcActivated)
-            return;
-
      //   Debug.Log("ay shit driving biiihhh");
         // Calculate the angle between the car and the target position
         Vector3 targetDirection = (driveTarget - car.transform.position).normalized;
@@ -140,11 +113,6 @@ public class CarController_NPC : Controller_Base
             nextCheckpoint = track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1].position;
         }
 
-        if (gameMode == LevelType.CHASER && checkpointToReach == CarController_Player.instance.checkpointToReach)
-        {
-            driveTarget = CarController_Player.instance.car.transform.position;
-        }
-
         float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, nextCheckpoint, car.wheelBase);
 
         float centripetalForce = (car.rb.mass * (car.forwardSpeed * car.forwardSpeed / 4)) / cornerRadius;
@@ -170,10 +138,22 @@ public class CarController_NPC : Controller_Base
             return;
 
         // Despawn Detection
-        if (gameMode == LevelType.RACER && car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
+        if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
-            isFlipped = true;
-            StartCoroutine(FlipDetection());
+            if(gameMode == LevelType.RACER)
+            {
+                isFlipped = true;
+                StartCoroutine(FlipDetection());
+            }
+
+            if (gameMode == LevelType.CHASER)
+            {
+                if(Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position) > 50)
+                {
+                    isFlipped = true;
+                    StartCoroutine(FlipDetection());
+                }
+            }
         }
     }
 

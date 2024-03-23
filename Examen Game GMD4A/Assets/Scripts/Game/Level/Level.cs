@@ -15,6 +15,7 @@ public class Level : ScriptableObject
 
     public Level parentLevel;
     public LevelType levelType;
+    public TimeOfDay timeOfDay;
     public int trackIndex;
     public List<GameObject> NPC_Cars;
     public List<GameObject> SPECIAL_NPC_Cars;

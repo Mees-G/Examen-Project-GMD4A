@@ -62,6 +62,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lights"",
+                    ""type"": ""Button"",
+                    ""id"": ""716bdd0a-c16b-4971-bda3-fb9019b3d1a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,28 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d0fdb39-81c1-408e-a669-b3d1299e7e6c"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f53ab77-326f-457f-8117-ed6be3815f01"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lights"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -918,6 +949,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_CarController_HandBrake = m_CarController.FindAction("HandBrake", throwIfNotFound: true);
         m_CarController_Respawn = m_CarController.FindAction("Respawn", throwIfNotFound: true);
         m_CarController_Look = m_CarController.FindAction("Look", throwIfNotFound: true);
+        m_CarController_Lights = m_CarController.FindAction("Lights", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -997,6 +1029,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_CarController_HandBrake;
     private readonly InputAction m_CarController_Respawn;
     private readonly InputAction m_CarController_Look;
+    private readonly InputAction m_CarController_Lights;
     public struct CarControllerActions
     {
         private @Input m_Wrapper;
@@ -1005,6 +1038,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @HandBrake => m_Wrapper.m_CarController_HandBrake;
         public InputAction @Respawn => m_Wrapper.m_CarController_Respawn;
         public InputAction @Look => m_Wrapper.m_CarController_Look;
+        public InputAction @Lights => m_Wrapper.m_CarController_Lights;
         public InputActionMap Get() { return m_Wrapper.m_CarController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1026,6 +1060,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Lights.started += instance.OnLights;
+            @Lights.performed += instance.OnLights;
+            @Lights.canceled += instance.OnLights;
         }
 
         private void UnregisterCallbacks(ICarControllerActions instance)
@@ -1042,6 +1079,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Lights.started -= instance.OnLights;
+            @Lights.performed -= instance.OnLights;
+            @Lights.canceled -= instance.OnLights;
         }
 
         public void RemoveCallbacks(ICarControllerActions instance)
@@ -1199,6 +1239,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnHandBrake(InputAction.CallbackContext context);
         void OnRespawn(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnLights(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

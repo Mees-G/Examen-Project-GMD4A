@@ -80,15 +80,9 @@ public abstract class Controller_Base : MonoBehaviour
 
         Vector3 box = car.collisionComponent.GetComponent<Collider>().bounds.center;
         Collider[] hitColliders = Physics.OverlapBox(car.transform.position, box, car.transform.rotation, LayerMask.NameToLayer("Car_Body"));
-        int i = 0;
-
-        //Check when there is a new collider coming into contact with the box
-        while (i < hitColliders.Length)
-        {
-            //Increase the number of Colliders in the array
-            i++;
-        }
-
+        
+        int i = hitColliders.Length;
+        
         if (i == 0)
         {
             carRespawning = false;

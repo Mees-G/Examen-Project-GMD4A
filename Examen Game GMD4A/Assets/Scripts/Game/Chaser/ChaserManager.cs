@@ -28,6 +28,25 @@ public class ChaserManager : GameModeBase
             string timeFormatted = string.Format("{0}:{1:00}", minutes, remainingSeconds);
             timer.text = timeFormatted;
         }
+
+        for (int i = 0; i < participants.Count; i++)
+        {
+            if (participants[i] is CarController_NPC)
+            {
+                CarController_NPC npc = participants[i] as CarController_NPC;
+
+                if(currentTrack.checkpoints.IndexOf(npc.checkpointToReach) <= currentTrack.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach))
+                {
+                    npc.SwitchControl(true);
+                    npc.car.lights.SetActive(true);
+                }
+                else
+                {
+                    npc.SwitchControl(false);
+                    npc.car.lights.SetActive(false);
+                }
+            }
+        }
     }
 
     public override void SetupGame()
@@ -70,15 +89,15 @@ public class ChaserManager : GameModeBase
             npc.track = currentTrack;
             npc.gameMode = LevelType.CHASER;
 
-
-
             float closestDistance = Mathf.Infinity;
             Transform newCheckpoint = currentTrack.checkpoints[0];
             for (int index = 0; index < currentTrack.checkpoints.Count; index++)
             {
-                if(Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)    
+                if(Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)
                 {
                     closestDistance = Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position);
+                    newCheckpoint = currentTrack.checkpoints[index];
+                    Debug.Log("FoundcloserCheckpoint");
                 }
             }
 

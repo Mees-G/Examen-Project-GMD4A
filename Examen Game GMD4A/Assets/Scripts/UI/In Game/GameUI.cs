@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
     public static GameUI instance;
 
+    public Input inputs;
+
     public Transform leaderboardPanel;
     public GameObject leaderboardPanelPrefab;
+
+    public TMP_Text stuckText;
+    public Slider healthSlider;
 
     public TMP_Text countDownTime;
     public FinishUI finishUI;
@@ -17,6 +24,26 @@ public class GameUI : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    public void StuckNotification(bool on)
+    {
+        stuckText.transform.parent.gameObject.SetActive(on);
+
+        if(!on)
+            return;
+
+        //notification
+        //if(inputs == "Keyboard")
+
+        stuckText.text = "Hold" + " F " + "To Respawn at Last Checkpoint";
+    }
+    public IEnumerator ShowHealth(float currentHealth)
+    {
+        healthSlider.value = currentHealth;
+        healthSlider.transform.parent.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(5);
+        healthSlider.transform.parent.gameObject.SetActive(false);
     }
 
     public void SetupLeaderBoard()

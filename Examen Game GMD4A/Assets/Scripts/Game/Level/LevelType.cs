@@ -6,3 +6,8 @@ public enum LevelType
 {
    RACER, CHASER
 }
+
+public enum TimeOfDay 
+{ 
+    DAY, NIGHT
+}

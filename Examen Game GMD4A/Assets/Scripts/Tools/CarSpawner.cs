@@ -16,7 +16,7 @@ public class CarSpawner : MonoBehaviour
 
         Car carScript = spawnedCar.GetComponent<Car>();
         carScript.currentCarController = controller;
-
+        carScript.lights.SetActive(GameManager.INSTANCE.currentLevel.timeOfDay == TimeOfDay.NIGHT);
         //Apply upgrades and modifiers
 
         if (controller.NPC)

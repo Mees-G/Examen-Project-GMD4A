@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 
 public class CarController_Player : Controller_Base
 {
@@ -35,9 +36,15 @@ public class CarController_Player : Controller_Base
         float factor = Mathf.Min(difference / (car.topSpeed * Time.deltaTime), 1);
         // if (Vector3.Distance(rb.velocity, previousVelocity) > topSpeed / 5)
         {
-           // Debug.Log(factor);
+            // Debug.Log(factor);
         }
         previousVelocity = car.rb.velocity;
+
+        if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
+        {
+            GameUI.instance.StuckNotification(true);
+        }
+        GameUI.instance.StuckNotification(false);
     }
 
     public override void SwitchControl(bool activate)
