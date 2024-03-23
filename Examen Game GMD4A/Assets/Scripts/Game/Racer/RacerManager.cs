@@ -21,6 +21,7 @@ public class RacerManager : GameModeBase
     public override void SetupGame()
     {
         SpawnParticipants();
+        currentTrack.trackObjects.SetActive(true);
         GameUI.instance.SetupLeaderBoard();
     }
 
@@ -56,6 +57,8 @@ public class RacerManager : GameModeBase
             CarController_Player.instance.car = plyrCar;
             CarController_Player.instance.track = currentTrack;
             CarController_Player.instance.checkpointToReach = currentTrack.checkpoints[0];
+            CarController_Player.instance.gameMode = LevelType.RACER;
+
             participants.Add(CarController_Player.instance);
         }
 
@@ -94,7 +97,6 @@ public class RacerManager : GameModeBase
 
     public void ParticipantFinished(Controller_Base participant)
     {
-        //if multiple laps
         participant.SwitchControl(false);
         if (!participant.NPC)
         {
@@ -102,9 +104,6 @@ public class RacerManager : GameModeBase
 
             //  float time = ;
             int score = (int)((participants.Count - placent) * ((60 * 8) - currentTime));
-
-            //  finishUI.ShowFinishUI();
-            //GameUI.FinishUI. TODO
 
             GameUI.instance.finishUI.ShowFinishUI(placent.ToString(), score, timer.text);
             finished = true;

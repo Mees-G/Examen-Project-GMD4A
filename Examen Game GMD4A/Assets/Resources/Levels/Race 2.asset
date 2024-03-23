@@ -17,8 +17,9 @@ MonoBehaviour:
   levelDescription: Antonioooo man
   highscore: 0
   fastestTime: 0
-  parentLevel: {fileID: 11400000, guid: 9021dc2545c49ce4abe5f0b70ea8f535, type: 2}
+  parentLevel: {fileID: 0}
   levelType: 0
+  timeOfDay: 0
   trackIndex: 2
   NPC_Cars:
   - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}

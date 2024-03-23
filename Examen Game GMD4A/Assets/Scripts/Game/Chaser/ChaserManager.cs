@@ -72,36 +72,42 @@ public class ChaserManager : GameModeBase
             CarController_Player.instance.car = plyrCar;
             CarController_Player.instance.track = currentTrack;
             CarController_Player.instance.checkpointToReach = currentTrack.checkpoints[0];
+            CarController_Player.instance.gameMode = LevelType.CHASER;
 
             participants.Add(CarController_Player.instance);
+
         }
 
         //spawn police cars
         for (int i = 1; i < currentTrack.startPositions.Length; i++)
         {
-            CarController_NPC npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<CarController_NPC>();
-            Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[Random.Range(0, currentLevel.NPC_Cars.Count)], currentTrack.startPositions[i].startTransform, npc);
-
-            participants.Add(npc);
-            
-            npc.modeManager = this;
-            npc.car = npcCar;
-            npc.track = currentTrack;
-            npc.gameMode = LevelType.CHASER;
-
-            float closestDistance = Mathf.Infinity;
-            Transform newCheckpoint = currentTrack.checkpoints[0];
-            for (int index = 0; index < currentTrack.checkpoints.Count; index++)
+            if (!currentTrack.startPositions[i].occupied)
             {
-                if(Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)
+                CarController_NPC npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<CarController_NPC>();
+                Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[Random.Range(0, currentLevel.NPC_Cars.Count)], currentTrack.startPositions[i].startTransform, npc);
+
+                participants.Add(npc);
+
+                npc.modeManager = this;
+                npc.car = npcCar;
+                npc.track = currentTrack;
+                npc.gameMode = LevelType.CHASER;
+                currentTrack.startPositions[i].occupied = true;
+
+                float closestDistance = Mathf.Infinity;
+                Transform newCheckpoint = currentTrack.checkpoints[0];
+                for (int index = 0; index < currentTrack.checkpoints.Count; index++)
                 {
-                    closestDistance = Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position);
-                    newCheckpoint = currentTrack.checkpoints[index];
-                    Debug.Log("FoundcloserCheckpoint");
+                    if (Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)
+                    {
+                        closestDistance = Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position);
+                        newCheckpoint = currentTrack.checkpoints[index];
+                    }
                 }
+
+                npc.checkpointToReach = newCheckpoint;
             }
 
-            npc.checkpointToReach = newCheckpoint;
         }
     }
     public override void StartGame()

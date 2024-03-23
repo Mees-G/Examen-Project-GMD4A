@@ -24,8 +24,6 @@ public class CarController_NPC : Controller_Base
     public float angleThreshold = 20f;
     public float angleBuffer = 2f; // Introduce a buffer to avoid rapid switching
 
-    public LevelType gameMode;
-
     void Awake()
     {
         NPC = true;
@@ -138,37 +136,26 @@ public class CarController_NPC : Controller_Base
             return;
 
         // Despawn Detection
-        if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
+        if (car.throttleInput >= 0.9f && car.forwardSpeed <= 0.01f)
         {
-            if(gameMode == LevelType.RACER)
-            {
-                isFlipped = true;
-                StartCoroutine(FlipDetection());
-            }
-
-            if (gameMode == LevelType.CHASER)
-            {
-                if(Vector3.Distance(car.transform.position, CarController_Player.instance.car.transform.position) > 50)
-                {
-                    isFlipped = true;
-                    StartCoroutine(FlipDetection());
-                }
-            }
+            isFlipped = true;
+            StartCoroutine(FlipDetection());
         }
     }
 
     IEnumerator FlipDetection()
     {
+        NpcActivated = false;
         yield return new WaitForSeconds(3);
         if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
-            //NpcActivated = false;
+            NpcActivated = false;
             RespawnCar();
         }
         else
         {
             isFlipped = false;
-            //   NpcActivated = true;
+            NpcActivated = true;
         }
     }
 
@@ -176,7 +163,7 @@ public class CarController_NPC : Controller_Base
     {
         base.RespawnCar();
         isFlipped = false;
-        //NpcActivated = true;
+        NpcActivated = true;
     }
     private void OnDrawGizmos()
     {

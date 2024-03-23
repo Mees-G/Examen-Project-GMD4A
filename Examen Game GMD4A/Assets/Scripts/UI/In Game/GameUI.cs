@@ -48,6 +48,8 @@ public class GameUI : MonoBehaviour
 
     public void SetupLeaderBoard()
     {
+        leaderboardPanel.parent.gameObject.SetActive(true);
+
         leaderboardList = new List<LeaderboardItem>();
 
         foreach (Controller_Base participant in RacerManager.instance.participants)

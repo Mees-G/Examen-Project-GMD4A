@@ -17,6 +17,8 @@ public abstract class Controller_Base : MonoBehaviour
 
     bool carRespawning;
 
+    public LevelType gameMode;
+
     public virtual void NextCheckpoint(Transform checkpoint)
     {
         if (checkpoint == checkpointToReach)
@@ -27,6 +29,7 @@ public abstract class Controller_Base : MonoBehaviour
             if (checkpoint == track.checkpoints.Last())
             {
                 checkpointToReach = track.checkpoints.First();
+                lapIndex++;
                 if (lapIndex >= RacerManager.instance.laps)
                 {
                     RacerManager.instance.ParticipantFinished(this);
@@ -37,7 +40,7 @@ public abstract class Controller_Base : MonoBehaviour
                 checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(checkpoint) + 1];
             }
 
-            if (this is CarController_Player)
+            if (this is CarController_Player && checkpointToReach)
                 checkpointToReach.GetChild(0).gameObject.SetActive(true);
 
             driveTarget = checkpointToReach.position;
@@ -57,9 +60,18 @@ public abstract class Controller_Base : MonoBehaviour
         else
         {
             respawnCheckpoint = track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) - 1];
+
+            if (gameMode == LevelType.CHASER)
+            {
+                if(this is CarController_NPC)
+                {
+                    respawnCheckpoint = track.checkpoints[track.checkpoints.IndexOf(CarController_Player.instance.checkpointToReach) - 2];
+                    checkpointToReach = track.checkpoints[track.checkpoints.IndexOf(respawnCheckpoint) + 1];
+                }
+            }
         }
 
-        if(respawnCheckpoint != null )
+        if (respawnCheckpoint != null )
         {
             StartCoroutine(CollisionControl());
 
