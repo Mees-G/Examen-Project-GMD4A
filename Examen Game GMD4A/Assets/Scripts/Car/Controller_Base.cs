@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,22 @@ public abstract class Controller_Base : MonoBehaviour
 
     [HideInInspector]public bool NPC;
     protected Vector3 driveTarget;
-    [Tooltip("What car does this control")] public Car car;
+
+    [SerializeField]
+    [Tooltip("What car does this control")]
+    private Car _car;
+
+    public Car car
+    {
+        get {
+            return _car;
+        } 
+        set
+        {
+            _car = value;
+            this.OnSetCar();
+        }
+    }
 
     public Track track;
     public Transform checkpointToReach;
@@ -100,6 +116,10 @@ public abstract class Controller_Base : MonoBehaviour
             carRespawning = false;
         }
     }
+
+
+    public virtual void OnSetCar() { }
+
 
     IEnumerator CollisionControl()
     {

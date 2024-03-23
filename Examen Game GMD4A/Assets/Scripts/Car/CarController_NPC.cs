@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,9 +25,22 @@ public class CarController_NPC : Controller_Base
     public float angleThreshold = 20f;
     public float angleBuffer = 2f; // Introduce a buffer to avoid rapid switching
 
+    private CarDamage carDamage;
+
     void Awake()
     {
         NPC = true;
+    }
+
+    public override void OnSetCar()
+    {
+        carDamage = car.GetComponent<CarDamage>();
+        carDamage.OnDeath += OnDeath;
+    }
+
+    private void OnDeath(Car car)
+    {
+        this.enabled = false;
     }
 
     public override void SwitchControl(bool activate)
@@ -161,9 +175,11 @@ public class CarController_NPC : Controller_Base
 
     public override void RespawnCar()
     {
-        base.RespawnCar();
-        isFlipped = false;
-        NpcActivated = true;
+        if (enabled) {
+            base.RespawnCar();
+            isFlipped = false;
+            NpcActivated = true;
+        }
     }
     private void OnDrawGizmos()
     {

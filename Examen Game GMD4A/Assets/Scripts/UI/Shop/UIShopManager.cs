@@ -57,10 +57,6 @@ public class UIShopManager : MonoBehaviour
     private bool initializedAnimation;
     private Input input;
 
-    //outline meuk
-    private GameObject previousSelected;
-    private Outline previousOutline;
-
 
     private Action onFinishMapAnimation = delegate { };
 
@@ -183,15 +179,14 @@ public class UIShopManager : MonoBehaviour
     private void OnDestroy()
     {
         CurrencyManager.INSTANCE.OnChangeAmount -= OnChangeMoneyAmount;
-        input.UI.Any.performed -= OnAnyPressed;
-        input.UI.Disable();
+        SelectedButtonOutlineManager.INSTANCE.input.UI.Any.performed -= OnAnyPressed;
+        SelectedButtonOutlineManager.INSTANCE.input.UI.Disable();
     }
 
     private void Awake()
     {
-        input = new Input();
-        input.UI.Any.performed += OnAnyPressed;
-        input.UI.Enable();
+        SelectedButtonOutlineManager.INSTANCE.input.UI.Any.performed += OnAnyPressed;
+        SelectedButtonOutlineManager.INSTANCE.input.UI.Enable();
 
         CurrencyManager.INSTANCE.OnChangeAmount += OnChangeMoneyAmount;
     }
@@ -221,25 +216,7 @@ public class UIShopManager : MonoBehaviour
 
     private void Update()
     {
-        GameObject selected = EventSystem.current.currentSelectedGameObject;
-        if (previousSelected != selected)
-        {
-            Outline outline = selected.GetComponent<Outline>();
-
-            if (previousOutline != null)
-                previousOutline.enabled = false;
-
-            if (outline == null)
-                outline = selected.AddComponent<Outline>();
-
-
-            outline.enabled = true;
-            outline.effectDistance = new Vector2(4, 4);
-            outline.effectColor = Color.black;
-
-            previousSelected = selected;
-            previousOutline = outline;
-        }
+       
         //Debug.Log(EventSystem.current.currentSelectedGameObject);
         if (hasPressedAny)
         {

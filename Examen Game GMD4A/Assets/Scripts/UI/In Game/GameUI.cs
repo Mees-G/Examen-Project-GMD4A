@@ -19,6 +19,7 @@ public class GameUI : MonoBehaviour
 
     public TMP_Text countDownTime;
     public FinishUI finishUI;
+    public UIGameOver gameOverUI;
 
     List<LeaderboardItem> leaderboardList;
     private void Awake()

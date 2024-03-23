@@ -13,7 +13,7 @@ public class UIGameOver : MonoBehaviour
 
     public void Quit()
     {
-        SceneManager.LoadScene("Level Menu");
+        SceneManager.LoadScene("Store");
     }
 
 }

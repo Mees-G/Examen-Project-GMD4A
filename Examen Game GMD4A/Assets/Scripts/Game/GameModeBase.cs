@@ -19,6 +19,9 @@ public abstract class GameModeBase : MonoBehaviour
     public float countDownTime = 10;
     public bool finished;
 
+    [Header("UI")]
+    public GameObject gameOverUI;
+
     [Header("Debugging")]
     public bool editorDebugMode;
     public List<Controller_Base> participants;
@@ -80,6 +83,13 @@ public abstract class GameModeBase : MonoBehaviour
                 break;
         }
     }
+
+    public void EndGame()
+    {
+        GameUI.instance.gameOverUI.gameObject.SetActive(true);
+        CarController_Player.instance.SwitchControl(false);
+    }
+
     public virtual void SetupGame()
     {
         currentTrack.trackObjects.SetActive(true);

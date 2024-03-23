@@ -1,20 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 
 public class CarController_Player : Controller_Base
 {
     public static CarController_Player instance;
     public PlayerInput playerInput;
 
-    public Vector3 previousVelocity;
+    private CarDamage carDamage;
 
     private void Awake()
     {
         instance = this;
         //playerInput.DeactivateInput();
+    }
+
+    public override void OnSetCar()
+    {
+        carDamage = car.GetComponent<CarDamage>();
+        carDamage.OnDeath += OnDeath;
+    }
+
+    private void OnDeath(Car car)
+    {
+        modeManager.EndGame();
     }
 
     private void Update()
@@ -31,14 +42,6 @@ public class CarController_Player : Controller_Base
             return;
 
         base.FixedUpdate();
-
-        float difference = Vector3.Distance(car.rb.velocity, previousVelocity);
-        float factor = Mathf.Min(difference / (car.topSpeed * Time.deltaTime), 1);
-        // if (Vector3.Distance(rb.velocity, previousVelocity) > topSpeed / 5)
-        {
-            // Debug.Log(factor);
-        }
-        previousVelocity = car.rb.velocity;
 
         if (car.throttleInput >= 0.9f && car.forwardSpeed < 0f)
         {
@@ -57,7 +60,7 @@ public class CarController_Player : Controller_Base
         else
         {
             Cursor.lockState = CursorLockMode.None;
-          //  playerInput.DeactivateInput();
+            playerInput.DeactivateInput();
         }
     }
 
