@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Race car
   description: A Basic Car, nothing special yet...
-  car: {fileID: 7056551957085260548, guid: 8953106c3e0a9b74cab6739115059a84, type: 3}
+  car: {fileID: 7330877813689086507, guid: a2eca5f3bf7850c4da9dc5bf6a8b6dcd, type: 3}
   icon: {fileID: 0}
   price: 300
   unlocked: 1
