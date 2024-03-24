@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,6 +43,8 @@ public class Car : MonoBehaviour
     [HideInInspector] public float currentSteerRange;
     [HideInInspector] public float wheelBase;
 
+    public GameObject nameTag;
+    public TMP_Text nameTagText;
     private void Start()
     {
         cameraControl = GetComponentInChildren<CinemachineFreeLook>();

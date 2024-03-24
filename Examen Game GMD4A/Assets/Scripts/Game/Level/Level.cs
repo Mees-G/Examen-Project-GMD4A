@@ -17,8 +17,10 @@ public class Level : ScriptableObject
     public LevelType levelType;
     public TimeOfDay timeOfDay;
     public int trackIndex;
+    [Range(0, 1)] public float difficultyMultiplier;
+
     public List<GameObject> NPC_Cars;
-    public List<GameObject> SPECIAL_NPC_Cars;
+    public List<NPC_Preset> Special_Npcs;
     //npc difficulty value?
     //generic NPC list?
     //special npc list?

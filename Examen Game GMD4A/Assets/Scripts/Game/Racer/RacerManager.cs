@@ -62,7 +62,37 @@ public class RacerManager : GameModeBase
             participants.Add(CarController_Player.instance);
         }
 
-        //Spawn NPC Participants
+        //spawn special NPC's
+
+        for (int s = 0; s < currentLevel.Special_Npcs.Count; s++)
+        {
+            for (int i = 0; i < currentTrack.startPositions.Length; i++)
+            {
+                if (!currentTrack.startPositions[i].occupied)
+                {
+                    CarController_NPC npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<CarController_NPC>();
+                    npc.specialNPC = currentLevel.Special_Npcs[s];
+                    Car npcCar = CarSpawner.instance.InstantiateCar(npc.specialNPC.car, currentTrack.startPositions[i].startTransform, npc);
+
+                    npc.modeManager = this;
+                    npc.car = npcCar;
+
+                    npc.car.nameTag.SetActive(true);
+                    npc.car.nameTagText.text = npc.specialNPC.npcName;
+
+                    npc.track = currentTrack;
+                    npc.gameMode = LevelType.RACER;
+                    npc.checkpointToReach = currentTrack.checkpoints[0];
+                    participants.Add(npc);
+
+                    currentTrack.startPositions[i].occupied = true;
+
+                    break;
+                }
+            }
+        }
+
+        //Spawn regular NPC's
 
         for (int i = 0; i < currentTrack.startPositions.Length; i++)
         {
@@ -80,6 +110,7 @@ public class RacerManager : GameModeBase
                 npc.car = npcCar;
                 npc.track = currentTrack;
                 npc.checkpointToReach = currentTrack.checkpoints[0];
+                currentTrack.startPositions[i].occupied = true;
             }
         }
     }

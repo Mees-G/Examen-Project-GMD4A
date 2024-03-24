@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8c4f757c2645c41845aa29bbc908c1, type: 3}
+  m_Name: Agnes
+  m_EditorClassIdentifier: 
+  npcName: Angry Agnes
+  icon: {fileID: 0}
+  car: {fileID: 7056551957085260548, guid: 8953106c3e0a9b74cab6739115059a84, type: 3}
+  torqueMultiplier: 0.24
+  topSpeedMultiplier: 0.235
+  brakesMultiplier: 0.235

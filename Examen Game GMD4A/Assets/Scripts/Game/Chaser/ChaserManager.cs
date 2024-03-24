@@ -54,11 +54,13 @@ public class ChaserManager : GameModeBase
         SpawnCars();
     }
 
+    //TODO: this spawncars and racermanager spawncars are nearly identical, it should be in gamemodebase
     private void SpawnCars()
     {
+        //spawn player
         if (!editorDebugMode)
         {
-            //spawn player
+            
             //Select one of the track's start positions at random
             Transform spawnPoint = currentTrack.startPositions[0].startTransform;
 
@@ -76,6 +78,38 @@ public class ChaserManager : GameModeBase
 
             participants.Add(CarController_Player.instance);
 
+        }
+
+        //spawn special NPC's
+        for (int i = 0; i < currentLevel.Special_Npcs.Count; i++)
+        {
+            if (!currentTrack.startPositions[i].occupied)
+            {
+                CarController_NPC npc = Instantiate(NpcObject, transform.parent.GetChild(0)).GetComponent<CarController_NPC>();
+                npc.specialNPC = currentLevel.Special_Npcs[i];
+                Car npcCar = CarSpawner.instance.InstantiateCar(currentLevel.NPC_Cars[Random.Range(0, currentLevel.NPC_Cars.Count)], currentTrack.startPositions[i].startTransform, npc);
+
+                participants.Add(npc);
+
+                npc.modeManager = this;
+                npc.car = npcCar;
+                npc.track = currentTrack;
+                npc.gameMode = LevelType.CHASER;
+                currentTrack.startPositions[i].occupied = true;
+
+                float closestDistance = Mathf.Infinity;
+                Transform newCheckpoint = currentTrack.checkpoints[0];
+                for (int index = 0; index < currentTrack.checkpoints.Count; index++)
+                {
+                    if (Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position) < closestDistance)
+                    {
+                        closestDistance = Vector3.Distance(currentTrack.startPositions[i].startTransform.position, currentTrack.checkpoints[index].position);
+                        newCheckpoint = currentTrack.checkpoints[index];
+                    }
+                }
+
+                npc.checkpointToReach = newCheckpoint;
+            }
         }
 
         //spawn police cars

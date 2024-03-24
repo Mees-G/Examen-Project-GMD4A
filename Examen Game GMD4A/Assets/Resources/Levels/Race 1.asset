@@ -21,8 +21,9 @@ MonoBehaviour:
   levelType: 0
   timeOfDay: 0
   trackIndex: 0
+  difficultyMultiplier: 0.2
   NPC_Cars:
   - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
   - {fileID: 1049237415070352878, guid: 2d7c23825cf591143957561f5181d2aa, type: 3}
-  SPECIAL_NPC_Cars: []
+  Special_Npcs: []
   completed: 1

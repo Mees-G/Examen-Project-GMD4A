@@ -61,8 +61,13 @@ public class GameUI : MonoBehaviour
 
             if (script.controller.NPC)
             {
+                if((script.controller as CarController_NPC).specialNPC)
+                {
+                    script.participantName.text = (script.controller as CarController_NPC).specialNPC.name;
+                }
+
                 //generate random name idk
-                script.participantName.text = "NPC" + Random.Range(100, 999);
+                script.participantName.text = "Bandit " + Random.Range(10, 99);
             }
             else
             {

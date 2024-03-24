@@ -21,11 +21,26 @@ public class CarSpawner : MonoBehaviour
         {
             carScript.lights.SetActive(GameManager.INSTANCE.currentLevel.timeOfDay == TimeOfDay.NIGHT);
         }
-        
+
         //Apply upgrades and modifiers
 
         if (controller.NPC)
         {
+            if((controller as CarController_NPC).specialNPC)
+            {
+                carScript.motorTorque = carScript.motorTorque += (carScript.motorTorque * (controller as CarController_NPC).specialNPC.torqueMultiplier);
+                carScript.topSpeed = carScript.topSpeed += (carScript.motorTorque * (controller as CarController_NPC).specialNPC.topSpeedMultiplier);
+                carScript.brakeTorque = carScript.brakeTorque += (carScript.motorTorque * (controller as CarController_NPC).specialNPC.brakesMultiplier);
+            }
+            else
+            {
+                if (GameManager.INSTANCE)
+                {
+                    carScript.motorTorque = carScript.motorTorque += (carScript.motorTorque * GameManager.INSTANCE.currentLevel.difficultyMultiplier);
+                    carScript.topSpeed = carScript.topSpeed += (carScript.motorTorque * GameManager.INSTANCE.currentLevel.difficultyMultiplier);
+                    carScript.brakeTorque = carScript.brakeTorque += (carScript.motorTorque * GameManager.INSTANCE.currentLevel.difficultyMultiplier);
+                }
+            }
             //TODO: Apply NPC modifiers
         }
         else

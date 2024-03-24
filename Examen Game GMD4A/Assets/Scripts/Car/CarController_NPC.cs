@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarController_NPC : Controller_Base
 {
+    public NPC_Preset specialNPC;
+
     public float detectionDistance;
     [Range(0, 100)] public float agressiveness;
     public float respawnTime;
