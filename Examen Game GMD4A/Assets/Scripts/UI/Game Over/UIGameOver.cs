@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIGameOver : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIGameOver : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         SelectedButtonOutlineManager.INSTANCE.input.UI.Enable();
+        GetComponentInChildren<Button>().Select();
     }
 
     public void Retry()
