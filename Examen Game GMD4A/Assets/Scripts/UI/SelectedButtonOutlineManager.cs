@@ -28,9 +28,13 @@ public class SelectedButtonOutlineManager : MonoBehaviour
 
     private void OnAnyPressed(InputAction.CallbackContext context)
     {
-        if (EventSystem.current.currentSelectedGameObject == null && context.control.device is Gamepad)
+        bool isGamepad = context.control.device is Gamepad;
+
+        Cursor.visible = !isGamepad;
+
+        if (EventSystem.current.currentSelectedGameObject == null && isGamepad)
         {
-            GameSceneManager.FindObjectOfType<Button>().Select(); ;
+            FindObjectOfType<Button>().Select();
         }
     }
 
@@ -41,6 +45,11 @@ public class SelectedButtonOutlineManager : MonoBehaviour
         {
             if (previousSelected != selected)
             {
+                if (selected.TryGetComponent(out Button button))
+                {
+                    selected = button.targetGraphic.gameObject;
+                }
+
                 Outline outline = selected.GetComponent<Outline>();
 
                 if (previousOutline != null)

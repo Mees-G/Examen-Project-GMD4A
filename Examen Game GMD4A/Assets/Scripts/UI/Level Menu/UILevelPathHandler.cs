@@ -89,14 +89,13 @@ public class UILevelPathHandler : MonoBehaviour
 
     private void Update()
     {
-      
+
         moneyText.text = CurrencyManager.SYMBOL + CurrencyManager.INSTANCE.amount;
         if (shouldDoAnimation)
         {
             Vector2 previousPosition = car.transform.position;
             Vector2 startPoint = startAnimationPosition;
             Vector2 endPoint = GameManager.INSTANCE.latestLevelPosition;
-            Debug.Log(startPoint + " - " + endPoint);
 
             //car pathing
             timer = Mathf.Min(timer + Time.deltaTime * 0.15f, 1);
@@ -130,18 +129,19 @@ public class UILevelPathHandler : MonoBehaviour
 
         if (isMapFocused && !popup.gameObject.activeSelf)
         {
-         
+
 
             graphicRaycastResults = new List<RaycastResult>();
             PointerEventData ed = new PointerEventData(EventSystem.current);
             ed.position = (playerInput.UI.Point.ReadValue<Vector2>());
             graphicRaycaster.Raycast(ed, graphicRaycastResults);
-            foreach(RaycastResult result in graphicRaycastResults)
-            {   
+            foreach (RaycastResult result in graphicRaycastResults)
+            {
                 controllerCursor.position = result.worldPosition;
             }
 
             Vector2 inputVector = playerInput.UI.Move.ReadValue<Vector2>();
+
             Vector3 added = inputVector * Time.deltaTime * 500;
             controllerCursor.localPosition += added;
 
@@ -154,6 +154,14 @@ public class UILevelPathHandler : MonoBehaviour
                 controllerCursor.localPosition -= added;
             }
 
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                RectTransform buttonRect = transform.GetChild(i).GetComponent<RectTransform>();
+                if (EventSystem.current.currentSelectedGameObject != buttonRect.gameObject && buttonRect.rect.Contains(buttonRect.InverseTransformPoint(controllerCursor.position)))
+                {
+                    buttonRect.GetComponent<Button>().Select();
+                }
+            }
 
         }
 
