@@ -12,6 +12,7 @@ public class Level : ScriptableObject
     [TextArea] public string levelDescription;
     public int highscore = 0;
     public float fastestTime = 0.0F;
+	public int baseEarning = 200;
 
     public Level parentLevel;
     public LevelType levelType;

@@ -4,11 +4,12 @@ using System.Net.Http.Headers;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
-public class AlcoholManager : MonoBehaviour
+public class CoinCollectionManager : MonoBehaviour
 {
 
     public double liters;
@@ -28,12 +29,27 @@ public class AlcoholManager : MonoBehaviour
     private float collectionDuration = 1.0F;
     private float coinAnimationDuration = 0.5f;
 
+    private bool hasCollectedCoins;
+
     public List<Coin> coinList = new List<Coin>();
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         intitialCoins = CurrencyManager.INSTANCE.amount;
         coinText.text = intitialCoins.ToString();
+        liters = GameManager.INSTANCE.currentCar.alcoholCapacity;
+    }
+
+    public void OnDrop(InputValue value)
+    {
+        Debug.Log("droppa");
+        AttemptToLoseAlcohol();
+
     }
 
     private void Update()
@@ -79,14 +95,20 @@ public class AlcoholManager : MonoBehaviour
 
     public void CollectCoins(UnityEngine.UI.Button button)
     {
-        StartCoroutine(CollectCoins(button.transform.position));
-        liters = 0;
+        if (!hasCollectedCoins) {
+            StartCoroutine(CollectCoins(button.transform.position));
+            hasCollectedCoins = true;
+        }
     }
 
     private IEnumerator CollectCoins(Vector2 position)
     {
-        int convertedToMoney = CurrencyManager.INSTANCE.ConvertAlcoholToMoney(liters);
-        CurrencyManager.INSTANCE.amount += convertedToMoney;
+        int totalCoinAmount = GameManager.INSTANCE.currentLevel.baseEarning;
+        if (GameManager.INSTANCE.currentLevel.levelType == LevelType.CHASER)
+        {
+            totalCoinAmount += CurrencyManager.INSTANCE.ConvertAlcoholToMoney(liters);
+        }
+        CurrencyManager.INSTANCE.amount += totalCoinAmount;
         float endTime = Time.time + spawnDuration;
         int givenAmount = 0;
         float previousFactor = 0;
@@ -95,7 +117,7 @@ public class AlcoholManager : MonoBehaviour
         {
             float difference = endTime - Time.time;
             float factor = 1 - (difference / spawnDuration);
-            int currentAmount = (int)(convertedToMoney * (factor - previousFactor));
+            int currentAmount = (int)(totalCoinAmount * (factor - previousFactor));
             //
             for (int i = 0; i < currentAmount; i++)
             {
@@ -103,10 +125,10 @@ public class AlcoholManager : MonoBehaviour
                 givenAmount++;
             }
             previousFactor = factor;
-            yield return new WaitForSeconds(spawnDuration / convertedToMoney);
+            yield return new WaitForSeconds(spawnDuration / totalCoinAmount);
         }
 
-        while (givenAmount < convertedToMoney)
+        while (givenAmount < totalCoinAmount)
         {
             Debug.Log(givenAmount + " - AAAAAAA");
             SpawnCoin(position);
@@ -129,15 +151,15 @@ public class AlcoholManager : MonoBehaviour
     {
         if (liters > 0)
         {
-           /* GameObject alcoholInstaniate = Instantiate(alcoholPrefab, alcoholSpawnPoint.transform.position, Random.rotation);
-            GameObject currentCar = GameManager.INSTANCE.currentCar;
+            GameObject alcoholInstaniate = Instantiate(alcoholPrefab, CarController_Player.instance.car.transform.position, Random.rotation);
+            GameObject currentCar = CarController_Player.instance.car.gameObject;
 
             Rigidbody rigidbody = alcoholInstaniate.GetComponent<Rigidbody>();
-            //Physics.IgnoreCollision(alcoholInstaniate.GetComponent<Collider>(), GameManager.INSTANCE.currentCar.GetComponent<Collider>());
+            Physics.IgnoreCollision(alcoholInstaniate.GetComponent<Collider>(), currentCar.GetComponentInChildren<Collider>());
 
-            rigidbody.velocity = -transform.forward * 2;
+            rigidbody.velocity = -currentCar.transform.forward * 5;
             rigidbody.angularVelocity = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10));
-            liters--;*/
+            liters--;
 
         }
     }

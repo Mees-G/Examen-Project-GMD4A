@@ -3877,7 +3877,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liters: 300
-  alcoholPrefab: {fileID: 0}
+  alcoholPrefab: {fileID: 4583871962579905471, guid: ee06671d4e85194459a97dcdba2d08e5,
+    type: 3}
   alcoholSpawnPoint: {fileID: 0}
   coinText: {fileID: 594894605162107396}
   coinPrefab: {fileID: 3477136795274099001, guid: 22bbd6f7191e01b41ad7cfaffb63a474,

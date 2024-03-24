@@ -80,6 +80,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9617420-5dab-4e06-b574-2270c3ca733e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -311,6 +320,17 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LookBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a684751d-e859-4dea-9128-0a797a61f180"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -982,6 +1002,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_CarController_Look = m_CarController.FindAction("Look", throwIfNotFound: true);
         m_CarController_Lights = m_CarController.FindAction("Lights", throwIfNotFound: true);
         m_CarController_LookBack = m_CarController.FindAction("LookBack", throwIfNotFound: true);
+        m_CarController_Drop = m_CarController.FindAction("Drop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1063,6 +1084,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_CarController_Look;
     private readonly InputAction m_CarController_Lights;
     private readonly InputAction m_CarController_LookBack;
+    private readonly InputAction m_CarController_Drop;
     public struct CarControllerActions
     {
         private @Input m_Wrapper;
@@ -1073,6 +1095,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_CarController_Look;
         public InputAction @Lights => m_Wrapper.m_CarController_Lights;
         public InputAction @LookBack => m_Wrapper.m_CarController_LookBack;
+        public InputAction @Drop => m_Wrapper.m_CarController_Drop;
         public InputActionMap Get() { return m_Wrapper.m_CarController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1100,6 +1123,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @LookBack.started += instance.OnLookBack;
             @LookBack.performed += instance.OnLookBack;
             @LookBack.canceled += instance.OnLookBack;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         private void UnregisterCallbacks(ICarControllerActions instance)
@@ -1122,6 +1148,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @LookBack.started -= instance.OnLookBack;
             @LookBack.performed -= instance.OnLookBack;
             @LookBack.canceled -= instance.OnLookBack;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         public void RemoveCallbacks(ICarControllerActions instance)
@@ -1281,6 +1310,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnLights(InputAction.CallbackContext context);
         void OnLookBack(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

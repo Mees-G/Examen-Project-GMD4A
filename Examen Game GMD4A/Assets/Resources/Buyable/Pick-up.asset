@@ -18,6 +18,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   price: 0
   unlocked: 1
+  alcoholCapacity: 100
   upgrades:
   - {fileID: 11400000, guid: 1fb2fb5472623794ca79def8f1dfdeaa, type: 2}
   - {fileID: 11400000, guid: d5986ee4f7093544f82536f4a19fd4f2, type: 2}

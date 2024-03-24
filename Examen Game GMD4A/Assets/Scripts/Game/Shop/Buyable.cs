@@ -10,18 +10,18 @@ public class Buyable : ScriptableObject
 {
     public string _name = "Basic Car";
     public string description = "A Basic Car, nothing special yet...";
-    
+
+    [Header("Car Options")]
     public GameObject car;
-
     public Sprite icon;
-
-
     public int price = 100;
-
     public bool unlocked;
 
-    public Upgrade[] upgrades;
+    [Header("Chaser Settings")]
+    public int alcoholCapacity;
 
+    [Header("Skin Settings")]
+    public Upgrade[] upgrades;
     public List<Mesh> meshSkins;
 
     //public Dictionary<string, UpgradeData> upgrades;

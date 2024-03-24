@@ -142,7 +142,6 @@ public class UIShopManager : MonoBehaviour
             {
                 if (!buyableCars[_index].unlocked)
                 {
-                    Debug.Log("Buy/Select/ETC");
                     buyButton.interactable = buyableCars[_index].price <= CurrencyManager.INSTANCE.amount;
                     buyPriceText.text = buyableCars[_index].price.ToString();
                     confirmPanel.SetActive(true);
@@ -319,6 +318,7 @@ public class UIShopManager : MonoBehaviour
         confirmMapPanel.SetActive(false);
         gameObject.SetActive(false);
         uiLevelPathHandler.GetComponent<CanvasGroup>().interactable = true;
+        GameManager.INSTANCE.currentSkin = cameraCarData[_index].carObj.GetComponent<SkinManager>().meshFilter.sharedMesh;
 
 
     }

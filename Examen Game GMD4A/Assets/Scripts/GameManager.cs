@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public Buyable currentCar;
     public Level currentLevel;
+    public Mesh currentSkin;
 
     //for car anim
     public Vector3 latestLevelPosition;

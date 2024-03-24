@@ -35,7 +35,7 @@ public class CurrencyManager
 
     public const string SYMBOL = "$";
 
-    public const double ALCOHOL_MULTIPLIER = 1.5;
+    public const double ALCOHOL_MULTIPLIER = 3.5;
     public Action<int> OnChangeAmount = delegate { };
 
     public int ConvertAlcoholToMoney(double liters)
