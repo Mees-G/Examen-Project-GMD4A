@@ -18,6 +18,7 @@ public class FinishUI : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
+        SelectedButtonOutlineManager.INSTANCE.input.UI.Enable();
     }
 
     public void ShowFinishUI(string place, int score, string time)
