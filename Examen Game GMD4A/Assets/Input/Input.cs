@@ -71,13 +71,22 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookBack"",
+                    ""type"": ""Value"",
+                    ""id"": ""bb284e9d-f73c-4dc6-bbaa-a9060e52595e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""WASD"",
                     ""id"": ""6f7312b8-c44a-45b0-9be9-43ee52be8c9f"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,7 +141,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Joystick"",
                     ""id"": ""59e4897b-73c1-4cf2-af6e-45a98a500c0f"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -280,6 +289,28 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Lights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08591751-21fc-4f9b-a6cc-54d72ed56845"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c13c56be-a730-41c4-bc3a-88d5b13414b8"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -950,6 +981,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_CarController_Respawn = m_CarController.FindAction("Respawn", throwIfNotFound: true);
         m_CarController_Look = m_CarController.FindAction("Look", throwIfNotFound: true);
         m_CarController_Lights = m_CarController.FindAction("Lights", throwIfNotFound: true);
+        m_CarController_LookBack = m_CarController.FindAction("LookBack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1030,6 +1062,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_CarController_Respawn;
     private readonly InputAction m_CarController_Look;
     private readonly InputAction m_CarController_Lights;
+    private readonly InputAction m_CarController_LookBack;
     public struct CarControllerActions
     {
         private @Input m_Wrapper;
@@ -1039,6 +1072,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Respawn => m_Wrapper.m_CarController_Respawn;
         public InputAction @Look => m_Wrapper.m_CarController_Look;
         public InputAction @Lights => m_Wrapper.m_CarController_Lights;
+        public InputAction @LookBack => m_Wrapper.m_CarController_LookBack;
         public InputActionMap Get() { return m_Wrapper.m_CarController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1063,6 +1097,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Lights.started += instance.OnLights;
             @Lights.performed += instance.OnLights;
             @Lights.canceled += instance.OnLights;
+            @LookBack.started += instance.OnLookBack;
+            @LookBack.performed += instance.OnLookBack;
+            @LookBack.canceled += instance.OnLookBack;
         }
 
         private void UnregisterCallbacks(ICarControllerActions instance)
@@ -1082,6 +1119,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Lights.started -= instance.OnLights;
             @Lights.performed -= instance.OnLights;
             @Lights.canceled -= instance.OnLights;
+            @LookBack.started -= instance.OnLookBack;
+            @LookBack.performed -= instance.OnLookBack;
+            @LookBack.canceled -= instance.OnLookBack;
         }
 
         public void RemoveCallbacks(ICarControllerActions instance)
@@ -1240,6 +1280,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnRespawn(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnLights(InputAction.CallbackContext context);
+        void OnLookBack(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

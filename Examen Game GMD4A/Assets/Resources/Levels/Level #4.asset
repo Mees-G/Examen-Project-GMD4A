@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a846f4293e9074e9b58daebd07a74f, type: 3}
   m_Name: Level #4
   m_EditorClassIdentifier: 
-  sceneName: Level 4
-  levelName: Level 4
-  levelDescription: Geen idee
+  sceneName: GameScene
+  levelName: Agnes revenge
+  levelDescription: Agnes coming for the beer idk
   highscore: 0
   fastestTime: 0
-  parentLevel: {fileID: 11400000, guid: 9021dc2545c49ce4abe5f0b70ea8f535, type: 2}
+  parentLevel: {fileID: 0}
   levelType: 0
-  trackIndex: 0
-  NPC_Cars: []
+  timeOfDay: 0
+  trackIndex: 3
+  NPC_Cars:
+  - {fileID: 7356915829096649769, guid: 68be0b2834deda14eba4a06bd64f51c6, type: 3}
+  - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
+  - {fileID: 1049237415070352878, guid: 2d7c23825cf591143957561f5181d2aa, type: 3}
+  - {fileID: 7330877813689086507, guid: a2eca5f3bf7850c4da9dc5bf6a8b6dcd, type: 3}
   SPECIAL_NPC_Cars: []
   completed: 0

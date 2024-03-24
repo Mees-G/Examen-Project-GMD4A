@@ -66,7 +66,7 @@ public class Car : MonoBehaviour
 
         //calculate how much torque is available 
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
-        
+
         //calculate how much to steer 
         currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
@@ -77,6 +77,7 @@ public class Car : MonoBehaviour
         {
             // Apply steering to Wheel colliders
             wheel.steerAngle = steeringDirectionInput * currentSteerRange;
+            //wheel.steerAngle = steeringDirectionInput * currentSteerRange;
         }
         foreach (WheelCollider wheel in backWheels)
         {

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,8 +10,10 @@ public class CarController_Player : Controller_Base
     public static CarController_Player instance;
     public PlayerInput playerInput;
 
-    private CarDamage carDamage;
+    float smoothVelocity = 0.1f;
 
+    private CarDamage carDamage;
+    private float targetSteeringInput;
     private void Awake()
     {
         instance = this;
@@ -48,6 +51,8 @@ public class CarController_Player : Controller_Base
             GameUI.instance.StuckNotification(true);
         }
         GameUI.instance.StuckNotification(false);
+
+        car.steeringDirectionInput = Mathf.Clamp(Mathf.Lerp(car.steeringDirectionInput, targetSteeringInput, 0.2f), -1f, 1f);
     }
 
     public override void SwitchControl(bool activate)
@@ -70,7 +75,7 @@ public class CarController_Player : Controller_Base
         Vector2 inputVector = value.Get<Vector2>();
 
         car.throttleInput = inputVector.y;
-        car.steeringDirectionInput = inputVector.x;
+        targetSteeringInput = inputVector.x;
 
     }
     public void OnHandBrake(InputValue value)
@@ -85,5 +90,12 @@ public class CarController_Player : Controller_Base
     public void OnRespawn()
     {
         RespawnCar();
+    }
+    public void OnLookBack()
+    {
+        //Debug.Log("Looking back");
+        //CinemachineTransposer.BindingMode originalBindingmode = car.cameraControl.m_BindingMode;
+        //car.cameraControl.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
+        //car.cameraControl.m_XAxis.Value = 180;
     }
 }

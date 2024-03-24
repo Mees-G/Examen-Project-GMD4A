@@ -125,7 +125,7 @@ public class CarController_NPC : Controller_Base
             nextCheckpoint = track.checkpoints[track.checkpoints.IndexOf(checkpointToReach) + 1].position;
         }
 
-        float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, checkpointToReach, nextCheckpoint, car.wheelBase);
+        float cornerRadius = CalculateCarPhysics.CornerRadius(car.transform, driveTarget, nextCheckpoint, car.wheelBase);
 
         float centripetalForce = (car.rb.mass * (car.forwardSpeed * car.forwardSpeed / 4)) / cornerRadius;
         float frictionForce = car.frontWheels[0].forwardFriction.stiffness * CalculateCarPhysics.CalculateNormalForce(car.rb.mass);
@@ -142,7 +142,7 @@ public class CarController_NPC : Controller_Base
 
         // Introduce hysteresis to prevent rapid switching
         car.throttleInput = Mathf.Clamp(Mathf.MoveTowards(car.throttleInput, targetThrottle, Time.deltaTime * 1.5f), -1f, 1f);
-        car.steeringDirectionInput = Mathf.Clamp(Mathf.SmoothDamp(car.steeringDirectionInput, targetSteeringInput, ref smoothVelocity, 0.1f), -1f, 1f);
+        car.steeringDirectionInput = Mathf.Clamp(Mathf.Lerp(car.steeringDirectionInput, targetSteeringInput, 0.2f), -1f, 1f);
 
         //Debug.Log($"Corner Radius: {cornerRadius}, Throttle: {car.throttleInput}, Can Make Turn: {canMakeTurn}");
 
