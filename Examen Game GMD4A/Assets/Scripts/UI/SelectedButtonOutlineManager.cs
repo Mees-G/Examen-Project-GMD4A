@@ -31,7 +31,6 @@ public class SelectedButtonOutlineManager : MonoBehaviour
         bool isGamepad = context.control.device is Gamepad;
 
         Cursor.visible = !isGamepad;
-        Debug.Log("Cursor visable: " + Cursor.visible);
 
         if (EventSystem.current.currentSelectedGameObject == null && isGamepad)
         {

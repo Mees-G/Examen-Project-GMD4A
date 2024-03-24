@@ -131,13 +131,15 @@ public class UILevelPathHandler : MonoBehaviour
         {
 
 
-            graphicRaycastResults = new List<RaycastResult>();
-            PointerEventData ed = new PointerEventData(EventSystem.current);
-            ed.position = (playerInput.UI.Point.ReadValue<Vector2>());
-            graphicRaycaster.Raycast(ed, graphicRaycastResults);
-            foreach (RaycastResult result in graphicRaycastResults)
-            {
-                controllerCursor.position = result.worldPosition;
+            if (Cursor.visible) {
+                graphicRaycastResults = new List<RaycastResult>();
+                PointerEventData ed = new PointerEventData(EventSystem.current);
+                ed.position = (playerInput.UI.Point.ReadValue<Vector2>());
+                graphicRaycaster.Raycast(ed, graphicRaycastResults);
+                foreach (RaycastResult result in graphicRaycastResults)
+                {
+                    controllerCursor.position = result.worldPosition;
+                }
             }
 
             Vector2 inputVector = playerInput.UI.Move.ReadValue<Vector2>();
