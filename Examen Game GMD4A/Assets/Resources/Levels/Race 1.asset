@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   levelName: Race 1
-  levelDescription: Bob dives into his racing career, inspired by his famous gold
-    medal winning father. Racing fuels his ambitions, but can he balance it with
-    his successful smuggling business?
+  levelDescription: Bob dives into his racing career, inspired by his famous gold-medal-winning
+    father. Racing fuels his ambitions, but can he balance it with his successful
+    smuggling business?
   highscore: 1628
   fastestTime: 0
   baseEarning: 200
