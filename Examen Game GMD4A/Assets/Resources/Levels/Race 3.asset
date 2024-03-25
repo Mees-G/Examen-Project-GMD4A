@@ -21,7 +21,7 @@ MonoBehaviour:
   highscore: 0
   fastestTime: 0
   baseEarning: 200
-  parentLevel: {fileID: 0}
+  parentLevel: {fileID: 11400000, guid: 222336b841e37ca489bd61053c0f5333, type: 2}
   levelType: 0
   timeOfDay: 0
   trackIndex: 3

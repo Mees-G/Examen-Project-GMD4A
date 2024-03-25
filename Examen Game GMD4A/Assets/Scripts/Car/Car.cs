@@ -80,7 +80,17 @@ public class Car : MonoBehaviour
         {
             // Apply steering to Wheel colliders
             wheel.steerAngle = steeringDirectionInput * currentSteerRange;
-            //wheel.steerAngle = steeringDirectionInput * currentSteerRange;
+
+            if (isAccelerating)
+            {
+                // Apply torque to Wheel colliders
+                wheel.brakeTorque = 0;
+            }
+            else
+            {
+                // apply brakes to all wheels when throttle is negative
+                wheel.brakeTorque = Mathf.Abs(throttleInput) * brakeTorque;
+            }
         }
         foreach (WheelCollider wheel in backWheels)
         {
@@ -119,8 +129,6 @@ public class Car : MonoBehaviour
         {
             if (currentCarController != null)
             {
-                Debug.Log("ja godverdommeee - " + other.transform);
-                Debug.Log("ja fewfew - " + other.transform.parent);
                 currentCarController.NextCheckpoint(other.transform);
             }
         }

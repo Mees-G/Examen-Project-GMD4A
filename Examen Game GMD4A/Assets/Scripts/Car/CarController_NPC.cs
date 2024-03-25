@@ -134,12 +134,11 @@ public class CarController_NPC : Controller_Base
         float frictionForce = car.frontWheels[0].forwardFriction.stiffness * CalculateCarPhysics.CalculateNormalForce(car.rb.mass);
 
         // Calculate if the car can make the turn without overshooting
-        bool canMakeTurn = centripetalForce <= frictionForce && Mathf.Abs(targetSteeringInput) <= 1f;
+        canMakeTurn = centripetalForce <= frictionForce && Mathf.Abs(car.steeringDirectionInput) <= 1f;
 
         // Overshoot Prevention
         if (!canMakeTurn)
         {
-            // The car might not be able to make the turn at the current speed
             targetThrottle = 0;
         }
 

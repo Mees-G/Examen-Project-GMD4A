@@ -17,16 +17,16 @@ MonoBehaviour:
   levelDescription: Bob dives into his racing career, inspired by his famous gold-medal-winning
     father. Racing fuels his ambitions, but can he balance it with his successful
     smuggling business?
-  highscore: 1628
+  highscore: 2203
   fastestTime: 0
   baseEarning: 200
   parentLevel: {fileID: 0}
   levelType: 0
   timeOfDay: 0
   trackIndex: 0
-  difficultyMultiplier: 0
+  difficultyMultiplier: 0.1
   NPC_Cars:
   - {fileID: 8844403209554162534, guid: d428ee88d01814d4c968b62e888b67e2, type: 3}
   - {fileID: 1049237415070352878, guid: 2d7c23825cf591143957561f5181d2aa, type: 3}
   Special_Npcs: []
-  completed: 1
+  completed: 0

@@ -9,7 +9,7 @@ public class SkinManager : MonoBehaviour
 
     public void SetSkin(Mesh skin)
     {
-        meshFilter.sharedMesh = skin;
+        //meshFilter.sharedMesh = skin;
     }
 
 }

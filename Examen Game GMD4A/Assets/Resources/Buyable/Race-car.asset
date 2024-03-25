@@ -17,7 +17,8 @@ MonoBehaviour:
   car: {fileID: 7330877813689086507, guid: a2eca5f3bf7850c4da9dc5bf6a8b6dcd, type: 3}
   icon: {fileID: 0}
   price: 300
-  unlocked: 1
+  unlocked: 0
+  alcoholCapacity: 0
   upgrades:
   - {fileID: 11400000, guid: 74e70a86dd1c17a4381a6b2ebc150a5d, type: 2}
   - {fileID: 11400000, guid: dbf12270c2314ce4f9eceb9ceeda7df1, type: 2}
