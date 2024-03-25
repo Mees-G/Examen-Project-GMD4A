@@ -33,9 +33,10 @@ public class CoinCollectionManager : MonoBehaviour
 
     public List<Coin> coinList = new List<Coin>();
 
+
+
     private void Awake()
     {
-        
     }
 
     private void Start()
@@ -48,7 +49,9 @@ public class CoinCollectionManager : MonoBehaviour
     public void OnDrop(InputValue value)
     {
         Debug.Log("droppa");
-        AttemptToLoseAlcohol();
+        if (GameManager.INSTANCE.currentLevel.levelType == LevelType.CHASER) {
+            AttemptToLoseAlcohol();
+        }
 
     }
 
@@ -161,6 +164,8 @@ public class CoinCollectionManager : MonoBehaviour
             rigidbody.angularVelocity = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10));
             liters--;
 
+            //3.0f alcohol weight
+            CarController_Player.instance.car.rb.mass -= 3.0F;
         }
     }
 

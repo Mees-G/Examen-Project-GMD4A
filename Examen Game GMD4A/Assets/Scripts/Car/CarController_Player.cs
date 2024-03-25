@@ -24,6 +24,14 @@ public class CarController_Player : Controller_Base
     {
         carDamage = car.GetComponent<CarDamage>();
         carDamage.OnDeath += OnDeath;
+
+
+        if (GameManager.INSTANCE.currentLevel.levelType == LevelType.CHASER)
+        {
+            //weight adjustment chaser
+            //3 = alcohol 'massss'
+            car.rb.mass += GameManager.INSTANCE.currentCar.alcoholCapacity * 3;
+        }
     }
 
     private void OnDeath(Car car)

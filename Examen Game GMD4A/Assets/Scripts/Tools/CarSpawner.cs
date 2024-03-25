@@ -48,6 +48,15 @@ public class CarSpawner : MonoBehaviour
             carScript.motorTorque += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Transmission").GetValue<int>() * 5);
             carScript.topSpeed += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Engine").GetValue<int>());
             carScript.brakeTorque += (GameManager.INSTANCE.currentCar.GetUpgradeByName("Brakes").GetValue<int>() * 5);
+
+            // livery/skin
+            if (spawnedCar.TryGetComponent(out SkinManager skinManager))
+            {
+                skinManager.SetSkin(GameManager.INSTANCE.currentSkin);
+            }
+
+          
+
         }
 
         return carScript;
