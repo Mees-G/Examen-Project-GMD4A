@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   levelName: Agnes revenge
-  levelDescription: Agnes coming for the beer idk
+  levelDescription: Antonio lost to Bob, conceding his place in the illegal alcohol
+    trade. Agnes then challenged Bob to a rematch for control of the empire, which
+    he accepted. And thus, a thrilling showdown between fierce rivals was set in
+    motion.
   highscore: 0
   fastestTime: 0
+  baseEarning: 200
   parentLevel: {fileID: 0}
   levelType: 0
   timeOfDay: 0

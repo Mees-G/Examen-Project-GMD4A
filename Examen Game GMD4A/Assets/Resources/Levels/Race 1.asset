@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   levelName: Race 1
-  levelDescription: Cool leveltje 1 met coole dingen
+  levelDescription: Bob dives into his racing career, inspired by his famous courier
+    father. Racing fuels his ambitions, but can he balance it with his successful
+    smuggling business?
   highscore: 1628
   fastestTime: 0
+  baseEarning: 200
   parentLevel: {fileID: 0}
   levelType: 0
   timeOfDay: 0

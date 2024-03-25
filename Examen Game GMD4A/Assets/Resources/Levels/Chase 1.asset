@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   levelName: Bobs Sneakroute
-  levelDescription: Bob has found a sneakroute over the mountain to avoid police,
-    but the police have found a way.
+  levelDescription: Bob has found a sneakroute to avoid the police and smuggle alcohol
+    in secret. He needs to get his special brew to his customers over the mountain
+    without getting caught by the police or lose his brew!
   highscore: 0
   fastestTime: 0
+  baseEarning: 200
   parentLevel: {fileID: 0}
   levelType: 1
   timeOfDay: 1

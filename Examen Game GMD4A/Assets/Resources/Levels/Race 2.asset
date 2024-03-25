@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   levelName: Quarry Quarrel
-  levelDescription: Antonioooo man
+  levelDescription: As Antonio passed, he saw Bob racing and recognized his prominence
+    in the '20s illegal alcohol trade. Antonio's boss and Bob's rival, Agnes, challenged
+    Bob to a race. The loser would forfeit their alcohol empire. Bob accepted, starting
+    a high-stakes duel between Bob and Antonio...
   highscore: 0
   fastestTime: 0
+  baseEarning: 200
   parentLevel: {fileID: 0}
   levelType: 0
   timeOfDay: 0
